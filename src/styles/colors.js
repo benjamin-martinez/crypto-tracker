@@ -10,6 +10,12 @@ export const themes = {
             color: "#707070",
             lineColor: "#00ff5f",
             barColor: "#2172e5"
+        },
+        icon: "invert(100%)",
+        money: {
+            green: "#00ff5f",
+            red: "#FE1040",
+            background: "#191B1F"
         }
     },
     light: {
@@ -23,7 +29,8 @@ export const themes = {
             color: "#2c2f36",
             lineColor: "#2550ea",
             barColor: "#1ad761"
-        }
+        },
+        icon: "invert(0%)"
     }
 }
 
