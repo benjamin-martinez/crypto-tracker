@@ -1,8 +1,8 @@
 import React from "react"
-import logo from './logo.svg';
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./styles/GlobalStyle";
 import { themes } from "./styles/colors";
+import Header from "./components/header/Header";
 
 class App extends React.Component {
 
@@ -15,6 +15,7 @@ class App extends React.Component {
       <ThemeProvider theme={this.state.theme}>
         <div className="App">
           <GlobalStyle />
+          <Header />
         </div>
       </ThemeProvider>
     );

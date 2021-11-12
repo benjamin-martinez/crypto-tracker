@@ -16,6 +16,10 @@ export const themes = {
             green: "#00ff5f",
             red: "#FE1040",
             background: "#191B1F"
+        },
+        headerSlider: {
+            background: "#2172E5",
+            foreground: "#ffffff"
         }
     },
     light: {
@@ -30,7 +34,15 @@ export const themes = {
             lineColor: "#2550ea",
             barColor: "#1ad761"
         },
-        icon: "invert(0%)"
+        icon: "invert(0%)",
+        money: {
+            green: "#00ff5f",
+            red: "#FE1040",
+            background: "#191B1F"
+        },
+        headerSlider: {
+            background: "#2172E5",
+            foreground: "#2C2F36"
+        }
     }
 }
-
