@@ -6,7 +6,7 @@ export const GlobalStyle = createGlobalStyle`
         font-family: Poppins;
     }
     body {
-        background: ${themes.light.background};
+        background: ${themes.dark.background};
     }
 
     ul {
