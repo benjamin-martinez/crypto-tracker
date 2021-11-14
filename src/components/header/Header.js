@@ -1,19 +1,21 @@
 import React from "react";
 import styled from "styled-components"
+import { Link, withRouter } from "react-router-dom";
 import { NavLinkText } from "../../styles/Fonts";
 import Searchbar from "./Searchbar";
 import CurrencyToggle from "./CurrencyToggle";
 import QRScanner from "./QRScanner"
 import Infographic from "./Infographic";
 
-export default class Header extends React.Component {
+class Header extends React.Component {
+
     render() {
         return (
             <Wrapper>
                 <Navigation>
                     <RightNav>
-                        <NavLink><NavLinkText>Coins</NavLinkText></NavLink>
-                        <NavLink><NavLinkText>Portfolio</NavLinkText></NavLink>
+                        <Link to="/coins"><NavLink currentPage={this.props.location.pathname.slice(1) === "coins"} ><NavLinkText>Coins</NavLinkText></NavLink></Link>
+                        <Link to="/portfolio"><NavLink currentPage={this.props.location.pathname.slice(1) === "portfolio"}><NavLinkText>Portfolio</NavLinkText></NavLink></Link>
                     </RightNav>
                     <LeftNav>
                         <Searchbar />
@@ -26,6 +28,8 @@ export default class Header extends React.Component {
         )
     }
 }
+
+export default withRouter(Header);
 
 const Wrapper = styled.header`
 color: ${props => props.theme.color};
@@ -56,6 +60,11 @@ gap: 27px;`;
 
 const NavLink = styled.div`
 padding: 10px 40px;
+border-radius: 10px;
+background: ${props => props.currentPage && props.theme.card.active};
+a {
+    color: white;
+}
 
 :hover {
     cursor: pointer;

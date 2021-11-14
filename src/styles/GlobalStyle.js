@@ -12,4 +12,9 @@ export const GlobalStyle = createGlobalStyle`
     ul {
         margin-top: 0px !important;
       }
+
+      a {
+          text-decoration: none;
+          color: ${themes.dark.color}
+      }
 `
