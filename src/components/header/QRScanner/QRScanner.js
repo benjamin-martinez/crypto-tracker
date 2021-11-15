@@ -1,5 +1,5 @@
 import React from "react";
-import {Wrapper, Icon } from "./QRScanner.styles"
+import { Wrapper, Icon } from "./QRScanner.styles"
 
 export default class QRScanner extends React.Component {
     render() {

@@ -7,7 +7,7 @@ import {
 import {Coins, Portfolio} from "pages";
 import { GlobalStyle } from "styles/GlobalStyle";
 import { themes } from "styles/colors";
-import Header from "components/header/Header";
+import Header from "components/header/Header/Header";
 
 class App extends React.Component {
 

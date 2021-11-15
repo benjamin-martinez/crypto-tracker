@@ -1,11 +1,8 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import {Wrapper, Navigation, RightNav, LeftNav, NavLinkWrapper} from "./Header.styles";
+import { Searchbar, Infographic, CurrencyToggle, QRScanner} from "components";
 import { NavLinkText } from "styles/Fonts";
-import Searchbar from "components/header/Searchbar";
-import CurrencyToggle from "components/header/CurrencyToggle";
-import QRScanner from "components/header/QRScanner"
-import Infographic from "components/header/Infographic";
+import { Wrapper, Navigation, RightNav, LeftNav, NavLinkWrapper } from "./Header.styles";
 
 class Header extends React.Component {
 
