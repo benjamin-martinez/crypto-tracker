@@ -1,5 +1,5 @@
 import React from "react"
-import styled from "styled-components"
+import {Wrapper} from "./Coins.styles"
 
 export default class Coins extends React.Component {
 
@@ -12,4 +12,3 @@ export default class Coins extends React.Component {
     }
 }
 
-const Wrapper = styled.div``;

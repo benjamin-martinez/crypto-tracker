@@ -1,5 +1,5 @@
 import React from "react";
-import {Wrapper, Icon, Dropdown} from "components/header/CurrencyToggle.styles"
+import {Wrapper, Icon, Dropdown} from "./CurrencyToggle.styles"
 import { NavText } from "styles/Fonts";
 import { CurrencyToggleDownArrow } from "styles/arrows";
 

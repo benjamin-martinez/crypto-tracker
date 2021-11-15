@@ -4,8 +4,7 @@ import {
   BrowserRouter as Router,
   Switch, Route, Redirect
 } from "react-router-dom";
-import Coins from "./pages/Coins";
-import Portfolio from "./pages/Portfolio";
+import {Coins, Portfolio} from "pages";
 import { GlobalStyle } from "styles/GlobalStyle";
 import { themes } from "styles/colors";
 import Header from "components/header/Header";

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const NavLinkText = styled.h2`
-    font-size: 23px;
+f   ont-size: 23px;
     font-weight: 800;
     line-height: 0px;
 `;

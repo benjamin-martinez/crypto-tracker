@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import {Wrapper, Navigation, RightNav, LeftNav, NavLinkWrapper} from "components/header/Header.styles"
+import {Wrapper, Navigation, RightNav, LeftNav, NavLinkWrapper} from "./Header.styles";
 import { NavLinkText } from "styles/Fonts";
 import Searchbar from "components/header/Searchbar";
 import CurrencyToggle from "components/header/CurrencyToggle";

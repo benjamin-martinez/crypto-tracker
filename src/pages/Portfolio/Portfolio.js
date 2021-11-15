@@ -1,5 +1,5 @@
 import React from "react"
-import styled from "styled-components"
+import {Wrapper} from "./Portfolio.styles"
 
 export default class Porfolio extends React.Component {
 
@@ -11,5 +11,3 @@ export default class Porfolio extends React.Component {
         )
     }
 }
-
-const Wrapper = styled.div``;
