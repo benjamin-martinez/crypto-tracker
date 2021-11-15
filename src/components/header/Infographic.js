@@ -1,8 +1,8 @@
 import React from "react"
 import styled from "styled-components"
-import { NeutralDot, UpArrow } from "../../styles/arrows";
-import { NavText } from "../../styles/Fonts";
-import { Slider, SliderWrapper } from "../../styles/sliders";
+import { NeutralDot, UpArrow } from "styles/arrows";
+import { NavText } from "styles/Fonts";
+import { Slider, SliderWrapper } from "styles/sliders";
 
 export default class Infographic extends React.Component {
     render() {
