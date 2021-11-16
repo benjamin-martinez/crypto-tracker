@@ -5,7 +5,6 @@ import { NavLinkText } from "styles/Fonts";
 import { Wrapper, Navigation, RightNav, LeftNav, NavLinkWrapper } from "./Header.styles";
 
 class Header extends React.Component {
-
     render() {
         return (
             <Wrapper>

@@ -10,21 +10,16 @@ import { themes } from "styles/colors";
 import Header from "components/header/Header/Header";
 
 class App extends React.Component {
-
   state = {
     theme: themes.dark
   }
-
-
   render() {
-    
     return (
       <ThemeProvider theme={this.state.theme}>
         <div className="App">
           <GlobalStyle />
           <Router >
             <Header />
-
             <Switch>
               <Route path="/coins" component={Coins} />
               <Route path="/portfolio" component={Portfolio} />
