@@ -7,7 +7,6 @@ import { Slider, SliderWrapper } from "styles/sliders";
 import { Wrapper, Volume, PriceWrapper, BtcDominance, Exchanges, MarketCap, Icon, EthDominance, InnerWrapper, CoinsExchangesWrapper, Coins } from "./Infographic.styles";
 
 export default class Infographic extends React.Component {
-
     state = {
         numCoins: 0,
         numExchanges: 0,
@@ -18,7 +17,6 @@ export default class Infographic extends React.Component {
         ethDom: 0,
         isLoading: false
     }
-
     getGlobalCryptoData = async () => {
         try {
             this.setState({isLoading: true})
@@ -40,12 +38,9 @@ export default class Infographic extends React.Component {
             this.setState({isLoading: false})
         }
     }
-
     componentDidMount() {
         this.getGlobalCryptoData();
     }
-
-
     render() {
         return (
             <Wrapper>
