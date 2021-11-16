@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import { Wrapper, Volume, PriceWrapper, BtcDominance, Exchanges, MarketCap, Icon, EthDominance, InnerWrapper, CoinsExchangesWrapper, Coins } from "./Infographic.styles"
 import { DownArrow, NeutralDot, UpArrow } from "styles/arrows";
 import { NavText } from "styles/Fonts";
 import { Slider, SliderWrapper } from "styles/sliders";
