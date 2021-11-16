@@ -1,8 +1,7 @@
 import React from "react"
-import {Wrapper} from "./Coins.styles"
+import { Wrapper } from "./Coins.styles"
 
 export default class Coins extends React.Component {
-
     render() {
         return (
             <Wrapper>
@@ -11,4 +10,3 @@ export default class Coins extends React.Component {
         )
     }
 }
-

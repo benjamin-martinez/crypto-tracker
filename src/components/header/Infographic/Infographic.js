@@ -4,6 +4,7 @@ import { Wrapper, Volume, PriceWrapper, BtcDominance, Exchanges, MarketCap, Icon
 import { DownArrow, NeutralDot, UpArrow } from "styles/arrows";
 import { NavText } from "styles/Fonts";
 import { Slider, SliderWrapper } from "styles/sliders";
+import { Wrapper, Volume, PriceWrapper, BtcDominance, Exchanges, MarketCap, Icon, EthDominance, InnerWrapper, CoinsExchangesWrapper, Coins } from "./Infographic.styles";
 
 export default class Infographic extends React.Component {
 

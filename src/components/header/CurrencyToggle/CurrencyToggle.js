@@ -1,7 +1,7 @@
 import React from "react";
-import {Wrapper, Icon, Dropdown} from "./CurrencyToggle.styles"
 import { NavText } from "styles/Fonts";
 import { CurrencyToggleDownArrow } from "styles/arrows";
+import { Wrapper, Icon, Dropdown } from "./CurrencyToggle.styles"
 
 export default class CurrencyToggle extends React.Component {
     render() {
