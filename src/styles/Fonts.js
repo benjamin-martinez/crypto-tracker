@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
-export const NavLink = styled.p`
-    font-size: 23px;
-    font-weight: medium;
+export const NavLinkText = styled.h2`
+f   ont-size: 23px;
+    font-weight: 800;
     line-height: 0px;
 `;
 
 export const NavText = styled.p`
     font-size: 17px;
-    font-weight: medium;
+    font-weight: bold;
     line-height: 0px;
 `;
 
