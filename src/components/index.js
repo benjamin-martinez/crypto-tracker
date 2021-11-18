@@ -8,3 +8,6 @@ export { default as Infographic } from './header/Infographic';
 export { default as QRScanner } from './header/QRScanner';
 
 export { default as Searchbar } from './header/Searchbar';
+
+
+//Coins Page components
