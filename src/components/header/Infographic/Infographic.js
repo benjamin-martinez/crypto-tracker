@@ -20,9 +20,9 @@ export default class Infographic extends React.Component {
         try {
             this.setState({isLoading: true})
             const { data } = await axios("https://api.coingecko.com/api/v3/global");
-            console.log(data.data)
             this.setState({
                 isLoading: false,
+                hasError: false,
                 numCoins: data.data.active_cryptocurrencies,
                 numExchanges: data.data.markets,
                 btcDom: data.data.market_cap_percentage.btc,
@@ -34,7 +34,10 @@ export default class Infographic extends React.Component {
         }
         catch (err) {
             console.log(err);
-            this.setState({isLoading: false})
+            this.setState({
+                isLoading: false,
+                hasError: true
+            })
         }
     }
     componentDidMount() {
