@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import numeral from "numeral";
 import { BarChart, DurationSelector} from "components/coins-page-charts";
 import { Wrapper, TextWrapper, SubWrapper } from "./BarChartWrapper.styles";
 import { ChartHeaderText, ChartSubText } from "../../../styles/Fonts"
@@ -73,15 +74,8 @@ export default class BarChartWrapper extends React.Component {
         else if (length === "1y")
             return 31536000
     }
-    convertPriceToBillions = (price) => {
-             if(Math.round(price).toString().length >= 10) {
-                return price.toString().slice(0,2) + "." + price.toString().slice(2,4) + " billion"
-             }
-             else if (Math.round(price).toString().length >= 7 && Math.round(price).toString().length < 10) {
-                return price.toString().slice(0,2) + "." + price.toString().slice(2,4) + " million"
-             }
-             else
-                return 
+    formatPrice = (price) => {
+        return numeral(price).format('($0.00 a)')
     }
     handleDurationClick = (duration) => {
         let tempArr = this.state.durations;
@@ -112,7 +106,7 @@ export default class BarChartWrapper extends React.Component {
             <Wrapper>
                 <TextWrapper>
                     <ChartSubText>{this.state.activeToken}</ChartSubText>
-                    <ChartHeaderText>${this.convertPriceToBillions(this.state.activePrice)}</ChartHeaderText>
+                    <ChartHeaderText>{this.formatPrice(this.state.activePrice)}</ChartHeaderText>
                     <ChartSubText>{this.state.activeDate}</ChartSubText>
                 </TextWrapper>
                 <DurationSelector durations={this.state.durations} handleDurationClick={this.handleDurationClick}/>
