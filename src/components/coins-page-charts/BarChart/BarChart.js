@@ -3,24 +3,33 @@ import { Bar } from "react-chartjs-2";
 import { Wrapper } from "./BarChart.styles"
 
 export default class BarChart extends React.Component {
+
+    getLabels = (arr) => {
+      let labels = []
+      arr.map((arr) => labels.push(new Date(arr[0]).toLocaleString(undefined, {
+        month: "short", day: "numeric", 
+    })))
+      return labels;
+    }
+
+    getPrices = (arr) => {
+      let prices = []
+      arr.map((arr) => prices.push(arr[1]))
+      return prices;
+    }
+
     render() {
-        let cLabels = []
-        let cPrices = []
-        this.props.totalVolumes.forEach((arr) => {
-            cLabels.push(arr[0])
-            cPrices.push(arr[1])
-        })
-        const data = (canvas) => {
+        
+        const chartData = (canvas) => {
             const ctx = canvas.getContext('2d')
             var gradientFill = ctx.createLinearGradient(0, 0, 0, 350);
             gradientFill.addColorStop(0, "rgba(33, 114, 229, 1)");
             gradientFill.addColorStop(1, "rgba(0, 0, 0, 1)");
+            console.log(this.state)
             return {
-                labels: cLabels.map(l => new Date(l).toLocaleString(undefined, {
-                    month: "short", day: "numeric", 
-                })),
+                labels: this.getLabels(this.props.totalVolumes),
                 datasets: [{
-                    data: cPrices,
+                    data: this.getPrices(this.props.totalVolumes),
                     tension: 0.4,
                     borderColor: "rgba(33, 114, 229, 1)",
                     fill: true,
@@ -72,7 +81,7 @@ export default class BarChart extends React.Component {
           }
         return (
                 <Wrapper>
-                    <Bar data={data} options={options} width={650} height={275}/>
+                    <Bar data={chartData} options={options} width={650} height={275}/>
                 </Wrapper>
         )
     }

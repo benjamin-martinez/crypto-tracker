@@ -4,6 +4,12 @@ export const Wrapper = styled.div`
     margin-top:25px;
 `;
 
+export const ContentWrapper = styled.div`
+    
+display: grid;
+justify-items: center;
+`;
+
 export const ChartsWrapper = styled.div`
     display: grid;
     grid-auto-flow: column;
@@ -16,5 +22,4 @@ export const SectionWrapper = styled.div`
 `;
 
 export const HeadingDiv = styled.div`
-    padding-left: 160px;
 `;
