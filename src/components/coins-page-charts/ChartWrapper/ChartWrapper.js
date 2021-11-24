@@ -75,22 +75,22 @@ export default class ChartWrapper extends React.Component {
         }
     }
     handleDurationClick = (duration) => {
-        let tempArr = this.state.durations;
-        tempArr.forEach(dur => {
-            if (dur.length === duration.length) {
-                if(!dur.active) {
-                    dur.active = true
-                    this.setState({currentDurationUnix: convertDurationToUnix(dur.length)});
-                    this.getChartData(convertDurationToUnix(dur.length));
-                }   
-            } else {
-                if(dur.active) {
-                    dur.active = false
-                }
+        const tempArr = this.state.durations.map(dur => {
+            return {
+                ...dur,
+                active: dur.length === duration.length 
             }
         })
         this.setState({durations: tempArr})
     }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.durations!== this.state.durations) {
+            console.log(this.state.durations)
+            this.state.durations.map(duration => duration.active && this.getChartData(convertDurationToUnix(duration.length)))
+        }
+    }
+
     componentDidMount() {
         this.getChartData(convertDurationToUnix("1d"));
         let date = new Date().toLocaleString(undefined, {

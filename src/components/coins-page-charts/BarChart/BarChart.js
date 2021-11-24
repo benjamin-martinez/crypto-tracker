@@ -19,7 +19,6 @@ export default class BarChart extends React.Component {
     }
 
     render() {
-        
         const chartData = (canvas) => {
             const ctx = canvas.getContext('2d')
             var gradientFill = ctx.createLinearGradient(0, 0, 0, 350);

@@ -11,7 +11,7 @@ export default class Chart extends React.Component {
   })))
     return labels;
   }
-
+  
   getPrices = (arr) => {
     let prices = []
     arr.map((arr) => prices.push(arr[1]))
