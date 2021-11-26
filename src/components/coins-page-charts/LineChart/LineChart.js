@@ -5,16 +5,14 @@ import { Wrapper } from "./LineChart.styles";
 export default class Chart extends React.Component {
 
   getLabels = (arr) => {
-    let labels = []
-    arr.map((arr) => labels.push(new Date(arr[0]).toLocaleString(undefined, {
+    let labels = arr.map((arr) => new Date(arr[0]).toLocaleString(undefined, {
       month: "short", day: "numeric", 
-  })))
+  }))
     return labels;
   }
-  
+
   getPrices = (arr) => {
-    let prices = []
-    arr.map((arr) => prices.push(arr[1]))
+    let prices = arr.map((arr) => arr[1])
     return prices;
   }
     render() {
@@ -51,7 +49,6 @@ export default class Chart extends React.Component {
                     ticks: {
                         align: "start",
                         source: 'auto',
-                        // Disabled rotation for performance
                         maxRotation: 0,
                         autoSkip: true,
                         maxTicksLimit: 7,

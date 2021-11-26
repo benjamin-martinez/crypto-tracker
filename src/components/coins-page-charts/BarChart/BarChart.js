@@ -5,16 +5,14 @@ import { Wrapper } from "./BarChart.styles"
 export default class BarChart extends React.Component {
 
     getLabels = (arr) => {
-      let labels = []
-      arr.map((arr) => labels.push(new Date(arr[0]).toLocaleString(undefined, {
+      let labels = arr.map((arr) => new Date(arr[0]).toLocaleString(undefined, {
         month: "short", day: "numeric", 
-    })))
+    }))
       return labels;
     }
 
     getPrices = (arr) => {
-      let prices = []
-      arr.map((arr) => prices.push(arr[1]))
+      let prices = arr.map((arr) => arr[1])
       return prices;
     }
 
@@ -24,7 +22,6 @@ export default class BarChart extends React.Component {
             var gradientFill = ctx.createLinearGradient(0, 0, 0, 350);
             gradientFill.addColorStop(0, "rgba(33, 114, 229, 1)");
             gradientFill.addColorStop(1, "rgba(0, 0, 0, 1)");
-            console.log(this.state)
             return {
                 labels: this.getLabels(this.props.totalVolumes),
                 datasets: [{
@@ -57,7 +54,6 @@ export default class BarChart extends React.Component {
                     ticks: {
                         align: "start",
                         source: 'auto',
-                        // Disabled rotation for performance
                         maxRotation: 0,
                         autoSkip: true,
                         maxTicksLimit: 7,
