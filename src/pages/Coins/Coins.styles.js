@@ -23,3 +23,5 @@ export const SectionWrapper = styled.div`
 
 export const HeadingDiv = styled.div`
 `;
+
+export const CoinTableWrapper = styled.div``;

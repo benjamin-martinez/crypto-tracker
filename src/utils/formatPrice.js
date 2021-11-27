@@ -7,3 +7,11 @@ export const addCommas = (price) => {
 export const addDecimalsAndShorten = (price) => {
     return numeral(price).format('($0.00 a)');
 }
+
+export const formatLargeNumber = (num) => {
+    return numeral(num).format('(0.00 a)')
+}
+
+export const formatPercentage = (percentage) => {
+    return numeral(percentage).format('0.00') + "%"
+}
