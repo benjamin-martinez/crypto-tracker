@@ -5,7 +5,7 @@ export const addCommas = (price) => {
 }
 
 export const addDecimalsAndShorten = (price) => {
-    return numeral(price).format('($0.00 a)');
+    return numeral(price).format('$0.00 a');
 }
 
 export const formatLargeNumber = (num) => {

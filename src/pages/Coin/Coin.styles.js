@@ -59,7 +59,6 @@ export const IdInnerWrapper = styled.div`
     justify-items: center;
 `;
 
-
 export const Icon = styled.img`
     height: 44px;
     width: 44px;

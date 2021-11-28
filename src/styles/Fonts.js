@@ -94,7 +94,7 @@ export const PortfolioEntryText = styled.p`
     line-height: 0px;
 `;
 
-export const ExternalLinkText = styled.p`
+export const ExternalLinkText = styled.a`
     font-size: 15px;
     font-weight: regular;
     line-height: 0%;
