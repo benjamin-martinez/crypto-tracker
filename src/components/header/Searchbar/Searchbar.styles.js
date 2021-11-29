@@ -9,7 +9,7 @@ export const Wrapper = styled.form`
     display: flex;
     gap: 20px;
     align-items: center;
-
+    position: relative;
     :hover {
         cursor: text;
     }

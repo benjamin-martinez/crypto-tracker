@@ -21,8 +21,11 @@ export default class Coin extends React.Component {
         })
     }
 
+    componentDidUpdate(prevState, prevProps) {
+        
+    }
+
     componentDidMount() {
-        console.log(this.props.match.params.id)
         this.getCoinData()
     }
 

@@ -4,3 +4,5 @@ export { default as Header } from './header/Header';
 export { default as Infographic } from './header/Infographic';
 export { default as QRScanner } from './header/QRScanner';
 export { default as Searchbar } from './header/Searchbar';
+export { default as SearchResults } from "./header/SearchResults";
+export { default as Result } from "./header/Result";
