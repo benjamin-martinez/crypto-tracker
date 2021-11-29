@@ -3,14 +3,9 @@ import { Wrapper } from "./Sparkline.styles";
 import { Line } from "react-chartjs-2";
 
 export default class Sparkline extends React.Component {
-
-    getLabels = (arr) => {
-        let counter = 0
-        let labels = arr.map(() => counter++)
-        return labels;
-      }
+    getLabels = (arr) => arr.map((el, index) => index)
     render() {
-        const chartData = (canvas) => {
+        const chartData = () => {
             let borderColor = ""
             if (this.props.prices[0] > this.props.prices[this.props.prices.length-1]) {
                 borderColor =  "rgba(254, 16, 64, 1)"
@@ -26,42 +21,42 @@ export default class Sparkline extends React.Component {
                     fill: false
                 }],
             }
-            }
+        }
         const options = {
-        plugins: {
-            legend: {
-                display: false
-            }
-        }, 
-        maintainAspectRatio: false,
-        elements: {
-            point:{
-                radius: 0
-            }
-        },
-        scales: {
-            x: {
-                grid: {
-                    display: false,
-                    drawBorder: false
-                },
-                ticks: {
-                    display: false,
-                    beginAtZero: true,
-                    maxTicksLimit: 5,
-                },
-                },
-            y: {
-                grid: {
-                    display: false,
-                    drawBorder: false,
-                },
-                ticks: {
-                display: false,
-                    beginAtZero: true,
-                    maxTicksLimit: 5,
-                },
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }, 
+            maintainAspectRatio: false,
+            elements: {
+                point:{
+                    radius: 0
+                }
             },
+            scales: {
+                x: {
+                    grid: {
+                        display: false,
+                        drawBorder: false
+                    },
+                    ticks: {
+                        display: false,
+                        beginAtZero: true,
+                        maxTicksLimit: 5,
+                    },
+                },
+                y: {
+                    grid: {
+                        display: false,
+                        drawBorder: false,
+                    },
+                    ticks: {
+                        display: false,
+                        beginAtZero: true,
+                        maxTicksLimit: 5,
+                    },
+                },
             }
         }
         return (
