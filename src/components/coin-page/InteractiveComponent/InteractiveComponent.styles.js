@@ -56,7 +56,7 @@ export const Name = styled.div`
     align-items: center;
 `;
 
-export const InputPrice = styled.div`
+export const InputPriceDiv = styled.div`
     width: 248px;
     height: 45px;
     background: ${props => props.theme.card.active};
@@ -65,7 +65,16 @@ export const InputPrice = styled.div`
     display: flex;
     align-items: center;
     padding-left: 19px;
+
+    :hover {
+        cursor: text
+    }
 `;
+
+export const Input = styled.input`
+    background: none;
+    border: none;
+    color: white;`;
 
 export const ConversionArrowsIcon = styled.img`
     width: 24px;

@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 
 export const Title = styled.div`
     justify-self: start;
-    margin-top:50px;
+    margin-top:25px;
     margin-bottom: 50px;
 `;
 

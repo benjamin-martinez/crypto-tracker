@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { CoinDescription, CoinSummary, InteractiveComponent } from "components/coin-page";
 import { Wrapper, ContentWrapper, BackgroundChartWrapper } from "./Coin.styles";
+import BackgroundChart from "components/coin-page/BackgroundChartWrapper";
 
 export default class Coin extends React.Component {
     state = {
@@ -31,10 +32,7 @@ export default class Coin extends React.Component {
                 {this.state.coin && <ContentWrapper>
                     <CoinSummary coin={this.state.coin} />
                     <CoinDescription coin={this.state.coin} />
-                    <InteractiveComponent />
-                    <BackgroundChartWrapper>
-
-                    </BackgroundChartWrapper>
+                    <InteractiveComponent coin={this.state.coin}/>
                 </ContentWrapper>}
            </Wrapper>
         )

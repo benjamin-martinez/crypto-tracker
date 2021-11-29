@@ -1,1 +1,1 @@
-export { default } from "./InteractiveComponents";
+export { default } from "./InteractiveComponent";

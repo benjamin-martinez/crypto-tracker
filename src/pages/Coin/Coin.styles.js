@@ -5,6 +5,7 @@ export const Wrapper = styled.div``;
 export const ContentWrapper = styled.div`
     display: grid;
     justify-items: center;
+    gap: 28px;
     color: ${props => props.theme.color};
 `;
 
