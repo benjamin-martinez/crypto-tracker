@@ -1,13 +1,16 @@
 import React from "react";
 import { Result } from "components";
+import { Link } from "react-router-dom";
 import { Wrapper, ResultsWrapper } from "./SearchResults.styles";
 
 export default class SearchResults extends React.Component {
+
+
     render() {
         return (
-            <Wrapper results={this.props.results}>
+            <Wrapper showResults={this.props.showResults}>
                 <ResultsWrapper>
-                    {this.props.results.map((result, index) => (index < 10 && <Result result={result}/>))}
+                    {this.props.results.map((result, index) => (index < 10 && <Link to={`/coin/${result.id}`} onClick={() => this.props.handleLinkClick()}><Result result={result}/></Link>))}
                 </ResultsWrapper>
             </Wrapper>
         )
