@@ -44,13 +44,6 @@ export default class Searchbar extends React.Component {
         this.setState({searchTerm: "", showResults: false})
     }
 
-    componentDidUpdate = (prevProps, prevState) => {
-        console.log(this.ref)
-        // if (prevProps.location.pathname !== this.props.location.pathname) {
-        //     this.setState({showResults: false})
-        // }
-      };
-
     componentDidMount() {
         document.addEventListener('mousedown', this.handleClickOutside);
         this.getAllTokens()
