@@ -1,71 +1,67 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { DownArrow, NeutralDot, UpArrow } from "styles/arrows";
 import { NavText } from "styles/Fonts";
 import { Slider, SliderWrapper } from "styles/sliders";
 import { Wrapper, Volume, PriceWrapper, BtcDominance, Exchanges, MarketCap, Icon, EthDominance, InnerWrapper, CoinsExchangesWrapper, Coins } from "./Infographic.styles";
 
-export default class Infographic extends React.Component {
-    state = {
-        numCoins: 0,
-        numExchanges: 0,
-        marketCap: 0,
-        marketCapChange: 0,
-        volume: 0,
-        btcDom: 0,
-        ethDom: 0,
-        isLoading: false
-    }
-    getGlobalCryptoData = async () => {
+const Infographic = (props) => {
+    const [numCoins, setNumCoins] = useState(0)
+    const [numExchanges, setNumExchanges] = useState(0)
+    const [marketCap, setMarketCap] = useState(0)
+    const [marketCapChange, setMarketCapChange] = useState(0)
+    const [volume, setVolume] = useState(0)
+    const [btcDom, setBtcDom] = useState(0)
+    const [ethDom, setEthDom] = useState(0)
+    const [isLoading, setIsLoading] = useState(false)
+    const [hasError, setHasError] = useState(false)
+    const getGlobalCryptoData = async () => {
         try {
-            this.setState({isLoading: true})
+            setIsLoading(true)
             const { data } = await axios("https://api.coingecko.com/api/v3/global");
-            this.setState({
-                isLoading: false,
-                hasError: false,
-                numCoins: data.data.active_cryptocurrencies,
-                numExchanges: data.data.markets,
-                btcDom: data.data.market_cap_percentage.btc,
-                ethDom: data.data.market_cap_percentage.eth,
-                marketCap: data.data.total_market_cap.usd,
-                marketCapChange: data.data.market_cap_change_percentage_24h_usd,
-                volume: data.data.total_volume.usd
-            })
+            setIsLoading(false)
+            setHasError(false)
+            setNumCoins(data.data.active_cryptocurrencies)
+            setNumExchanges(data.data.markets)
+            setBtcDom(data.data.market_cap_percentage.btc)
+            setEthDom(data.data.market_cap_percentage.eth)
+            setMarketCap(data.data.total_market_cap.usd)
+            setMarketCapChange(data.data.market_cap_change_percentage_24h_usd)
+            setVolume(data.data.total_volume.usd)
         }
         catch (err) {
             console.log(err);
-            this.setState({
-                isLoading: false,
-                hasError: true
-            })
+            setIsLoading(false)
+            setHasError(true)
         }
     }
-    componentDidMount() {
-        this.getGlobalCryptoData();
-    }
-    render() {
+
+    useEffect(() => {
+        getGlobalCryptoData()
+    }, [])
+    
         return (
             <Wrapper>
                 <InnerWrapper>
                     <CoinsExchangesWrapper>
                         <Coins>
-                            <NavText>Coins {this.state.numCoins}</NavText>
+                            <NavText>Coins {numCoins}</NavText>
                         </Coins>
                         <Exchanges>
-                            <NavText>Exchanges {this.state.numExchanges}</NavText>
+                            <NavText>Exchanges {numExchanges}</NavText>
                         </Exchanges>
                     </CoinsExchangesWrapper>
                     <MarketCap>
                         <NeutralDot background="white" />
                         <PriceWrapper>
-                            <NavText>{(this.state.marketCap/1.0e+12).toFixed(2)} T</NavText>
-                            {this.state.marketCapChange > 0 ? <UpArrow /> : <DownArrow />}
+                            <NavText>{(marketCap/1.0e+12).toFixed(2)} T</NavText>
+                            {marketCapChange > 0 ? <UpArrow /> : <DownArrow />}
                         </PriceWrapper>
                     </MarketCap>
                     <Volume>
                         <NeutralDot background="white" />
                         <PriceWrapper>
-                            <NavText>{(this.state.volume/1.0e+9).toFixed(2)} B</NavText>
+                            <NavText>{(volume/1.0e+9).toFixed(2)} B</NavText>
                             <SliderWrapper height="13px" width="55px" background="#2172E5">
                                 <Slider width="28" background="#ffffff" />
                             </SliderWrapper>
@@ -73,20 +69,22 @@ export default class Infographic extends React.Component {
                     </Volume>
                     <BtcDominance>
                         <Icon src="icons/btcdom.svg" />
-                        <NavText>{Math.round(this.state.btcDom)}%</NavText>
+                        <NavText>{Math.round(btcDom)}%</NavText>
                         <SliderWrapper height="13px" width="55px" background="#2172E5">
-                            <Slider width={Math.round(this.state.btcDom)} background="#ffffff" />
+                            <Slider width={Math.round(btcDom)} background="#ffffff" />
                         </SliderWrapper>
                     </BtcDominance>
                     <EthDominance>
                         <Icon src="icons/ethdom.svg" />
-                        <NavText>{Math.round(this.state.ethDom)}%</NavText>
+                        <NavText>{Math.round(ethDom)}%</NavText>
                         <SliderWrapper height="13px" width="55px" background="#2172E5">
-                            <Slider width={Math.round(this.state.ethDom)} background="#ffffff" />
+                            <Slider width={Math.round(ethDom)} background="#ffffff" />
                         </SliderWrapper>
                     </EthDominance>
                 </InnerWrapper>
             </Wrapper>
         )
-    }
+    
 }
+
+export default Infographic

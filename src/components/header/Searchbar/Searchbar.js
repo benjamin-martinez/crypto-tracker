@@ -1,73 +1,79 @@
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import React from "react";
 import { SearchResults } from "components";
 import { Wrapper, Icon, Input, ErrorMessage, ErrorMessageWrapper } from "./Searchbar.styles"
 import { SearchResultsText } from "styles/Fonts";
 
-export default class Searchbar extends React.Component {
-    state = {
-        searchTerm: "",
-        allTokens: [],
-        results: [],
-        showResults: false,
-        isMouseOver: false
-    }
+const Searchbar = () => {
+    const [searchTerm, setSearchTerm] = useState("")
+    const [allTokens, setAllTokens] = useState([])
+    const [results, setResults] = useState([])
+    const [showResults, setShowResults] = useState(false)
     
-    wrapperRef = React.createRef();
-    handleClickOutside = this.handleClickOutside.bind(this);
+    const wrapperRef = useRef();
+    useOutsideAlerter(wrapperRef);
 
-    getAllTokens = async () => {
+    function useOutsideAlerter(ref) {
+        useEffect(() => {
+            /**
+             * Alert if clicked on outside of element
+             */
+            function handleClickOutside(event) {
+                if (ref.current && !ref.current.contains(event.target)) {
+                    alert("You clicked outside of me!");
+                }
+            }
+    
+            // Bind the event listener
+            document.addEventListener("mousedown", handleClickOutside);
+            return () => {
+                // Unbind the event listener on clean up
+                document.removeEventListener("mousedown", handleClickOutside);
+            };
+        }, [ref]);
+    }
+
+    const getAllTokens = async () => {
         const { data } = await axios("https://api.coingecko.com/api/v3/coins/list")
-        this.setState({ allTokens: data })
+        setAllTokens(data)
     }
 
-    filterNames = (query) => {
-        const results = this.state.allTokens.filter(token => (token.id.includes(query) || token.name.includes(query) || token.symbol.includes(query)))
-        this.setState({results: results, showResults: true})
+    const filterNames = (query) => {
+        const results = allTokens.filter(token => (token.id.includes(query) || token.name.includes(query) || token.symbol.includes(query)))
+        setResults(results)
+        setShowResults(true)
     }
 
-    handleChange = (e) => {
-        this.setState({searchTerm: e.target.value})
-
+    const handleChange = (e) => {
+        setSearchTerm(e.target.value)
         if (e.target.value.length > 2) {
-            this.filterNames(e.target.value)
+            filterNames(e.target.value)
         }
         else 
-            this.setState({results: []})
+            setResults([])
     }
 
-    handleMouseOver = () => this.setState({isMouseOver: true})
-
-    handleMouseLeave = () => this.setState({isMouseOver: false})
-
-    handleLinkClick = () => {
-        this.setState({searchTerm: "", showResults: false})
+    const handleLinkClick = () => {
+        setSearchTerm("")
+        setShowResults(false)
     }
 
-    componentDidMount() {
-        document.addEventListener('mousedown', this.handleClickOutside);
-        this.getAllTokens()
-    }
+    useEffect(() => {
+        getAllTokens()
+    }, [])
 
-    handleClickOutside(event) {
-        if (this.wrapperRef.current && !this.wrapperRef.current.contains(event.target)) {
-            this.setState({showResults: false})
-        }
-    }
-
-    
-    render() {
-        return (
-            <Wrapper ref={this.wrapperRef} onSubmit={(e) => e.preventDefault()} onMouseOver={() => this.handleMouseOver()} onMouseLeave={() => this.handleMouseLeave()}>
-                <Icon src="icons/search.svg"/>
-                <Input type="text" placeholder="Search..." onChange={this.handleChange} value={this.state.searchTerm} onBlur={() => !this.state.isMouseOver && this.setState({showResults: false})}/>
-                {this.state.showResults && (this.state.results.length > 0 ? <SearchResults showResults={this.state.showResults} results={this.state.results} handleLinkClick={this.handleLinkClick} />
-                 : <ErrorMessageWrapper>
-                        <ErrorMessage>
-                        {this.state.searchTerm.length < 3 ? <SearchResultsText>Please enter at least 3 characters.</SearchResultsText> : <SearchResultsText>No results found. Try another search.</SearchResultsText>}
-                        </ErrorMessage>
-                    </ErrorMessageWrapper>)}
-            </Wrapper>
-        )
-    }
+    return (
+        <Wrapper ref={wrapperRef} onSubmit={(e) => e.preventDefault()}>
+            <Icon src="icons/search.svg"/>
+            <Input type="text" placeholder="Search..." onChange={handleChange} value={searchTerm}/>
+            {showResults && (results.length > 0 ? <SearchResults showResults={showResults} results={results} handleLinkClick={handleLinkClick} />
+                : <ErrorMessageWrapper>
+                    <ErrorMessage>
+                    {searchTerm.length < 3 ? <SearchResultsText>Please enter at least 3 characters.</SearchResultsText> : <SearchResultsText>No results found. Try another search.</SearchResultsText>}
+                    </ErrorMessage>
+                </ErrorMessageWrapper>)}
+        </Wrapper>
+    )
 }
+
+export default Searchbar
