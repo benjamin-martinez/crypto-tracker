@@ -13,13 +13,20 @@ class App extends React.Component {
   state = {
     theme: themes.dark
   }
+  toggleTheme = () => {
+    if(this.state.theme === themes.dark) {
+      this.setState({theme: themes.light})
+    } else {
+      this.setState({theme: themes.dark})
+    }
+  }
   render() {
     return (
       <ThemeProvider theme={this.state.theme}>
         <div className="App">
-          <GlobalStyle />
+          <GlobalStyle theme={this.state.theme}/>
           <Router >
-            <Header />
+            <Header toggleTheme={this.toggleTheme}/>
             <Switch>
               <Route path="/coins" component={Coins} />
               <Route path="/portfolio" component={Portfolio} />
