@@ -1,116 +1,110 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import axios from "axios";
 import { BarChart, DurationSelector, LineChart} from "components/coins-page-charts";
 import { addCommas, addDecimalsAndShorten, convertDurationToUnix } from "utils";
 import { Wrapper, TextWrapper, SubWrapper } from "./ChartWrapper.styles";
 import { ChartHeaderText, ChartSubText } from "../../../styles/Fonts"
 
-export default class ChartWrapper extends React.Component {
-    state = {
-        activeToken: "BTC",
-        activePrice: "0.00",
-        activeDate: "Nov 17, 2021",
-        tokenPriceHistory: [],
-        durations: [
-            {
-                length: "1d",
-                active: true
-            },
-            {
-                length: "1w",
-                active: false
-            },
-            {
-                length: "1m",
-                active: false
-            },
-            {
-                length: "3m",
-                active: false
-            },
-            {
-                length: "6m",
-                active: false
-            },
-            {
-                length: "1y",
-                active: false
-            }
-        ]
-    }
-    getChartData = async (duration) => {
+const ChartWrapper = (props) => {
+    const [activeToken, setActiveToken] = useState("BTC")
+    const [activePrice, setActivePrice] = useState("0.00")
+    const [activeDate, setActiveDate] = useState("Nov 17, 2021")
+    const [tokenPriceHistory, setTokenPriceHistory] = useState([])
+    const [durations, setDurations] = useState([
+        {
+            length: "1d",
+            active: true
+        },
+        {
+            length: "1w",
+            active: false
+        },
+        {
+            length: "1m",
+            active: false
+        },
+        {
+            length: "3m",
+            active: false
+        },
+        {
+            length: "6m",
+            active: false
+        },
+        {
+            length: "1y",
+            active: false
+        }
+    ])
+    const [isLoading, setIsLoading] = useState(false)
+
+    const getChartData = async (duration) => {
         const todaysDate = new Date() / 1000;
         const durationStartDate = new Date()/1000 - duration;
-        this.setState({ isLoading: true })
+        setIsLoading(true)
         try {
             const { data } = await axios(`https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=usd&from=${durationStartDate}&to=${todaysDate}`);
-            if (this.props.chartType === "volume") {
+            if (props.chartType === "volume") {
                 if (duration === 86400) {
-                    this.setState({
-                        tokenPriceHistory: data.total_volumes,
-                        activePrice: data.total_volumes[data.total_volumes.length-1][1],
-                        isLoading: false
-                    })
-                } else 
-                    this.setState({
-                        tokenPriceHistory: data.total_volumes,
-                        isLoading: false
-                    })
-            } else if (this.props.chartType === "price") {
+                    setTokenPriceHistory(data.total_volumes)
+                    setActivePrice(data.total_volumes[data.total_volumes.length-1][1])
+                    setIsLoading(false)
+                } else {
+                    setTokenPriceHistory(data.total_volumes)
+                    setIsLoading(false)
+                }
+            } else if (props.chartType === "price") {
                 if (duration === 86400) {
-                    this.setState({
-                        tokenPriceHistory: data.prices,
-                        activePrice: data.prices[data.prices.length-1][1],
-                        isLoading: false
-                    })
-                } else 
-                    this.setState({
-                        tokenPriceHistory: data.prices,
-                        isLoading: false
-                    })
+                    setTokenPriceHistory(data.prices)
+                    setActivePrice(data.prices[data.prices.length-1][1])
+                    setIsLoading(false)
+                }
+                else {
+                    setTokenPriceHistory(data.prices)
+                    setIsLoading(false)
+                }
             }
         }
         catch (err) {
             console.log(err)
         }
     }
-    handleDurationClick = (duration) => {
-        const tempArr = this.state.durations.map(dur => {
+    const handleDurationClick = (duration) => {
+        const tempArr = durations.map(dur => {
             return {
                 ...dur,
                 active: dur.length === duration.length 
             }
         })
-        this.setState({durations: tempArr})
+        setDurations(tempArr)
     }
+    useEffect(() => {
+        durations.map(duration => duration.active && getChartData(convertDurationToUnix(duration.length)))
+        //eslint-disable-next-line
+    }, [durations])
 
-    componentDidUpdate(prevProps, prevState) {
-        if (prevState.durations!== this.state.durations) {
-            console.log(this.state.durations)
-            this.state.durations.map(duration => duration.active && this.getChartData(convertDurationToUnix(duration.length)))
-        }
-    }
-
-    componentDidMount() {
-        this.getChartData(convertDurationToUnix("1d"));
+    useEffect(() => {
+        getChartData(convertDurationToUnix("1d"));
         let date = new Date().toLocaleString(undefined, {
             month: "short", day: "numeric", year: "numeric"
         })
-        this.setState({activeDate: date})
-    }
-    render() {
-        return (
-            <Wrapper>
-                <TextWrapper>
-                    <ChartSubText>{this.state.activeToken} {this.props.chartType === "volume" && "Volume"}</ChartSubText>
-                    <ChartHeaderText>{this.props.chartType === "volume" ? addDecimalsAndShorten(this.state.activePrice) : addCommas(this.state.activePrice)}</ChartHeaderText>
-                    <ChartSubText>{this.state.activeDate}</ChartSubText>
-                </TextWrapper>
-                <DurationSelector durations={this.state.durations} handleDurationClick={this.handleDurationClick}/>
-                <SubWrapper>
-                    {this.props.chartType === "volume" ? <BarChart totalVolumes={this.state.tokenPriceHistory} /> : <LineChart coinPrices={this.state.tokenPriceHistory}/>}
-                </SubWrapper>
-            </Wrapper>
-        )
-    }
+        setActiveDate(date)
+        //eslint-disable-next-line
+    }, [])
+
+    return (
+        <Wrapper>
+            <TextWrapper>
+                <ChartSubText>{activeToken} {props.chartType === "volume" && "Volume"}</ChartSubText>
+                <ChartHeaderText>{props.chartType === "volume" ? addDecimalsAndShorten(activePrice) : addCommas(activePrice)}</ChartHeaderText>
+                <ChartSubText>{activeDate}</ChartSubText>
+            </TextWrapper>
+            <DurationSelector durations={durations} handleDurationClick={handleDurationClick}/>
+            <SubWrapper>
+                {props.chartType === "volume" ? <BarChart totalVolumes={tokenPriceHistory} /> : <LineChart coinPrices={tokenPriceHistory}/>}
+            </SubWrapper>
+        </Wrapper>
+    )
 }
+
+export default ChartWrapper
