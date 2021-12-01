@@ -1,66 +1,54 @@
-import React from "react";
+import React, { useState } from "react";
 import { SectionHeading } from "styles/Fonts";
-import { BackgroundChartWrapper, DurationSelector } from "components/coin-page";
+import { BackgroundChartWrapper } from "components/coin-page";
 import { addCommasNoDec } from "utils";
 import { Wrapper, ConversionWrapper, CoinInput, Name, InputPriceDiv, Input, ConversionArrowsIcon } from "./InteractiveComponent.styles"
 
-export default class InteractiveComponent extends React.Component {
+const InteractiveComponent = (props) => {
 
-    state = {
-        tokenAmount: 1,
-        fiatAmount: this.props.coin.market_data.current_price.usd,
-        fiatType: "usd",
-    }
+    const [tokenAmount, setTokenAmount] = useState(1)
+    const [fiatAmount, setFiatAmount] = useState(props.coin.market_data.current_price.usd)
+    const [fiatType, setFiatType] = useState("usd")
 
-    handleFiatChange = (e) => {
+    const handleFiatChange = (e) => {
         const amountWithNoCommas = e.target.value.replace(/,/g, "");
         if(/^\d+$/.test(amountWithNoCommas)) {
-            this.setState({
-                fiatAmount: e.target.value,
-                tokenAmount: parseInt(e.target.value)/parseInt(this.props.coin.market_data.current_price.usd)
-            })
+            setFiatAmount(e.target.value)
+            setTokenAmount(parseInt(e.target.value)/parseInt(props.coin.market_data.current_price.usd))
         }
-
         if (e.target.value === "") {
-            this.setState({
-                fiatAmount: e.target.value,
-                tokenAmount: e.target.value
-            })
+            setFiatAmount(e.target.value)
+            setTokenAmount(e.target.value)
         }
     }
 
-    handleTokenAmountChange = (e) => {
+    const handleTokenAmountChange = (e) => {
         const amountWithNoCommas = e.target.value.replace(/,/g, "");
         if(/^\d+$/.test(amountWithNoCommas)) {
-            this.setState({
-                tokenAmount: e.target.value,
-                fiatAmount: parseInt(this.props.coin.market_data.current_price.usd)*parseInt(e.target.value)
-            })
+                setTokenAmount(e.target.value)
+                setFiatAmount(parseInt(props.coin.market_data.current_price.usd)*parseInt(e.target.value))
         }
         if (e.target.value === "") {
-            this.setState({
-                fiatAmount: e.target.value,
-                tokenAmount: e.target.value
-            })
+            setFiatAmount(e.target.value)
+            setTokenAmount(e.target.value)
         }
     }
-
-    render() {
-        return (
-            <Wrapper>
-                <ConversionWrapper>
-                    <CoinInput>
-                        <Name><SectionHeading>{this.props.coin.symbol.toUpperCase()}</SectionHeading></Name>
-                        <InputPriceDiv><Input value={this.state.tokenAmount} onChange={this.handleTokenAmountChange}/></InputPriceDiv>
-                    </CoinInput>
-                    <ConversionArrowsIcon src="icons/conversion-arrows.svg"/>
-                    <CoinInput>
-                        <Name><SectionHeading>USD</SectionHeading></Name>
-                        <InputPriceDiv>$<Input value={addCommasNoDec(this.state.fiatAmount)} onChange={this.handleFiatChange}/></InputPriceDiv>
-                    </CoinInput>
-                </ConversionWrapper>
-                <BackgroundChartWrapper coinId={this.props.coin.id} />
-            </Wrapper>
-        )
-    }
+    return (
+        <Wrapper>
+            <ConversionWrapper>
+                <CoinInput>
+                    <Name><SectionHeading>{props.coin.symbol.toUpperCase()}</SectionHeading></Name>
+                    <InputPriceDiv><Input value={tokenAmount} onChange={handleTokenAmountChange}/></InputPriceDiv>
+                </CoinInput>
+                <ConversionArrowsIcon src="icons/conversion-arrows.svg"/>
+                <CoinInput>
+                    <Name><SectionHeading>USD</SectionHeading></Name>
+                    <InputPriceDiv>$<Input value={addCommasNoDec(fiatAmount)} onChange={handleFiatChange}/></InputPriceDiv>
+                </CoinInput>
+            </ConversionWrapper>
+            <BackgroundChartWrapper coinId={props.coin.id} />
+        </Wrapper>
+    )
 }
+
+export default InteractiveComponent

@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { convertDurationToUnix } from "utils";
 import { DurationSelector, BackgroundChart } from "components/coin-page";
 import { Wrapper } from "./BackgroundChartWrapper.styles";
 
-export default class BackgroundChartWrapper extends React.Component {
-    state = {
-        tokenPriceHistory: [],
-        durations: [
+const BackgroundChartWrapper = (props) => {
+    const [tokenPriceHistory, setTokenPriceHistory] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
+    const [hasError, setHasError] = useState(false)
+    const [durations, setDurations] = useState(
+        [
             {
                 length: "1d",
                 active: true
@@ -33,61 +35,54 @@ export default class BackgroundChartWrapper extends React.Component {
                 active: false
             }
         ]
-    }
-    getChartData = async (duration) => {
+    )
+    const getChartData = async (duration) => {
         const todaysDate = new Date() / 1000;
         const durationStartDate = new Date()/1000 - duration;
-        this.setState({ isLoading: true })
+        setIsLoading(true)
         try {
-            const { data } = await axios(`https://api.coingecko.com/api/v3/coins/${this.props.coinId}/market_chart/range?vs_currency=usd&from=${durationStartDate}&to=${todaysDate}`);
+            const { data } = await axios(`https://api.coingecko.com/api/v3/coins/${props.coinId}/market_chart/range?vs_currency=usd&from=${durationStartDate}&to=${todaysDate}`);
             console.log(data)
                 if (duration === 86400) {
-                    this.setState({
-                        tokenPriceHistory: data.prices,
-                        activePrice: data.prices[data.prices.length-1][1],
-                        isLoading: false
-                    })
+                    setTokenPriceHistory(data.prices)
+                    setIsLoading(false)
+                    setHasError(false)
                 } else {
-                    this.setState({
-                        tokenPriceHistory: data.prices,
-                        isLoading: false
-                    })
+                    setTokenPriceHistory(data.prices)
+                    setIsLoading(false)
+                    setHasError(false)
                 }
             }
         catch (err) {
             console.log(err)
+            setHasError(true)
         }
     }
-    handleDurationClick = (duration) => {
-        const tempArr = this.state.durations.map(dur => {
+    const handleDurationClick = (duration) => {
+        const tempArr = durations.map(dur => {
             return {
                 ...dur,
                 active: dur.length === duration.length 
             }
         })
-        this.setState({durations: tempArr})
+        setDurations(tempArr)
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (prevState.durations!== this.state.durations) {
-            console.log(this.state.durations)
-            this.state.durations.map(duration => duration.active && this.getChartData(convertDurationToUnix(duration.length)))
-        }
-    }
+    useEffect(() => {
+        durations.map(duration => duration.active && getChartData(convertDurationToUnix(duration.length)))
+        //eslint-disable-next-line
+    }, [durations])
 
-    componentDidMount() {
-        this.getChartData(convertDurationToUnix("1d"));
-        let date = new Date().toLocaleString(undefined, {
-            month: "short", day: "numeric", year: "numeric"
-        })
-        this.setState({activeDate: date})
-    }
-    render() {
-        return (
-            <Wrapper>
-                <DurationSelector durations={this.state.durations} handleDurationClick={this.handleDurationClick}/>
-                <BackgroundChart coinPrices={this.state.tokenPriceHistory}/>
-            </Wrapper>
-        )
-    }
+    useEffect(() => {
+        getChartData(convertDurationToUnix("1d"));
+        //eslint-disable-next-line
+    }, [])
+    return (
+        <Wrapper>
+            <DurationSelector durations={durations} handleDurationClick={handleDurationClick}/>
+            <BackgroundChart coinPrices={tokenPriceHistory}/>
+        </Wrapper>
+    )
 }
+
+export default BackgroundChartWrapper
