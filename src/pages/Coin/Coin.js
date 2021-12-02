@@ -1,8 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { CoinDescription, CoinSummary, InteractiveComponent } from "components/coin-page";
-import { Wrapper, ContentWrapper, BackgroundChartWrapper } from "./Coin.styles";
-import BackgroundChart from "components/coin-page/BackgroundChartWrapper";
+import { Wrapper, ContentWrapper } from "./Coin.styles";
 
 export default class Coin extends React.Component {
     state = {
@@ -14,7 +13,6 @@ export default class Coin extends React.Component {
     getCoinData = async () => {
         this.setState({isLoading: true})
         const { data } = await axios(`https://api.coingecko.com/api/v3/coins/${this.props.match.params.id}?localization=false`)
-        console.log(data)
         this.setState({
             isLoading: false,
             coin: data
@@ -22,7 +20,6 @@ export default class Coin extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.match.params.id)
         this.getCoinData()
     }
 
