@@ -99,3 +99,13 @@ export const ExternalLinkText = styled.a`
     font-weight: regular;
     line-height: 0%;
 `;
+
+export const SearchResultsText = styled.p`
+    font-size: 17px;
+    line-height: 0%;
+`;
+
+export const SearchResultsSubText = styled.p`
+    font-size: 13px;
+    line-height: 0%;
+`;

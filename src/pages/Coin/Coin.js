@@ -19,6 +19,12 @@ export default class Coin extends React.Component {
         })
     }
 
+    componentDidUpdate = (prevProps, prevState) => {
+        if (prevProps.location.pathname !== this.props.location.pathname) {
+            this.getCoinData()
+        }
+      };
+
     componentDidMount() {
         this.getCoinData()
     }
