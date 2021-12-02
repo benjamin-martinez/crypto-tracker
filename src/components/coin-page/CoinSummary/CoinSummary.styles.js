@@ -180,7 +180,8 @@ export const MarketDetails = styled.div`
 `;
 
 export const MarketDetailsTop = styled.div`
-    margin-bottom: 22px;`;
+    margin-bottom: 22px;
+`;
 
 export const MarketDetailsMiddle = styled.div``;
 
