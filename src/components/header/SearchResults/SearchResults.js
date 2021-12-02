@@ -10,7 +10,7 @@ export default class SearchResults extends React.Component {
         return (
             <Wrapper showResults={this.props.showResults}>
                 <ResultsWrapper>
-                    {this.props.results.map((result, index) => (index < 10 && <Link to={`/coin/${result.id}`} onClick={() => this.props.handleLinkClick()}><Result result={result}/></Link>))}
+                    {this.props.results.map((result) => <Link to={`/coin/${result.id}`} onClick={() => this.props.handleLinkClick()}><Result result={result}/></Link>)}
                 </ResultsWrapper>
             </Wrapper>
         )

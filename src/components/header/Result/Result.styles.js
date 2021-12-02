@@ -5,7 +5,6 @@ export const Wrapper = styled.div`
     height: 50px;
     display: flex;
     align-items: center;
-    //border-bottom: ${props => props.theme.color} .5px solid;
     border-radius: 10px;
     :hover {
         cursor: pointer;

@@ -28,11 +28,6 @@ export default class Searchbar extends React.Component {
         }
     }
 
-    // filterNames = (query) => {
-    //     const results = this.state.allTokens.filter(token => (token.id.includes(query) || token.name.includes(query) || token.symbol.includes(query)))
-    //     this.setState({results: results, showResults: true})
-    // }
-
     handleChange = (e) => {
         const searchTerm = e.target.value
         this.setState({searchTerm: searchTerm})
@@ -40,8 +35,9 @@ export default class Searchbar extends React.Component {
         if (e.target.value.length > 2) {
             debounce(this.getFilteredTokens,500)(searchTerm)
         }
-        else 
+        else {
             this.setState({results: []})
+        }
     }
 
     handleMouseOver = () => this.setState({isMouseOver: true})
@@ -57,10 +53,8 @@ export default class Searchbar extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (this.state.searchTerm !== prevState.searchTerm) {
-            if (this.state.searchTerm.length < 3) {
-                this.setState({results: []})
-            }
+        if (this.state.searchTerm !== prevState.searchTerm && this.state.searchTerm.length < 3) {
+            this.setState({results: []})
         }
     }
 
@@ -73,7 +67,7 @@ export default class Searchbar extends React.Component {
     
     render() {
         return (
-            <Wrapper ref={this.wrapperRef} onSubmit={(e) => e.preventDefault()} onMouseOver={() => this.handleMouseOver()} onMouseLeave={() => this.handleMouseLeave()} onMouseDown={this.handleOnMouseDown}>
+            <Wrapper ref={this.wrapperRef} onSubmit={(e) => e.preventDefault()} onMouseOver={this.handleMouseOver} onMouseLeave={this.handleMouseLeave} onMouseDown={this.handleOnMouseDown}>
                 <Icon src="icons/search.svg"/>
                 <Input type="text" placeholder="Search..." onChange={this.handleChange} value={this.state.searchTerm} onBlur={() => !this.state.isMouseOver && this.setState({showResults: false})}/>
                 {this.state.showResults && (this.state.results.length > 0 ? <SearchResults showResults={this.state.showResults} results={this.state.results} handleLinkClick={this.handleLinkClick} />
