@@ -1,8 +1,9 @@
-import axios from "axios";
 import React from "react";
+import axios from "axios";
+import { debounce } from "lodash"
 import { SearchResults } from "components";
-import { Wrapper, Icon, Input, ErrorMessage, ErrorMessageWrapper } from "./Searchbar.styles"
 import { SearchResultsText } from "styles/Fonts";
+import { Wrapper, Icon, Input, ErrorMessage, ErrorMessageWrapper } from "./Searchbar.styles"
 
 export default class Searchbar extends React.Component {
     state = {
@@ -10,15 +11,22 @@ export default class Searchbar extends React.Component {
         allTokens: [],
         results: [],
         showResults: false,
-        isMouseOver: false
+        isMouseOver: false,
+        isLoading: false,
+        hasError: false
     }
-    
     wrapperRef = React.createRef();
     handleClickOutside = this.handleClickOutside.bind(this);
 
-    getAllTokens = async () => {
-        const { data } = await axios("https://api.coingecko.com/api/v3/coins/list")
-        this.setState({ allTokens: data })
+    getFilteredTokens = async (searchTerm) => {
+        this.setState({isLoading: true})
+        try {
+            const { data } = await axios(`https://crypto-app-server.herokuapp.com/coins/${searchTerm}`)
+            this.setState({ results: data, showResults: true, isLoading: false, hasError: false })
+        } catch (err) {
+            console.log(err)
+            this.setState({isLoading: false, hasError: true})
+        }
     }
 
     filterNames = (query) => {
@@ -27,10 +35,11 @@ export default class Searchbar extends React.Component {
     }
 
     handleChange = (e) => {
-        this.setState({searchTerm: e.target.value})
+        const searchTerm = e.target.value
+        this.setState({searchTerm: searchTerm})
 
         if (e.target.value.length > 2) {
-            this.filterNames(e.target.value)
+            debounce(this.getFilteredTokens,200)(searchTerm)
         }
         else 
             this.setState({results: []})
@@ -44,16 +53,16 @@ export default class Searchbar extends React.Component {
         this.setState({searchTerm: "", showResults: false})
     }
 
-    componentDidUpdate = (prevProps, prevState) => {
-        console.log(this.ref)
-        // if (prevProps.location.pathname !== this.props.location.pathname) {
-        //     this.setState({showResults: false})
-        // }
-      };
+    handleOnMouseDown = (e) => {
+        this.handleClickOutside(e)
+    }
 
-    componentDidMount() {
-        document.addEventListener('mousedown', this.handleClickOutside);
-        this.getAllTokens()
+    componentDidUpdate(prevProps, prevState) {
+        if (this.state.searchTerm !== prevState.searchTerm) {
+            if (this.state.searchTerm.length < 3) {
+                this.setState({results: []})
+            }
+        }
     }
 
     handleClickOutside(event) {
@@ -65,7 +74,7 @@ export default class Searchbar extends React.Component {
     
     render() {
         return (
-            <Wrapper ref={this.wrapperRef} onSubmit={(e) => e.preventDefault()} onMouseOver={() => this.handleMouseOver()} onMouseLeave={() => this.handleMouseLeave()}>
+            <Wrapper ref={this.wrapperRef} onSubmit={(e) => e.preventDefault()} onMouseOver={() => this.handleMouseOver()} onMouseLeave={() => this.handleMouseLeave()} onMouseDown={this.handleOnMouseDown}>
                 <Icon src="icons/search.svg"/>
                 <Input type="text" placeholder="Search..." onChange={this.handleChange} value={this.state.searchTerm} onBlur={() => !this.state.isMouseOver && this.setState({showResults: false})}/>
                 {this.state.showResults && (this.state.results.length > 0 ? <SearchResults showResults={this.state.showResults} results={this.state.results} handleLinkClick={this.handleLinkClick} />

@@ -19,3 +19,11 @@ export const TextWrapper = styled.div`
     width: 100%;
     justify-content: space-between;
 `;
+
+export const LeftText = styled.div`
+    display: flex;
+    gap: 10px;
+    align-items: center;
+`;
+
+export const RightText = styled.div``;
