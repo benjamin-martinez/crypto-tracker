@@ -29,16 +29,16 @@ export const ChartSubText = styled.p`
     line-height: 0;
 `;
 
-export const ChartHeaderText = styled.h2`
+export const ChartHeaderText = styled.h1`
     font-size: 44px;
     font-weight: semi-bold;
-    line-height: 0;
+    line-height: 0px;
 `;
 
 export const ChartCategoryText = styled.p`
     font-size: 18px;
     font-weight: regular;
-    line-height: 100%;
+    line-height: 0%;
 `;
 
 export const ChartDurationText = styled.p`
@@ -60,30 +60,42 @@ export const CoinTableRowText = styled.p`
 
 export const ButtonText = styled.span`
     font-size: 20px;
-    font-weight: semi-bold;
+    font-weight: bold;
     line-height: 120%;
+`;
+
+export const SectionHeading2 = styled.h1`
+    font-size:22px;
+    line-height: 0px;
+    font-weight: regular;
+`;
+
+export const SubSectionHeading = styled.h1`
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 100%;
 `;
 
 export const PortfolioEntryTitle = styled.p`
     font-size: 25px;
     font-weight: semi-bold;
-    line-height: 120%;
+    line-height: 0px;
 `;
 
 export const PortfolioEntryLabelText = styled.p`
     font-size: 18px;
-    font-weight: semi-bold;
-    line-height: 120%;
+    font-weight: bold;
+    line-height: 0px;
 `;
 
 export const PortfolioEntryText = styled.p`
     font-size: 18px;
     font-weight: regular;
-    line-height: 120%;
+    line-height: 0px;
 `;
 
-export const ExternalLinkText = styled.p`
+export const ExternalLinkText = styled.a`
     font-size: 15px;
     font-weight: regular;
-    line-height: 120%;
+    line-height: 0%;
 `;
