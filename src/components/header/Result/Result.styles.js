@@ -26,3 +26,8 @@ export const LeftText = styled.div`
 `;
 
 export const RightText = styled.div``;
+
+export const Icon = styled.img`
+    height: 17px;
+    width: 17px;
+`;
