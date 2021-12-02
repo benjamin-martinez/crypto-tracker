@@ -8,7 +8,6 @@ import { Wrapper, Icon, Input, ErrorMessage, ErrorMessageWrapper } from "./Searc
 export default class Searchbar extends React.Component {
     state = {
         searchTerm: "",
-        allTokens: [],
         results: [],
         showResults: false,
         isMouseOver: false,
@@ -29,10 +28,10 @@ export default class Searchbar extends React.Component {
         }
     }
 
-    filterNames = (query) => {
-        const results = this.state.allTokens.filter(token => (token.id.includes(query) || token.name.includes(query) || token.symbol.includes(query)))
-        this.setState({results: results, showResults: true})
-    }
+    // filterNames = (query) => {
+    //     const results = this.state.allTokens.filter(token => (token.id.includes(query) || token.name.includes(query) || token.symbol.includes(query)))
+    //     this.setState({results: results, showResults: true})
+    // }
 
     handleChange = (e) => {
         const searchTerm = e.target.value
