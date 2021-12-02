@@ -38,7 +38,7 @@ export default class Searchbar extends React.Component {
         this.setState({searchTerm: searchTerm})
 
         if (e.target.value.length > 2) {
-            debounce(this.getFilteredTokens,200)(searchTerm)
+            debounce(this.getFilteredTokens,500)(searchTerm)
         }
         else 
             this.setState({results: []})
