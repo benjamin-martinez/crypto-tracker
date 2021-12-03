@@ -1,7 +1,7 @@
 import React from "react";
-import { Wrapper, Icon } from "./QRScanner.styles"
+import { Wrapper, Icon } from "./DarkModeToggle.styles"
 
-export default class QRScanner extends React.Component {
+export default class DarkModeToggle extends React.Component {
     render() {
         return (
             <Wrapper>

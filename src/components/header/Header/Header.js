@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import { Searchbar, Infographic, CurrencyToggle, QRScanner} from "components";
+import { Searchbar, Infographic, CurrencyToggle, DarkModeToggle} from "components";
 import { NavLinkText } from "styles/Fonts";
 import { Wrapper, Navigation, RightNav, LeftNav, NavLinkWrapper } from "./Header.styles";
 
@@ -16,7 +16,7 @@ class Header extends React.Component {
                     <LeftNav>
                         <Searchbar />
                         <CurrencyToggle />
-                        <QRScanner />
+                        <DarkModeToggle />
                     </LeftNav>
                 </Navigation>
                 <Infographic />
