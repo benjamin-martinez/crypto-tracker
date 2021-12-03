@@ -30,16 +30,13 @@ export default class CurrencyToggle extends React.Component {
         ],
         isMouseOver: false
     }
-
     wrapperRef = React.createRef();
-    handleClickOutside = this.handleClickOutside.bind(this);
 
     componentDidMount() {
         document.addEventListener('mousedown', this.handleClickOutside);
-        
     }
 
-    handleClickOutside(event) {
+    handleClickOutside = (event) => {
         if (this.wrapperRef.current && !this.wrapperRef.current.contains(event.target)) {
             this.setState({isDropdownActive: false})
         }
@@ -62,12 +59,12 @@ export default class CurrencyToggle extends React.Component {
     handleMouseLeave = () => this.setState({isMouseOver: false})
     render() {
         return (
-            <Wrapper onMouseOver={() => this.handleMouseOver()} onMouseLeave={() => this.handleMouseLeave()}>
+            <Wrapper ref={this.wrapperRef} onMouseOver={() => this.handleMouseOver()} onMouseLeave={() => this.handleMouseLeave()}>
                 <CurrencyWrapper onClick={() => this.handleOpenDropdownClick()}>
                     <Icon><NavText>{this.state.activeCurrency.symbol}</NavText></Icon>
                     <CurrentCurrency><NavText>{this.state.activeCurrency.name}</NavText>{this.state.isDropdownActive ? <CurrencyToggleUpArrow /> : <CurrencyToggleDownArrow />}</CurrentCurrency>
                 </CurrencyWrapper>
-                {this.state.isDropdownActive && <Dropdown ref={this.wrapperRef}>
+                {this.state.isDropdownActive && <Dropdown >
                     {this.state.currencies.map((currency) => <DropdownCurrencyOuterWrapper key={currency.name} onClick={() => this.handleSelectionClick(currency)}>
                         <DropdownCurrencyInnerWrapper>
                     <Icon><NavText>{currency.symbol}</NavText></Icon>
