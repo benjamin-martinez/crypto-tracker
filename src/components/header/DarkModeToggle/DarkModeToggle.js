@@ -8,7 +8,7 @@ export default class DarkModeToggle extends React.Component {
     }
     render() {
         return (
-            <Wrapper onClick={() => this.handleClick()}>
+            <Wrapper onClick={this.handleClick}>
                 <Icon src="icons/scan.svg"/>
             </Wrapper>
         )

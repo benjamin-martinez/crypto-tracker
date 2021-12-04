@@ -11,20 +11,18 @@ import Header from "components/header/Header/Header";
 
 class App extends React.Component {
   state = {
-    theme: themes.dark
+    isDarkTheme: true
   }
-  toggleTheme = () => {
-    if(this.state.theme === themes.dark) {
-      this.setState({theme: themes.light})
-    } else {
-      this.setState({theme: themes.dark})
-    }
-  }
+
+  getCurrentTheme = () => this.state.isDarkTheme ? themes.dark : themes.light
+
+  toggleTheme = () => this.setState({isDarkTheme: !this.state.isDarkTheme})
+
   render() {
     return (
-      <ThemeProvider theme={this.state.theme}>
+      <ThemeProvider theme={this.getCurrentTheme()}>
         <div className="App">
-          <GlobalStyle theme={this.state.theme}/>
+          <GlobalStyle theme={this.getCurrentTheme()}/>
           <Router >
             <Header toggleTheme={this.toggleTheme}/>
             <Switch>
