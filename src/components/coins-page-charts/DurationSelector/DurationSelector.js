@@ -1,6 +1,6 @@
 import React from "react";
+import { ChartDurationText } from "styles/Fonts";
 import { Wrapper, ContentWrapper, SWrapper } from "./DurationSelector.styles";
-import { ChartDurationText } from "../../../styles/Fonts";
 
 const Selection = (props) => {
   return (

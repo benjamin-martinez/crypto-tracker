@@ -1,5 +1,4 @@
 const convertDurationToUnix = (length) => {
-  console.log(length);
   switch (length) {
     case "1d":
       return 86400;

@@ -13,10 +13,7 @@ const BarChart = (props) => {
     return labels;
   };
 
-  const getPrices = (arr) => {
-    let prices = arr.map((arr) => arr[1]);
-    return prices;
-  };
+  const getPrices = (arr) => arr.map((arr) => arr[1]);
 
   const chartData = (canvas) => {
     const ctx = canvas.getContext("2d");

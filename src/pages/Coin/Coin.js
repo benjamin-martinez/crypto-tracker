@@ -16,7 +16,6 @@ const Coin = (props) => {
     const { data } = await axios(
       `https://api.coingecko.com/api/v3/coins/${props.match.params.id}?localization=false`
     );
-    console.log(data);
     setIsLoading(false);
     setCoin(data);
   };

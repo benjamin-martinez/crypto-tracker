@@ -42,7 +42,6 @@ const BackgroundChartWrapper = (props) => {
       const { data } = await axios(
         `https://api.coingecko.com/api/v3/coins/${props.coinId}/market_chart/range?vs_currency=usd&from=${durationStartDate}&to=${todaysDate}`
       );
-      console.log(data);
       if (duration === 86400) {
         setTokenPriceHistory(data.prices);
         setIsLoading(false);

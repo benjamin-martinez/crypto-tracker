@@ -57,7 +57,9 @@ const Searchbar = () => {
     setSearchTerm(e.target.value);
     if (e.target.value.length > 2) {
       debounce(getFilteredTokens, 500)(e.target.value);
-    } else setResults([]);
+    } else {
+      setResults([]);
+    }
   };
 
   const handleLinkClick = () => {

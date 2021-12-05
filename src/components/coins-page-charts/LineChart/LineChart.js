@@ -81,11 +81,7 @@ const LineChart = (props) => {
       },
     },
   };
-  return (
-    <Wrapper>
-      <Line data={chartData} options={options} width={650} height={275} />
-    </Wrapper>
-  );
+  return <Wrapper><Line data={chartData} options={options} width={650} height={275} /></Wrapper>
 };
 
 export default LineChart;
