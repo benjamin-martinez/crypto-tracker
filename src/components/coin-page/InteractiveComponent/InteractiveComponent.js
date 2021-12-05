@@ -10,27 +10,21 @@ const InteractiveComponent = (props) => {
     const [fiatAmount, setFiatAmount] = useState(props.coin.market_data.current_price.usd)
     const [fiatType, setFiatType] = useState("usd")
 
-    const handleFiatChange = (e) => {
-        const amountWithNoCommas = e.target.value.replace(/,/g, "");
+    const handleAmountChange = (e, isFiat) => {
+        const amountValue = e.target.value
+        const amountWithNoCommas = amountValue.replace(/,/g, "");
         if(/^\d+$/.test(amountWithNoCommas)) {
-            setFiatAmount(e.target.value)
-            setTokenAmount(parseInt(e.target.value)/parseInt(props.coin.market_data.current_price.usd))
-        }
-        if (e.target.value === "") {
-            setFiatAmount(e.target.value)
-            setTokenAmount(e.target.value)
-        }
-    }
-
-    const handleTokenAmountChange = (e) => {
-        const amountWithNoCommas = e.target.value.replace(/,/g, "");
-        if(/^\d+$/.test(amountWithNoCommas)) {
+            if(isFiat) {
+                setTokenAmount(amountValue)
+                setFiatAmount(parseInt(props.coin.market_data.current_price.usd)/parseInt(amountValue))
+            } else {
                 setTokenAmount(e.target.value)
                 setFiatAmount(parseInt(props.coin.market_data.current_price.usd)*parseInt(e.target.value))
+            }
         }
-        if (e.target.value === "") {
-            setFiatAmount(e.target.value)
-            setTokenAmount(e.target.value)
+        if (amountValue === "") {
+            setFiatAmount("")
+            setTokenAmount("")
         }
     }
     return (
@@ -38,12 +32,12 @@ const InteractiveComponent = (props) => {
             <ConversionWrapper>
                 <CoinInput>
                     <Name><SectionHeading>{props.coin.symbol.toUpperCase()}</SectionHeading></Name>
-                    <InputPriceDiv><Input value={tokenAmount} onChange={handleTokenAmountChange}/></InputPriceDiv>
+                    <InputPriceDiv><Input value={tokenAmount} onChange={(e) => handleAmountChange(e,false)}/></InputPriceDiv>
                 </CoinInput>
                 <ConversionArrowsIcon src="icons/conversion-arrows.svg"/>
                 <CoinInput>
                     <Name><SectionHeading>USD</SectionHeading></Name>
-                    <InputPriceDiv>$<Input value={addCommasNoDec(fiatAmount)} onChange={handleFiatChange}/></InputPriceDiv>
+                    <InputPriceDiv>$<Input value={addCommasNoDec(fiatAmount)} onChange={(e) => handleAmountChange(e,true)}/></InputPriceDiv>
                 </CoinInput>
             </ConversionWrapper>
             <BackgroundChartWrapper coinId={props.coin.id} />

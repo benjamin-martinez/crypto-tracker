@@ -7,7 +7,7 @@ const SearchResults = (props) => {
     return (
         <Wrapper showResults={props.showResults}>
             <ResultsWrapper>
-                {props.results.map((result, index) => (index < 10 && <Link to={`/coin/${result.id}`} onClick={() => props.handleLinkClick()}><Result result={result}/></Link>))}
+                {props.results.map((result) => <Link to={`/coin/${result.id}`} onClick={() => props.handleLinkClick()}><Result result={result}/></Link>)}
             </ResultsWrapper>
         </Wrapper>
     )

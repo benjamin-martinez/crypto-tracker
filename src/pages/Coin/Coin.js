@@ -7,7 +7,6 @@ const Coin = (props) => {
     const [isLoading, setIsLoading] = useState(false)
     const [coin, setCoin] = useState(null)
     
-
     const getCoinData = async () => {
         setIsLoading(true)
         const { data } = await axios(`https://api.coingecko.com/api/v3/coins/${props.match.params.id}?localization=false`)

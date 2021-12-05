@@ -10,19 +10,16 @@ import { themes } from "styles/colors";
 import Header from "components/header/Header/Header";
 
 function App() {
-  const [theme, setTheme] = useState(themes.dark)
+  const [isDarkTheme, setIsDarkTheme] = useState(true)
 
-  const toggleTheme = () => {
-    if(theme === themes.dark) {
-      setTheme(themes.light)
-    } else {
-      setTheme(themes.dark)
-    }
-  }
+  const getCurrentTheme = () => isDarkTheme ? themes.dark : themes.light
+
+  const toggleTheme = () => setIsDarkTheme(!isDarkTheme)
+
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={getCurrentTheme()}>
       <div className="App">
-        <GlobalStyle theme={theme}/>
+        <GlobalStyle theme={getCurrentTheme()}/>
         <Router >
           <Header toggleTheme={toggleTheme}/>
           <Switch>

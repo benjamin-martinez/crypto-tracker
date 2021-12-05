@@ -2,7 +2,7 @@ import React, { useState, useEffect} from "react";
 import axios from "axios";
 import { TableRow } from "components/coins-page-table";
 import { CoinTableTitle } from "styles/Fonts";
-import { OutsideWrapper, Wrapper, HeaderRow } from "./CoinTable.styles";
+import { OutsideWrapper, Wrapper, HeaderRow, THNum, THName, THPrice, TH1h, TH24h, TH7d, TH24VolMarCap, THCircTotSup, THLast7d } from "./CoinTable.styles";
 
 const CoinTable = (props) => {
     const [coins, setCoins] = useState([])
@@ -27,38 +27,29 @@ const CoinTable = (props) => {
         getTableData();
     }, [])
 
-    return (
-        <OutsideWrapper>
-        <Wrapper>
-            <col style={{width:"5.3%"}} />
-            <col style={{width:"18.4%"}} />
-            <col style={{width:"7.9%"}} />
-            <col style={{width:"7.4%"}} />
-            <col style={{width:"8.3%"}} />
-            <col style={{width:"7.5%"}} />
-            <col style={{width:"18.7%"}} />
-            <col style={{width:"18.6%"}} />
-            <col style={{width:"8.6%"}} />
-            <HeaderRow>
-                <tr>
-                    <th><CoinTableTitle>#</CoinTableTitle></th>
-                    <th><CoinTableTitle>Name</CoinTableTitle></th>
-                    <th><CoinTableTitle>Price</CoinTableTitle></th>
-                    <th><CoinTableTitle>1h%</CoinTableTitle></th>
-                    <th><CoinTableTitle>24h%</CoinTableTitle></th>
-                    <th><CoinTableTitle>7d%</CoinTableTitle></th>
-                    <th><CoinTableTitle>24h Volume/Market Cap</CoinTableTitle></th>
-                    <th><CoinTableTitle>Circulating/Total Supply</CoinTableTitle></th>
-                    <th><CoinTableTitle>Last 7d</CoinTableTitle></th>
-                </tr>
-            </HeaderRow>
-            {coins.map(coin => <TableRow key={coin.id} coin={coin} />)}
-        </Wrapper>
-        {/* <Pagination>
-            
-        </Pagination> */}
-        </OutsideWrapper>
-    )
+return (
+    <OutsideWrapper>
+    <Wrapper>
+        <HeaderRow>
+            <tr>
+                <THNum><CoinTableTitle>#</CoinTableTitle></THNum>
+                <THName><CoinTableTitle>Name</CoinTableTitle></THName>
+                <THPrice><CoinTableTitle>Price</CoinTableTitle></THPrice>
+                <TH1h><CoinTableTitle>1h%</CoinTableTitle></TH1h>
+                <TH24h><CoinTableTitle>24h%</CoinTableTitle></TH24h>
+                <TH7d><CoinTableTitle>7d%</CoinTableTitle></TH7d>
+                <TH24VolMarCap><CoinTableTitle>24h Volume/Market Cap</CoinTableTitle></TH24VolMarCap>
+                <THCircTotSup><CoinTableTitle>Circulating/Total Supply</CoinTableTitle></THCircTotSup>
+                <THLast7d><CoinTableTitle>Last 7d</CoinTableTitle></THLast7d>
+            </tr>
+        </HeaderRow>
+        {coins.map(coin => <TableRow key={coin.id} coin={coin} />)}
+    </Wrapper>
+    {/* <Pagination>
+        
+    </Pagination> */}
+    </OutsideWrapper>
+)
     
 }
 

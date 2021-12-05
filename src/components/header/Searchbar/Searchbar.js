@@ -1,53 +1,54 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
+import { debounce } from "lodash"
 import { SearchResults } from "components";
-import { Wrapper, Icon, Input, ErrorMessage, ErrorMessageWrapper } from "./Searchbar.styles"
 import { SearchResultsText } from "styles/Fonts";
+import { Wrapper, Icon, Input, ErrorMessage, ErrorMessageWrapper } from "./Searchbar.styles"
 
 const Searchbar = () => {
     const [searchTerm, setSearchTerm] = useState("")
-    const [allTokens, setAllTokens] = useState([])
     const [results, setResults] = useState([])
     const [showResults, setShowResults] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+    const [hasError, setHasError] = useState(false)
     
     const wrapperRef = useRef();
     useOutsideAlerter(wrapperRef);
 
     function useOutsideAlerter(ref) {
         useEffect(() => {
-            /**
-             * Alert if clicked on outside of element
-             */
             function handleClickOutside(event) {
                 if (ref.current && !ref.current.contains(event.target)) {
                     setShowResults(false)
                 }
             }
     
-            // Bind the event listener
             document.addEventListener("mousedown", handleClickOutside);
             return () => {
-                // Unbind the event listener on clean up
                 document.removeEventListener("mousedown", handleClickOutside);
             };
         }, [ref]);
     }
 
-    const getAllTokens = async () => {
-        const { data } = await axios("https://api.coingecko.com/api/v3/coins/list")
-        setAllTokens(data)
-    }
-
-    const filterNames = (query) => {
-        const results = allTokens.filter(token => (token.id.includes(query) || token.name.includes(query) || token.symbol.includes(query)))
-        setResults(results)
-        setShowResults(true)
+    const getFilteredTokens = async (searchTerm) => {
+        setIsLoading(true)
+        try {
+            const { data } = await axios(`https://crypto-app-server.herokuapp.com/coins/${searchTerm}`)
+            setResults(data)
+            setShowResults(true)
+            setIsLoading(false)
+            setHasError(false)
+        } catch (err) {
+            console.log(err)
+            setIsLoading(false)
+            setHasError(true)
+        }
     }
 
     const handleChange = (e) => {
         setSearchTerm(e.target.value)
         if (e.target.value.length > 2) {
-            filterNames(e.target.value)
+            debounce(getFilteredTokens,500)(e.target.value)
         }
         else 
             setResults([])
@@ -59,8 +60,9 @@ const Searchbar = () => {
     }
 
     useEffect(() => {
-        getAllTokens()
-    }, [])
+        if(searchTerm.length < 2)
+            setResults([])
+    }, [searchTerm])
 
     return (
         <Wrapper ref={wrapperRef} onSubmit={(e) => e.preventDefault()}>

@@ -5,7 +5,6 @@ export const Wrapper = styled.div`
     height: 50px;
     display: flex;
     align-items: center;
-    //border-bottom: ${props => props.theme.color} .5px solid;
     border-radius: 10px;
     :hover {
         cursor: pointer;
@@ -18,4 +17,17 @@ export const TextWrapper = styled.div`
     display: flex;
     width: 100%;
     justify-content: space-between;
+`;
+
+export const LeftText = styled.div`
+    display: flex;
+    gap: 10px;
+    align-items: center;
+`;
+
+export const RightText = styled.div``;
+
+export const Icon = styled.img`
+    height: 17px;
+    width: 17px;
 `;

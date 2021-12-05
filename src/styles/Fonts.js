@@ -65,15 +65,15 @@ export const ButtonText = styled.span`
 `;
 
 export const SectionHeading2 = styled.h1`
-font-size:22px;
-line-height: 0px;
-font-weight: regular;
+    font-size:22px;
+    line-height: 0px;
+    font-weight: regular;
 `;
 
 export const SubSectionHeading = styled.h1`
-font-size: 18px;
-font-weight: bold;
-line-height: 100%;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 100%;
 `;
 
 export const PortfolioEntryTitle = styled.p`
@@ -102,5 +102,10 @@ export const ExternalLinkText = styled.a`
 
 export const SearchResultsText = styled.p`
     font-size: 17px;
+    line-height: 0%;
+`;
+
+export const SearchResultsSubText = styled.p`
+    font-size: 13px;
     line-height: 0%;
 `;
