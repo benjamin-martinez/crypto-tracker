@@ -24,7 +24,7 @@ export const SWrapper = styled.div`
     width: 34px;
     color: ${props => props.theme.color};
     display: grid;
-    background: ${props => props.active ? props.theme.chart.lineColor : "none"};
+    background: ${props => props.active ? props.theme.money.green : "none"};
     border-radius: 5px;
     justify-items: center;
     align-items: center;

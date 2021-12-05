@@ -16,7 +16,7 @@ class Header extends React.Component {
                     <LeftNav>
                         <Searchbar />
                         <CurrencyToggle />
-                        <DarkModeToggle />
+                        <DarkModeToggle toggleTheme={this.props.toggleTheme}/>
                     </LeftNav>
                 </Navigation>
                 <Infographic />

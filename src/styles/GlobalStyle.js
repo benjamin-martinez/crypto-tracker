@@ -6,7 +6,7 @@ export const GlobalStyle = createGlobalStyle`
         font-family: Poppins;
     }
     body {
-        background: ${themes.dark.background};
+        background: ${props => props.theme.background};
     }
 
     ul {
@@ -15,6 +15,6 @@ export const GlobalStyle = createGlobalStyle`
 
       a {
           text-decoration: none;
-          color: ${themes.dark.color}
+          color: ${props => props.theme.color}
       }
 `
