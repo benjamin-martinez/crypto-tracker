@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { getActiveCurrency } from "store/currencies";
 import { DownArrow, NeutralDot, UpArrow } from "styles/arrows";
 import { NavText } from "styles/Fonts";
 import { Slider, SliderWrapper } from "styles/sliders";
@@ -27,6 +29,7 @@ const Infographic = (props) => {
   const [ethDom, setEthDom] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const activeCurrency = useSelector(getActiveCurrency)
   const getGlobalCryptoData = async () => {
     try {
       setIsLoading(true);
@@ -37,7 +40,7 @@ const Infographic = (props) => {
       setNumExchanges(data.data.markets);
       setBtcDom(data.data.market_cap_percentage.btc);
       setEthDom(data.data.market_cap_percentage.eth);
-      setMarketCap(data.data.total_market_cap.usd);
+      setMarketCap(data.data.total_market_cap.activeCurrency.usd);
       setMarketCapChange(data.data.market_cap_change_percentage_24h_usd);
       setVolume(data.data.total_volume.usd);
     } catch (err) {

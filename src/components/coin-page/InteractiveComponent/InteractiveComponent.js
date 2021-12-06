@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { getActiveCurrency } from "store/currencies";
 import { SectionHeading } from "styles/Fonts";
 import { BackgroundChartWrapper } from "components/coin-page";
 import { addCommasNoDec } from "utils";
@@ -17,7 +19,7 @@ const InteractiveComponent = (props) => {
   const [fiatAmount, setFiatAmount] = useState(
     props.coin.market_data.current_price.usd
   );
-  const [fiatType, setFiatType] = useState("usd");
+  const activeCurrency = useSelector(getActiveCurrency)
 
   const handleAmountChange = (e, isFiat) => {
     const amountValue = e.target.value;
@@ -59,10 +61,10 @@ const InteractiveComponent = (props) => {
         <ConversionArrowsIcon src="icons/conversion-arrows.svg" />
         <CoinInput>
           <Name>
-            <SectionHeading>USD</SectionHeading>
+            <SectionHeading>{activeCurrency.name}</SectionHeading>
           </Name>
           <InputPriceDiv>
-            $
+          {activeCurrency.symbol}
             <Input
               value={addCommasNoDec(fiatAmount)}
               onChange={(e) => handleAmountChange(e, true)}
