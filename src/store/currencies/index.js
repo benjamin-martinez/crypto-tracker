@@ -1,17 +1,17 @@
 const intitialState = {
     data: [
         {
-            name: "USD",
+            name: "usd",
             isActive: true,
             symbol: "$"
         },
         {
-            name: "EUR",
+            name: "eur",
             isActive: false,
             symbol: "€",
         },
         {
-            name: "GBP",
+            name: "gbp",
             isActive: false,
             symbol: "£",
         }

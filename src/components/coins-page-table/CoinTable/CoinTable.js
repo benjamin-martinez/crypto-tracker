@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux"
+import { getActiveCurrency } from "store/currencies";
+import { useSelector } from "react-redux"
 import { getCoinsData } from "store/coins/action";
-import { getCoinsMarketCapAsc, getCoinsMarketCapDesc } from "store/coins"
 import { TableRow } from "components/coins-page-table";
 import { CoinTableTitle } from "styles/Fonts";
 import {
@@ -20,27 +21,17 @@ import {
 } from "./CoinTable.styles";
 
 const CoinTable = (props) => {
-  const [sortBy, setSortBy] = useState("market_cap_desc") 
 
+  const activeCurrency = useSelector(getActiveCurrency)
 
   useEffect(() => {
-    props.getCoinsData(1, sortBy);
+    props.getCoinsData(1);
   }, []);
 
   useEffect(() => {
-    props.getCoinsData(1, sortBy)
-  }, [sortBy])
+    props.getCoinsData(1)
+  }, [activeCurrency])
 
-  const setSortByMarketCap = () => {
-    if (sortBy.includes("market_cap")){
-      if (sortBy.includes("desc")) {
-        setSortBy("market_cap_asc")
-      }
-      else{
-        setSortBy("market_cap_desc")
-      }
-    }
-  }
 
   return (
     <OutsideWrapper>
@@ -90,9 +81,7 @@ const CoinTable = (props) => {
 const mapStateToProps = (state) => ({
   coins: state.coins.data,
   isLoading: state.coins.isLoading,
-  hasError: state.coins.hasError,
-  // coinsByMarketCapAsc: getCoinsMarketCapAsc(state),
-  // coinsByMarketCapDesc: getCoinsMarketCapDesc(state)
+  hasError: state.coins.hasError
 })
 
 const mapDispatchToProps = {

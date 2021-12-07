@@ -26,8 +26,6 @@ const Infographic = (props) => {
   const [marketCap, setMarketCap] = useState(0);
   const [marketCapChange, setMarketCapChange] = useState(0);
   const [volume, setVolume] = useState(0);
-  const [btcDom, setBtcDom] = useState(0);
-  const [ethDom, setEthDom] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [dominance, setDominance] = useState({
@@ -45,8 +43,6 @@ const Infographic = (props) => {
       setNumExchanges(data.data.markets);
       const { btc, eth } = data.data.market_cap_percentage;
       setDominance({btc, eth})
-      setBtcDom(data.data.market_cap_percentage.btc);
-      setEthDom(data.data.market_cap_percentage.eth);
       setMarketCap(data.data.total_market_cap[activeCurrency.name]);
       setMarketCapChange(data.data[`market_cap_change_percentage_24h_${activeCurrency.name}`]);
       setVolume(data.data.total_volume[activeCurrency.name]);
@@ -82,7 +78,7 @@ const Infographic = (props) => {
         <Volume>
           <NeutralDot background="white" />
           <PriceWrapper>
-            <NavText>{(volume / 1.0e9).toFixed(2)} B</NavText>
+            <NavText>{addDecimalsAndShorten(volume)}</NavText>
             <SliderWrapper height="13px" width="55px" background="#2172E5">
               <Slider width="28" background="#ffffff" />
             </SliderWrapper>
@@ -90,16 +86,16 @@ const Infographic = (props) => {
         </Volume>
         <BtcDominance>
           <Icon src="icons/btcdom.svg" />
-          <NavText>{Math.round(btcDom)}%</NavText>
+          <NavText>{Math.round(dominance.btc)}%</NavText>
           <SliderWrapper height="13px" width="55px" background="#2172E5">
-            <Slider width={Math.round(btcDom)} background="#ffffff" />
+            <Slider width={Math.round(dominance.btc)} background="#ffffff" />
           </SliderWrapper>
         </BtcDominance>
         <EthDominance>
           <Icon src="icons/ethdom.svg" />
-          <NavText>{Math.round(ethDom)}%</NavText>
+          <NavText>{Math.round(dominance.eth)}%</NavText>
           <SliderWrapper height="13px" width="55px" background="#2172E5">
-            <Slider width={Math.round(ethDom)} background="#ffffff" />
+            <Slider width={Math.round(dominance.eth)} background="#ffffff" />
           </SliderWrapper>
         </EthDominance>
       </InnerWrapper>

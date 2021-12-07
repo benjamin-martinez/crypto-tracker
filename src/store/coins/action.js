@@ -2,7 +2,7 @@ import axios from "axios";
 import { getActiveCurrency } from "store/currencies";
 import { GET_COINS_SUCCESS, GET_COINS_PENDING, GET_COINS_ERROR } from "./index";
 
-export const getCoinsData = (pageNum, sortBy) => async (dispatch, getState) => {
+export const getCoinsData = (pageNum) => async (dispatch, getState) => {
   const state = getState()
   const activeCurrency = getActiveCurrency(state)
   try {

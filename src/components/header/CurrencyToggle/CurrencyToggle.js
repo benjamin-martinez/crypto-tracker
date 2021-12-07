@@ -49,7 +49,7 @@ const CurrencyToggle = (props) => {
           <NavText>{props.activeCurrency.symbol}</NavText>
         </Icon>
         <CurrentCurrency>
-          <NavText>{props.activeCurrency.name}</NavText>
+          <NavText>{props.activeCurrency.name.toUpperCase()}</NavText>
           {isDropdownActive ? (
             <CurrencyToggleUpArrow />
           ) : (
@@ -69,7 +69,7 @@ const CurrencyToggle = (props) => {
                   <NavText>{currency.symbol}</NavText>
                 </Icon>
                 <CurrentCurrency>
-                  <NavText>{currency.name}</NavText>
+                  <NavText>{currency.name.toUpperCase()}</NavText>
                   {currency.isActive && <NavText>√</NavText>}
                 </CurrentCurrency>
               </DropdownCurrencyInnerWrapper>

@@ -104,6 +104,17 @@ const ChartWrapper = (props) => {
     //eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    getChartData(convertDurationToUnix("1d"));
+    let date = new Date().toLocaleString(undefined, {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+    setActiveDate(date);
+    //eslint-disable-next-line
+  }, [activeCurrency]);
+
   return (
     <Wrapper>
       <TextWrapper>
