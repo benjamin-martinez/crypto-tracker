@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { connect } from "react-redux"
+import { getCoinsData } from "store/coins/action";
+import { getCoinsMarketCapAsc, getCoinsMarketCapDesc } from "store/coins"
 import { TableRow } from "components/coins-page-table";
 import { CoinTableTitle } from "styles/Fonts";
 import {
@@ -18,28 +20,27 @@ import {
 } from "./CoinTable.styles";
 
 const CoinTable = (props) => {
-  const [coins, setCoins] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const [sortBy, setSortBy] = useState("market_cap_desc") 
 
-  const getTableData = async () => {
-    setIsLoading(true);
-    try {
-      const { data } = await axios(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d"
-      );
-      setCoins(data);
-      setIsLoading(false);
-      setHasError(false);
-    } catch (err) {
-      setIsLoading(false);
-      setHasError(true);
-    }
-  };
 
   useEffect(() => {
-    getTableData();
+    props.getCoinsData(1, sortBy);
   }, []);
+
+  useEffect(() => {
+    props.getCoinsData(1, sortBy)
+  }, [sortBy])
+
+  const setSortByMarketCap = () => {
+    if (sortBy.includes("market_cap")){
+      if (sortBy.includes("desc")) {
+        setSortBy("market_cap_asc")
+      }
+      else{
+        setSortBy("market_cap_desc")
+      }
+    }
+  }
 
   return (
     <OutsideWrapper>
@@ -75,7 +76,7 @@ const CoinTable = (props) => {
             </THLast7d>
           </tr>
         </HeaderRow>
-        {coins.map((coin) => (
+        {!props.isLoading && props.coins.map((coin) => (
           <TableRow key={coin.id} coin={coin} />
         ))}
       </Wrapper>
@@ -86,4 +87,16 @@ const CoinTable = (props) => {
   );
 };
 
-export default CoinTable;
+const mapStateToProps = (state) => ({
+  coins: state.coins.data,
+  isLoading: state.coins.isLoading,
+  hasError: state.coins.hasError,
+  // coinsByMarketCapAsc: getCoinsMarketCapAsc(state),
+  // coinsByMarketCapDesc: getCoinsMarketCapDesc(state)
+})
+
+const mapDispatchToProps = {
+  getCoinsData
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CoinTable);

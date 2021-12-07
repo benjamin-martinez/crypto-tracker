@@ -18,6 +18,7 @@ import {
   CoinsExchangesWrapper,
   Coins,
 } from "./Infographic.styles";
+import { addDecimalsAndShorten } from "utils";
 
 const Infographic = (props) => {
   const [numCoins, setNumCoins] = useState(0);
@@ -68,7 +69,7 @@ const Infographic = (props) => {
         <MarketCap>
           <NeutralDot background="white" />
           <PriceWrapper>
-            <NavText>{(marketCap / 1.0e12).toFixed(2)} T</NavText>
+            <NavText>{addDecimalsAndShorten(marketCap)}</NavText>
             {marketCapChange > 0 ? <UpArrow /> : <DownArrow />}
           </PriceWrapper>
         </MarketCap>

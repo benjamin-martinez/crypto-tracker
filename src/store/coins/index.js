@@ -39,3 +39,35 @@ function coinsReducer(state=initialState, action) {
 }
 
 export default coinsReducer
+
+export const getCoinsMarketCapAsc = (state) => state.coins.data.sort((a,b) => a.market_cap_rank - b.market_cap_rank)
+
+export const getCoinsMarketCapDesc = (state) => state.coins.data.sort((a,b) => b.market_cap_rank - a.market_cap_rank)
+
+export const getCoinsVolumeAsc = () => {}
+
+export const getCoinsVolumeDesc = () => {}
+
+export const getCoinsNameAsc = () => {}
+
+export const getCoinsNameDesc = () => {}
+
+export const getCoins1HrAsc = () => {}
+
+export const getCoins1HrDesc = () => {}
+
+export const getCoins24HrAsc = () => {}
+
+export const getCoins24HrDesc = () => {}
+
+export const getCoins7DAsc = () => {}
+
+export const getCoins7DDesc = () => {}
+
+export const getCoinsVolOverMarcCapAsc = () => {}
+
+export const getCoinsVolOverMarcCapDesc = () => {}
+
+export const getCoinsCircOverTotalSupplyAsc = () => {}
+
+export const getCoinsCircOverTotalSupplyDesc = () => {}

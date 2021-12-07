@@ -50,6 +50,9 @@ export const ChartDurationText = styled.p`
 export const CoinTableTitle = styled.p`
   font-size: 19px;
   font-weight: semi-bold;
+  :hover {
+    cursor: pointer
+  }
 `;
 
 export const CoinTableRowText = styled.p`
