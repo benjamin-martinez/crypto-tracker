@@ -25,9 +25,8 @@ const LoadingLineChart = (props) => {
   const chartData = (canvas) => {
     const ctx = canvas.getContext("2d");
     var gradientFill = ctx.createLinearGradient(0, 0, 0, 350);
-    let borderColor = "";
     let prices = getPrices();
-    borderColor = "rgba(80, 80, 80, 1)";
+    const borderColor = "rgba(80, 80, 80, 1)";
     gradientFill.addColorStop(0, "rgba(80, 80, 80, .5)");
     gradientFill.addColorStop(1, "rgba(0, 0, 0, 0.0)");
     return {
