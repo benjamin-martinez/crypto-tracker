@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux"
 import { getActiveCurrency } from "store/currencies";
 import { useSelector } from "react-redux"
+import { getFilteredCoins } from "store/coins";
 import { getCoinsData } from "store/coins/action";
 import { TableRow } from "components/coins-page-table";
 import { CoinTableTitle } from "styles/Fonts";
@@ -23,6 +24,9 @@ import {
 const CoinTable = (props) => {
 
   const activeCurrency = useSelector(getActiveCurrency)
+  const [key, setKey] = useState("total_market_cap")
+  const [direction, setDirection] = useState("desc")
+  const filteredCoins = useSelector((state) => getFilteredCoins(state, direction, key))
 
   useEffect(() => {
     props.getCoinsData(1);
