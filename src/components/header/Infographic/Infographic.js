@@ -30,6 +30,10 @@ const Infographic = (props) => {
   const [ethDom, setEthDom] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const [dominance, setDominance] = useState({
+    eth: 0,
+    btc: 0
+  })
   const activeCurrency = useSelector(getActiveCurrency)
   const getGlobalCryptoData = async () => {
     try {
@@ -39,11 +43,13 @@ const Infographic = (props) => {
       setHasError(false);
       setNumCoins(data.data.active_cryptocurrencies);
       setNumExchanges(data.data.markets);
+      const { btc, eth } = data.data.market_cap_percentage;
+      setDominance({btc, eth})
       setBtcDom(data.data.market_cap_percentage.btc);
       setEthDom(data.data.market_cap_percentage.eth);
-      setMarketCap(data.data.total_market_cap.activeCurrency.usd);
-      setMarketCapChange(data.data.market_cap_change_percentage_24h_usd);
-      setVolume(data.data.total_volume.usd);
+      setMarketCap(data.data.total_market_cap[activeCurrency.name]);
+      setMarketCapChange(data.data[`market_cap_change_percentage_24h_${activeCurrency.name}`]);
+      setVolume(data.data.total_volume[activeCurrency.name]);
     } catch (err) {
       console.log(err);
       setIsLoading(false);

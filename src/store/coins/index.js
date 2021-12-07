@@ -40,7 +40,7 @@ function coinsReducer(state=initialState, action) {
 
 export default coinsReducer
 
-export const getCoinsMarketCapAsc = (state) => state.coins.data.sort((a,b) => a.market_cap_rank - b.market_cap_rank)
+export const getCoinsMarketCapAsc = (state, { direction, key }) => state.coins.data.sort((a,b) => a.market_cap_rank - b.market_cap_rank)
 
 export const getCoinsMarketCapDesc = (state) => state.coins.data.sort((a,b) => b.market_cap_rank - a.market_cap_rank)
 
