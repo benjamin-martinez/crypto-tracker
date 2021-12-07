@@ -22,13 +22,9 @@ const LoadingLineChart = (props) => {
     }
     return data;
   };
-  const chartData = (canvas) => {
-    const ctx = canvas.getContext("2d");
-    var gradientFill = ctx.createLinearGradient(0, 0, 0, 350);
+  const chartData = () => {
     let prices = getPrices();
     const borderColor = "rgba(80, 80, 80, 1)";
-    gradientFill.addColorStop(0, "rgba(80, 80, 80, .5)");
-    gradientFill.addColorStop(1, "rgba(0, 0, 0, 0.0)");
     return {
       labels: getLabels(),
       datasets: [
@@ -36,13 +32,11 @@ const LoadingLineChart = (props) => {
           data: prices,
           tension: 0.4,
           borderColor: borderColor,
-          fill: true,
-          backgroundColor: gradientFill,
         },
       ],
     };
   };
-  const totalDuration = 10000;
+  const totalDuration = 1000;
   const delayBetweenPoints = totalDuration / getPrices().length;
   const previousY = (ctx) =>
     ctx.index === 0

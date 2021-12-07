@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { getActiveCurrency } from "store/currencies";
+import { LoadingInfographic } from "components/loading-animations";
 import { DownArrow, NeutralDot, UpArrow } from "styles/arrows";
 import { NavText } from "styles/Fonts";
 import { Slider, SliderWrapper } from "styles/sliders";
@@ -57,6 +58,7 @@ const Infographic = (props) => {
 
   return (
     <Wrapper>
+      {isLoading  ? <LoadingInfographic/> : 
       <InnerWrapper>
         <CoinsExchangesWrapper>
           <Coins>
@@ -96,7 +98,7 @@ const Infographic = (props) => {
             <Slider width={Math.round(ethDom)} background="#ffffff" />
           </SliderWrapper>
         </EthDominance>
-      </InnerWrapper>
+      </InnerWrapper>}
     </Wrapper>
   );
 };

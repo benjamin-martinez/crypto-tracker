@@ -8,7 +8,7 @@ const LoadingBarChart = (props) => {
         let prev = 100;
         for (let i = 0; i < 100; i++) {
           prev += 5 - Math.random() * 10;
-          data.push(prev);
+          data.push(Math.abs(prev));
         }
         return data;
       };
@@ -18,17 +18,13 @@ const LoadingBarChart = (props) => {
         let prev = 100;
         for (let i = 0; i < 1000; i++) {
           prev += 5 - Math.random() * 10;
-          data.push({ x: i, y: prev });
+          data.push(Math.abs(prev));
         }
         return data;
       };
 
-  const chartData = (canvas) => {
-    const ctx = canvas.getContext("2d");
-    var gradientFill = ctx.createLinearGradient(0, 0, 0, 350);
+  const chartData = () => {
     const borderColor = "rgba(80, 80, 80, 1)";
-    gradientFill.addColorStop(0, "rgba(80, 80, 80, .5)");
-    gradientFill.addColorStop(1, "rgba(0, 0, 0, 0.0)");
     return {
       labels: getLabels(),
       datasets: [
@@ -37,20 +33,16 @@ const LoadingBarChart = (props) => {
           tension: 0.4,
           borderColor: borderColor,
           fill: true,
-          backgroundColor: gradientFill,
+          backgroundColor: borderColor,
         },
       ],
     };
   };
-  var delayed = false;
   const animation = {
-    onComplete: () => {
-      delayed = true;
-    },
     delay: (context) => {
       let delay = 0;
       if (context.type === 'data' && context.mode === 'default') {
-        delay = context.dataIndex * 30 + context.datasetIndex * 10;
+        delay = context.dataIndex * 3 + context.datasetIndex;
       }
       return delay;
     },
@@ -75,11 +67,9 @@ const LoadingBarChart = (props) => {
     scales: {
       x: {
         ticks: {
-          align: "start",
-          source: "auto",
-          maxRotation: 0,
-          autoSkip: true,
-          maxTicksLimit: 7,
+          display: false,
+          beginAtZero: true,
+          maxTicksLimit: 5,
         },
         grid: {
           display: false,

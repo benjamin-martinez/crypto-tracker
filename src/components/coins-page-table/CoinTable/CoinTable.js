@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux"
 import { getCoinsData } from "store/coins/action";
+import { useSelector } from "react-redux"
 import { getCoinsMarketCapAsc, getCoinsMarketCapDesc } from "store/coins"
 import { TableRow } from "components/coins-page-table";
 import { CoinTableTitle } from "styles/Fonts";
@@ -18,10 +19,11 @@ import {
   THCircTotSup,
   THLast7d,
 } from "./CoinTable.styles";
+import { LoadingTableRow } from "components/loading-animations";
 
 const CoinTable = (props) => {
   const [sortBy, setSortBy] = useState("market_cap_desc") 
-
+  const isLoading = useSelector(state => state.coins.isLoading)
 
   useEffect(() => {
     props.getCoinsData(1, sortBy);
@@ -76,9 +78,9 @@ const CoinTable = (props) => {
             </THLast7d>
           </tr>
         </HeaderRow>
-        {!props.isLoading && props.coins.map((coin) => (
+        {!isLoading && props.coins.map((coin) => (
           <TableRow key={coin.id} coin={coin} />
-        ))}
+        )) }
       </Wrapper>
       {/* <Pagination>
         
