@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux"
 import { getActiveCurrency } from "store/currencies";
 import { useSelector } from "react-redux"
-import { getFilteredCoins } from "store/coins";
 import { getCoinsData, getCoinsDataByCategory } from "store/coins/action";
 import { TableRow } from "components/coins-page-table";
 import { CoinTableTitle } from "styles/Fonts";
@@ -26,6 +25,9 @@ const CoinTable = (props) => {
 
   const activeCurrency = useSelector(getActiveCurrency)
   const activeCategory = useSelector(state => state.coins.activeCategory)
+  const activeDirection = useSelector(state => state.coins.activeDirection)
+  const activePageNum = useSelector(state => state.coins.pageNum)
+  const activeResultsPerPage = useSelector(state => state.coins.activeResultsPerPage)
 
   useEffect(() => {
     props.getCoinsDataByCategory(activeCategory)
@@ -39,6 +41,17 @@ const CoinTable = (props) => {
     props.getCoinsDataByCategory(activeCategory)
   }, [activeCategory])
 
+  useEffect(() => {
+    props.getCoinsDataByCategory(activeCategory)
+  }, [activeDirection])
+
+  useEffect(() => {
+    props.getCoinsDataByCategory(activeCategory)
+  }, [activePageNum])
+
+  useEffect(() => {
+    props.getCoinsDataByCategory(activeCategory)
+  }, [activeResultsPerPage])
 
   return (
     <OutsideWrapper>
