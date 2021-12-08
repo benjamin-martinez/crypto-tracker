@@ -111,7 +111,7 @@ const TableFilters = () => {
               {activeResultsPerPage}
               <SmallDownNuetralArrow />
               {isDropdownActive && (
-                <RowsDropdown ref={wrapperRef}>
+                <RowsDropdown>
                   {resultsPerPage.map((num) => (
                     <SelectionWrapper
                       onClick={() => handleRowSelectionClick(num)}
