@@ -39,3 +39,17 @@ export const NeutralDot = styled.div`
   border-radius: 50%;
   background: ${(props) => props.background};
 `;
+
+export const DownNuetralArrow = styled.div`
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid ${props => props.theme.color};  `;
+
+export const UpNuetralArrow = styled.div`
+width: 0;
+height: 0;
+border-left: 7px solid transparent;
+border-right: 7px solid transparent;
+border-bottom: 7px solid ${props => props.theme.color};  `;

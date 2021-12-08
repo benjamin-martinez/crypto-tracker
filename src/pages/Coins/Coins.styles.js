@@ -8,6 +8,7 @@ export const ContentWrapper = styled.div`
     
 display: grid;
 justify-items: center;
+gap: 40px;
 `;
 
 export const ChartsWrapper = styled.div`
@@ -19,6 +20,7 @@ export const ChartsWrapper = styled.div`
 
 export const SectionWrapper = styled.div`
     color: ${props => props.theme.color};
+
 `;
 
 export const HeadingDiv = styled.div`

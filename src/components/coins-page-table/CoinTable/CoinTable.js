@@ -3,9 +3,10 @@ import { connect } from "react-redux"
 import { getActiveCurrency } from "store/currencies";
 import { useSelector } from "react-redux"
 import { getFilteredCoins } from "store/coins";
-import { getCoinsData } from "store/coins/action";
+import { getCoinsData, getCoinsDataByCategory } from "store/coins/action";
 import { TableRow } from "components/coins-page-table";
 import { CoinTableTitle } from "styles/Fonts";
+import { TableFilters } from "components/coins-page-table";
 import {
   OutsideWrapper,
   Wrapper,
@@ -24,21 +25,24 @@ import {
 const CoinTable = (props) => {
 
   const activeCurrency = useSelector(getActiveCurrency)
-  const [key, setKey] = useState("total_market_cap")
-  const [direction, setDirection] = useState("desc")
-  const filteredCoins = useSelector((state) => getFilteredCoins(state, direction, key))
+  const activeCategory = useSelector(state => state.coins.activeCategory)
 
   useEffect(() => {
-    props.getCoinsData(1);
+    props.getCoinsDataByCategory(activeCategory)
   }, []);
 
   useEffect(() => {
-    props.getCoinsData(1)
+    props.getCoinsDataByCategory(activeCategory)
   }, [activeCurrency])
+
+  useEffect(() => {
+    props.getCoinsDataByCategory(activeCategory)
+  }, [activeCategory])
 
 
   return (
     <OutsideWrapper>
+      <TableFilters />
       <Wrapper>
         <HeaderRow>
           <tr>
@@ -89,7 +93,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  getCoinsData
+  getCoinsData,
+  getCoinsDataByCategory
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoinTable);
