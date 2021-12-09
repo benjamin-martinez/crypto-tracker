@@ -1,14 +1,8 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux"
-<<<<<<< HEAD
-import { getCoinsData } from "store/coins/action";
-import { useSelector } from "react-redux"
-import { getCoinsMarketCapAsc, getCoinsMarketCapDesc } from "store/coins"
-=======
 import { getActiveCurrency } from "store/currencies";
 import { useSelector } from "react-redux"
 import { getCoinsData, getCoinsDataByCategory } from "store/coins/action";
->>>>>>> 89a9b3a31eb988a7a69aba340a1e7b49d4caaf67
 import { TableRow } from "components/coins-page-table";
 import { CoinTableTitle } from "styles/Fonts";
 import { TableFilters } from "components/coins-page-table";
