@@ -51,7 +51,7 @@ export const CoinTableTitle = styled.p`
   font-size: 19px;
   font-weight: semi-bold;
   :hover {
-    cursor: pointer
+    cursor: pointer;
   }
 `;
 
@@ -111,4 +111,16 @@ export const SearchResultsText = styled.p`
 export const SearchResultsSubText = styled.p`
   font-size: 13px;
   line-height: 0%;
+`;
+
+export const ModalTitleText = styled.h1`
+  font-size: 28px;
+  line-height: 0%;
+  font-weight: bold;
+`;
+
+export const ModalButtonText = styled.p`
+  font-size: 15px;
+  line-height: 0%;
+  font-weight: bold;
 `;

@@ -39,6 +39,7 @@ export const themes = {
     money: {
       green: "#00ff5f",
       red: "#FE1040",
+      blue: "#2172e5",
       background: "#191B1F",
     },
     headerSlider: {
