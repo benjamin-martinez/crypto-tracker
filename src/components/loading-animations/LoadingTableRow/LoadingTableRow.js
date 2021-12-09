@@ -3,7 +3,35 @@ import { Wrapper, InnerWrapper } from "./LoadingTableRow.styles";
 const LoadingTableRow = (props) => {
   return (
     <Wrapper>
-      <InnerWrapper />
+      <tr>
+        <td>
+          <InnerWrapper />
+        </td>
+        <td>
+          <InnerWrapper />
+        </td>
+        <td>
+          <InnerWrapper />
+        </td>
+        <td>
+          <InnerWrapper />
+        </td>
+        <td>
+          <InnerWrapper />
+        </td>
+        <td>
+          <InnerWrapper />
+        </td>
+        <td>
+          <InnerWrapper />
+        </td>
+        <td>
+          <InnerWrapper />
+        </td>
+        <td>
+          <InnerWrapper />
+        </td>
+      </tr>
     </Wrapper>
   );
 };

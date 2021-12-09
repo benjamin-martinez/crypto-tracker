@@ -24,6 +24,7 @@ import { LoadingTableRow } from "components/loading-animations";
 const CoinTable = (props) => {
   const [sortBy, setSortBy] = useState("market_cap_desc") 
   const isLoading = useSelector(state => state.coins.isLoading)
+  const loaders = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
   useEffect(() => {
     props.getCoinsData(1, sortBy);
@@ -78,9 +79,9 @@ const CoinTable = (props) => {
             </THLast7d>
           </tr>
         </HeaderRow>
-        {!isLoading && props.coins.map((coin) => (
+        {!isLoading ? props.coins.map((coin) => (
           <TableRow key={coin.id} coin={coin} />
-        )) }
+        )) : loaders.map(() => <LoadingTableRow />)}
       </Wrapper>
       {/* <Pagination>
         
