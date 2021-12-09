@@ -3,16 +3,21 @@ import { Result } from "components";
 import { Link } from "react-router-dom";
 import { Wrapper, ResultsWrapper } from "./SearchResults.styles";
 
-export default class SearchResults extends React.Component {
+const SearchResults = (props) => {
+  return (
+    <Wrapper showResults={props.showResults}>
+      <ResultsWrapper>
+        {props.results.map((result) => (
+          <Link
+            to={`/coin/${result.id}`}
+            onClick={() => props.handleLinkClick()}
+          >
+            <Result result={result} />
+          </Link>
+        ))}
+      </ResultsWrapper>
+    </Wrapper>
+  );
+};
 
-
-    render() {
-        return (
-            <Wrapper showResults={this.props.showResults}>
-                <ResultsWrapper>
-                    {this.props.results.map((result) => <Link to={`/coin/${result.id}`} onClick={() => this.props.handleLinkClick()}><Result result={result}/></Link>)}
-                </ResultsWrapper>
-            </Wrapper>
-        )
-    }
-}
+export default SearchResults;
