@@ -30,36 +30,16 @@ const CoinDescription = (props) => {
         </InnerTextWrapper>
       </TextWrapper>
       <LinksWrapper>
-        <LinkWrapper>
+        {props.coin.links.blockchain_site.map((link, index) => index < 3 && <LinkWrapper>
           <LinkIcon src="icons/link.svg" />
           <ExternalLinkText
-            href={props.coin.links.blockchain_site[0]}
+            href={link}
             target="_blank"
           >
-            {props.coin.links.blockchain_site[0]}
+            {link}
           </ExternalLinkText>
           <CopyIcon src="icons/copy.svg" />
-        </LinkWrapper>
-        <LinkWrapper>
-          <LinkIcon src="icons/link.svg" />
-          <ExternalLinkText
-            href={props.coin.links.blockchain_site[1]}
-            target="_blank"
-          >
-            {props.coin.links.blockchain_site[1]}
-          </ExternalLinkText>
-          <CopyIcon src="icons/copy.svg" />
-        </LinkWrapper>
-        <LinkWrapper>
-          <LinkIcon src="icons/link.svg" />
-          <ExternalLinkText
-            href={props.coin.links.blockchain_site[2]}
-            target="_blank"
-          >
-            {props.coin.links.blockchain_site[2]}
-          </ExternalLinkText>
-          <CopyIcon src="icons/copy.svg" />
-        </LinkWrapper>
+        </LinkWrapper>)}
       </LinksWrapper>
     </Wrapper>
   );

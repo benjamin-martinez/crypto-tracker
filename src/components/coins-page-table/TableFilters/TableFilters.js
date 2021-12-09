@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   DownNuetralArrow,
   SmallDownNuetralArrow,
@@ -7,7 +8,6 @@ import {
   UpNuetralArrow,
 } from "styles/arrows";
 import { ChartHeaderText, CoinTableRowText } from "styles/Fonts";
-import { useSelector, useDispatch } from "react-redux";
 import {
   setActiveCategory,
   setActiveDirection,
@@ -55,9 +55,7 @@ const TableFilters = () => {
       ? dispatch(setActiveDirection(directions[1]))
       : dispatch(setActiveDirection(directions[0]));
 
-  const handlePageUpClick = () => dispatch(incrementPageNum());
-
-  const handlePageDownClick = () => dispatch(decrementPageNum());
+  const handlePageClick = (direction) => direction === "+1" ? dispatch(incrementPageNum()) : dispatch(decrementPageNum());
 
   const handleRowsDropdownClick = () => setIsDropdownActive(!isDropdownActive);
 
@@ -126,9 +124,9 @@ const TableFilters = () => {
           <PageSelectorWrapper>
             <CoinTableRowText>Page:</CoinTableRowText>
             <PageSelector>
-              <SmallLeftNuetralArrow onClick={handlePageDownClick} />
+              <SmallLeftNuetralArrow onClick={() => handlePageClick("-1")} />
               {pageNum}
-              <SmallRightNuetralArrow onClick={handlePageUpClick} />
+              <SmallRightNuetralArrow onClick={() => handlePageClick("+1")} />
             </PageSelector>
           </PageSelectorWrapper>
         </TableNav>

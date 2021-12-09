@@ -130,14 +130,3 @@ function coinsReducer(state = initialState, action) {
 
 export default coinsReducer;
 
-export const getFilteredCoins = (state, { direction, key }) => {
-  let coins = state.coins.data;
-  console.log(coins);
-
-  // if (direction === "asc") {
-  //     return coins.sort((a,b) => a[key] - b[key])
-  // }
-  // else {
-  //     return coins.sort((a,b) => b[key] - a[key])
-  // }
-};

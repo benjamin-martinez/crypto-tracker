@@ -92,9 +92,6 @@ const CoinTable = (props) => {
           <TableRow key={coin.id} coin={coin} />
         ))}
       </Wrapper>
-      {/* <Pagination>
-        
-    </Pagination> */}
     </OutsideWrapper>
   );
 };
