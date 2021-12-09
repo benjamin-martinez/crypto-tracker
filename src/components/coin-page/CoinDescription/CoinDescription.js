@@ -30,7 +30,7 @@ const CoinDescription = (props) => {
         </InnerTextWrapper>
       </TextWrapper>
       <LinksWrapper>
-        {props.coin.links.blockchain_site.map((link, index) => index < 3 && <LinkWrapper>
+        {props.coin.links.blockchain_site.filter((link, index) => index < 3).map((link) => <LinkWrapper>
           <LinkIcon src="icons/link.svg" />
           <ExternalLinkText
             href={link}
