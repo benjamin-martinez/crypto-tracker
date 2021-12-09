@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { getActiveCurrency } from "store/currencies";
 import {
   BarChart,
   DurationSelector,
   LineChart,
 } from "components/coins-page-charts";
 import { addCommas, addDecimalsAndShorten, convertDurationToUnix } from "utils";
+import { ChartHeaderText, ChartSubText } from "styles/Fonts";
 import { Wrapper, TextWrapper, SubWrapper } from "./ChartWrapper.styles";
-import { ChartHeaderText, ChartSubText } from "../../../styles/Fonts";
 
 const ChartWrapper = (props) => {
   const [activeToken, setActiveToken] = useState("BTC");
@@ -41,6 +43,7 @@ const ChartWrapper = (props) => {
     },
   ]);
   const [isLoading, setIsLoading] = useState(false);
+  const activeCurrency = useSelector(getActiveCurrency)
 
   const getChartData = async (duration) => {
     const todaysDate = new Date() / 1000;
@@ -48,7 +51,7 @@ const ChartWrapper = (props) => {
     setIsLoading(true);
     try {
       const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=usd&from=${durationStartDate}&to=${todaysDate}`
+        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=${activeCurrency.name}&from=${durationStartDate}&to=${todaysDate}`
       );
       if (props.chartType === "volume") {
         if (duration === 86400) {
@@ -101,6 +104,17 @@ const ChartWrapper = (props) => {
     //eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    getChartData(convertDurationToUnix("1d"));
+    let date = new Date().toLocaleString(undefined, {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+    setActiveDate(date);
+    //eslint-disable-next-line
+  }, [activeCurrency]);
+
   return (
     <Wrapper>
       <TextWrapper>
@@ -109,8 +123,8 @@ const ChartWrapper = (props) => {
         </ChartSubText>
         <ChartHeaderText>
           {props.chartType === "volume"
-            ? addDecimalsAndShorten(activePrice)
-            : addCommas(activePrice)}
+            ? activeCurrency.symbol + addDecimalsAndShorten(activePrice)
+            : activeCurrency.symbol + addCommas(activePrice)}
         </ChartHeaderText>
         <ChartSubText>{activeDate}</ChartSubText>
       </TextWrapper>

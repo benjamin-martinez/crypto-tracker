@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { NavText } from "styles/Fonts";
 import { CurrencyToggleDownArrow, CurrencyToggleUpArrow } from "styles/arrows";
+import { connect } from "react-redux"
+import { toggleCurrency } from "store/currencies/actions";
+import { getActiveCurrency } from "store/currencies";
 import {
   Wrapper,
   CurrencyWrapper,
@@ -11,30 +14,8 @@ import {
   DropdownCurrencyInnerWrapper,
 } from "./CurrencyToggle.styles";
 
-const CurrencyToggle = () => {
+const CurrencyToggle = (props) => {
   const [isDropdownActive, setIsDropdownActive] = useState(false);
-  const [activeCurrency, setActiveCurrency] = useState({
-    name: "USD",
-    isActive: true,
-    symbol: "$",
-  });
-  const [currencies, setCurrencies] = useState([
-    {
-      name: "USD",
-      isActive: true,
-      symbol: "$",
-    },
-    {
-      name: "EUR",
-      isActive: false,
-      symbol: "€",
-    },
-    {
-      name: "GBP",
-      isActive: false,
-      symbol: "£",
-    },
-  ]);
 
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef);
@@ -57,24 +38,18 @@ const CurrencyToggle = () => {
   const handleOpenDropdownClick = () => setIsDropdownActive(!isDropdownActive);
 
   const handleSelectionClick = (currency) => {
-    const tempArr = currencies.map((cur) => {
-      return {
-        ...cur,
-        isActive: cur.name === currency.name,
-      };
-    });
-    setCurrencies(tempArr);
-    setActiveCurrency(currency);
+    props.toggleCurrency(currency)
     setIsDropdownActive(false);
   };
+
   return (
     <Wrapper>
       <CurrencyWrapper onClick={() => handleOpenDropdownClick()}>
         <Icon>
-          <NavText>{activeCurrency.symbol}</NavText>
+          <NavText>{props.activeCurrency.symbol}</NavText>
         </Icon>
         <CurrentCurrency>
-          <NavText>{activeCurrency.name}</NavText>
+          <NavText>{props.activeCurrency.name.toUpperCase()}</NavText>
           {isDropdownActive ? (
             <CurrencyToggleUpArrow />
           ) : (
@@ -84,7 +59,7 @@ const CurrencyToggle = () => {
       </CurrencyWrapper>
       {isDropdownActive && (
         <Dropdown ref={wrapperRef}>
-          {currencies.map((currency) => (
+          {props.currencies.map((currency) => (
             <DropdownCurrencyOuterWrapper
               key={currency.name}
               onClick={() => handleSelectionClick(currency)}
@@ -94,7 +69,7 @@ const CurrencyToggle = () => {
                   <NavText>{currency.symbol}</NavText>
                 </Icon>
                 <CurrentCurrency>
-                  <NavText>{currency.name}</NavText>
+                  <NavText>{currency.name.toUpperCase()}</NavText>
                   {currency.isActive && <NavText>√</NavText>}
                 </CurrentCurrency>
               </DropdownCurrencyInnerWrapper>
@@ -106,4 +81,13 @@ const CurrencyToggle = () => {
   );
 };
 
-export default CurrencyToggle;
+const mapStateToProps = (state) => ({
+  currencies: state.currencies.data,
+  activeCurrency: getActiveCurrency(state)
+})
+
+const mapDispatchToProps = {
+  toggleCurrency
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CurrencyToggle);

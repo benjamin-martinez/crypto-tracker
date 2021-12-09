@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { getActiveCurrency } from "store/currencies";
 import {
   CoinDescription,
   CoinSummary,
@@ -10,6 +12,7 @@ import { Wrapper, ContentWrapper } from "./Coin.styles";
 const Coin = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [coin, setCoin] = useState(null);
+  const activeCurrency = useSelector(getActiveCurrency)
 
   const getCoinData = async () => {
     setIsLoading(true);
@@ -19,6 +22,10 @@ const Coin = (props) => {
     setIsLoading(false);
     setCoin(data);
   };
+
+  useEffect(() => {
+    
+  }, [activeCurrency])
 
   useEffect(() => {
     getCoinData();

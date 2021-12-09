@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { getActiveCurrency } from "store/currencies";
 import { Link } from "react-router-dom";
 import { Sparkline } from "components/coins-page-table";
 import {
@@ -20,6 +22,8 @@ import {
 } from "utils/formatPrice";
 
 const TableRow = (props) => {
+
+  const activeCurrency = useSelector(getActiveCurrency)
   return (
     <Wrapper>
       <tr>
@@ -38,7 +42,7 @@ const TableRow = (props) => {
         </td>
         <td>
           <CoinTableRowText>
-            {addCommas(props.coin.current_price)}
+            {activeCurrency.symbol + addCommas(props.coin.current_price)}
           </CoinTableRowText>
         </td>
         <td>
@@ -87,10 +91,10 @@ const TableRow = (props) => {
           <DoubleSpan>
             <DoubleSpanTop>
               <CoinTableRowText>
-                {addDecimalsAndShorten(props.coin.total_volume)}
+                {addDecimalsAndShorten(props.coin.total_volume, activeCurrency)}
               </CoinTableRowText>
               <CoinTableRowText>
-                {addDecimalsAndShorten(props.coin.market_cap)}
+                {addDecimalsAndShorten(props.coin.market_cap, activeCurrency)}
               </CoinTableRowText>
             </DoubleSpanTop>
             <SliderWrapper height="8px" width="100%" background="white">

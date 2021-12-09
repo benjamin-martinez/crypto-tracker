@@ -17,7 +17,7 @@ const Coins = () => {
       <ContentWrapper>
         <SectionWrapper>
           <HeadingDiv>
-            <SectionHeading>Your Overview</SectionHeading>
+            <SectionHeading>Bitcoin Overview</SectionHeading>
           </HeadingDiv>
           <ChartsWrapper>
             <ChartWrapper chartType="price" />
@@ -26,7 +26,6 @@ const Coins = () => {
         </SectionWrapper>
         <SectionWrapper>
           <HeadingDiv>
-            <SectionHeading>Your Overview</SectionHeading>
           </HeadingDiv>
           <CoinTableWrapper>
             <CoinTable />
