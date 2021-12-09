@@ -1,10 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux"
+<<<<<<< HEAD
 import { getCoinsData } from "store/coins/action";
 import { useSelector } from "react-redux"
 import { getCoinsMarketCapAsc, getCoinsMarketCapDesc } from "store/coins"
+=======
+import { getActiveCurrency } from "store/currencies";
+import { useSelector } from "react-redux"
+import { getCoinsData, getCoinsDataByCategory } from "store/coins/action";
+>>>>>>> 89a9b3a31eb988a7a69aba340a1e7b49d4caaf67
 import { TableRow } from "components/coins-page-table";
 import { CoinTableTitle } from "styles/Fonts";
+import { TableFilters } from "components/coins-page-table";
 import {
   OutsideWrapper,
   Wrapper,
@@ -22,31 +29,41 @@ import {
 import { LoadingTableRow } from "components/loading-animations";
 
 const CoinTable = (props) => {
-  const [sortBy, setSortBy] = useState("market_cap_desc") 
   const isLoading = useSelector(state => state.coins.isLoading)
   const loaders = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+  const activeCurrency = useSelector(getActiveCurrency)
+  const activeCategory = useSelector(state => state.coins.activeCategory)
+  const activeDirection = useSelector(state => state.coins.activeDirection)
+  const activePageNum = useSelector(state => state.coins.pageNum)
+  const activeResultsPerPage = useSelector(state => state.coins.activeResultsPerPage)
 
   useEffect(() => {
-    props.getCoinsData(1, sortBy);
+    props.getCoinsDataByCategory(activeCategory)
   }, []);
 
   useEffect(() => {
-    props.getCoinsData(1, sortBy)
-  }, [sortBy])
+    props.getCoinsDataByCategory(activeCategory)
+  }, [activeCurrency])
 
-  const setSortByMarketCap = () => {
-    if (sortBy.includes("market_cap")){
-      if (sortBy.includes("desc")) {
-        setSortBy("market_cap_asc")
-      }
-      else{
-        setSortBy("market_cap_desc")
-      }
-    }
-  }
+  useEffect(() => {
+    props.getCoinsDataByCategory(activeCategory)
+  }, [activeCategory])
+
+  useEffect(() => {
+    props.getCoinsDataByCategory(activeCategory)
+  }, [activeDirection])
+
+  useEffect(() => {
+    props.getCoinsDataByCategory(activeCategory)
+  }, [activePageNum])
+
+  useEffect(() => {
+    props.getCoinsDataByCategory(activeCategory)
+  }, [activeResultsPerPage])
 
   return (
     <OutsideWrapper>
+      <TableFilters />
       <Wrapper>
         <HeaderRow>
           <tr>
@@ -83,9 +100,6 @@ const CoinTable = (props) => {
           <TableRow key={coin.id} coin={coin} />
         )) : loaders.map(() => <LoadingTableRow />)}
       </Wrapper>
-      {/* <Pagination>
-        
-    </Pagination> */}
     </OutsideWrapper>
   );
 };
@@ -93,13 +107,12 @@ const CoinTable = (props) => {
 const mapStateToProps = (state) => ({
   coins: state.coins.data,
   isLoading: state.coins.isLoading,
-  hasError: state.coins.hasError,
-  // coinsByMarketCapAsc: getCoinsMarketCapAsc(state),
-  // coinsByMarketCapDesc: getCoinsMarketCapDesc(state)
+  hasError: state.coins.hasError
 })
 
 const mapDispatchToProps = {
-  getCoinsData
+  getCoinsData,
+  getCoinsDataByCategory
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoinTable);

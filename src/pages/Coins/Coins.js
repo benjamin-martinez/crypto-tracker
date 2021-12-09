@@ -26,7 +26,6 @@ const Coins = () => {
         </SectionWrapper>
         <SectionWrapper>
           <HeadingDiv>
-            <SectionHeading>Top 25 coins by Market Cap</SectionHeading>
           </HeadingDiv>
           <CoinTableWrapper>
             <CoinTable />

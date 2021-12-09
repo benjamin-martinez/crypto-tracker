@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getActiveCurrency } from "store/currencies";
 import { SectionHeading } from "styles/Fonts";
@@ -16,10 +16,8 @@ import {
 
 const InteractiveComponent = (props) => {
   const [tokenAmount, setTokenAmount] = useState(1);
-  const [fiatAmount, setFiatAmount] = useState(
-    props.coin.market_data.current_price.usd
-  );
-  const activeCurrency = useSelector(getActiveCurrency)
+  const [fiatAmount, setFiatAmount] = useState("");
+  const activeCurrency = useSelector(getActiveCurrency);
 
   const handleAmountChange = (e, isFiat) => {
     const amountValue = e.target.value;
@@ -28,13 +26,13 @@ const InteractiveComponent = (props) => {
       if (isFiat) {
         setTokenAmount(amountValue);
         setFiatAmount(
-          parseInt(props.coin.market_data.current_price.usd) /
+          parseInt(props.coin.market_data.current_price[activeCurrency.name]) /
             parseInt(amountValue)
         );
       } else {
         setTokenAmount(e.target.value);
         setFiatAmount(
-          parseInt(props.coin.market_data.current_price.usd) *
+          parseInt(props.coin.market_data.current_price[activeCurrency.name]) *
             parseInt(e.target.value)
         );
       }
@@ -44,6 +42,11 @@ const InteractiveComponent = (props) => {
       setTokenAmount("");
     }
   };
+
+  useEffect(() => {
+    setFiatAmount(props.coin.market_data.current_price[activeCurrency.name]);
+  }, [activeCurrency]);
+
   return (
     <Wrapper>
       <ConversionWrapper>
@@ -61,10 +64,10 @@ const InteractiveComponent = (props) => {
         <ConversionArrowsIcon src="icons/conversion-arrows.svg" />
         <CoinInput>
           <Name>
-            <SectionHeading>{activeCurrency.name}</SectionHeading>
+            <SectionHeading>{activeCurrency.name.toUpperCase()}</SectionHeading>
           </Name>
           <InputPriceDiv>
-          {activeCurrency.symbol}
+            {activeCurrency.symbol}
             <Input
               value={addCommasNoDec(fiatAmount)}
               onChange={(e) => handleAmountChange(e, true)}
