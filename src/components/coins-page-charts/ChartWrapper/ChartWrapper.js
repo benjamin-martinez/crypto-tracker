@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getChartData } from "store/charts/action";
 import { getActiveCurrency } from "store/currencies";
 import {
   BarChart,
@@ -13,10 +14,12 @@ import { Wrapper, TextWrapper, SubWrapper } from "./ChartWrapper.styles";
 import { LoadingBarChart, LoadingLineChart } from "components/loading-animations";
 
 const ChartWrapper = (props) => {
+  const dispatch = useDispatch()
   const [activeToken, setActiveToken] = useState("BTC");
   const [activePrice, setActivePrice] = useState("0.00");
   const [activeDate, setActiveDate] = useState("Nov 17, 2021");
-  const [tokenPriceHistory, setTokenPriceHistory] = useState([]);
+  const tokenPriceHistory = useSelector(state => state.charts.lineData)
+  const tokenVolumeHistory = useSelector(state => state.charts.barData)
   const [durations, setDurations] = useState([
     {
       length: "1d",
@@ -43,40 +46,10 @@ const ChartWrapper = (props) => {
       active: false,
     },
   ]);
-  const [isLoading, setIsLoading] = useState(false);
   const activeCurrency = useSelector(getActiveCurrency)
-
-  const getChartData = async (duration) => {
-    const todaysDate = new Date() / 1000;
-    const durationStartDate = new Date() / 1000 - duration;
-    setIsLoading(true);
-    try {
-      const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart/range?vs_currency=${activeCurrency.name}&from=${durationStartDate}&to=${todaysDate}`
-      );
-      if (props.chartType === "volume") {
-        if (duration === 86400) {
-          setTokenPriceHistory(data.total_volumes);
-          setActivePrice(data.total_volumes[data.total_volumes.length - 1][1]);
-          setIsLoading(false);
-        } else {
-          setTokenPriceHistory(data.total_volumes);
-          setIsLoading(false);
-        }
-      } else if (props.chartType === "price") {
-        if (duration === 86400) {
-          setTokenPriceHistory(data.prices);
-          setActivePrice(data.prices[data.prices.length - 1][1]);
-          setIsLoading(false);
-        } else {
-          setTokenPriceHistory(data.prices);
-          setIsLoading(false);
-        }
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const isLoading = useSelector(state => state.charts.isLoading)
+  const isLineLoading = useSelector(state => state.charts.isLineLoading)
+  const isBarLoading = useSelector(state => state.charts.isBarLoading)
   const handleDurationClick = (duration) => {
     const tempArr = durations.map((dur) => {
       return {
@@ -89,13 +62,13 @@ const ChartWrapper = (props) => {
   useEffect(() => {
     durations.map(
       (duration) =>
-        duration.active && getChartData(convertDurationToUnix(duration.length))
+        duration.active && dispatch(getChartData(activeCurrency, convertDurationToUnix(duration.length), props.chartType))
     );
     //eslint-disable-next-line
   }, [durations]);
 
   useEffect(() => {
-    getChartData(convertDurationToUnix("1d"));
+    dispatch(getChartData(activeCurrency, convertDurationToUnix("1d"), props.chartType));
     let date = new Date().toLocaleString(undefined, {
       month: "short",
       day: "numeric",
@@ -106,7 +79,7 @@ const ChartWrapper = (props) => {
   }, []);
 
   useEffect(() => {
-    getChartData(convertDurationToUnix("1d"));
+    dispatch(getChartData(activeCurrency, convertDurationToUnix("1d"), props.chartType));
     let date = new Date().toLocaleString(undefined, {
       month: "short",
       day: "numeric",
@@ -116,6 +89,7 @@ const ChartWrapper = (props) => {
     //eslint-disable-next-line
   }, [activeCurrency]);
 
+  console.log(tokenPriceHistory)
   return (
     <Wrapper>
       <TextWrapper>
@@ -135,9 +109,9 @@ const ChartWrapper = (props) => {
       />
       <SubWrapper>
         {props.chartType === "volume" ? (
-          isLoading ? <LoadingBarChart /> : <BarChart totalVolumes={tokenPriceHistory} />
+          isBarLoading ? <LoadingBarChart /> : tokenVolumeHistory && !!tokenVolumeHistory.length && <BarChart totalVolumes={tokenVolumeHistory} />
         ) : (
-          isLoading ? <LoadingLineChart /> : <LineChart coinPrices={tokenPriceHistory} />
+          isLineLoading ? <LoadingLineChart /> : tokenPriceHistory && !!tokenPriceHistory.length && <LineChart coinPrices={tokenPriceHistory} />
         )}
       </SubWrapper>
     </Wrapper>

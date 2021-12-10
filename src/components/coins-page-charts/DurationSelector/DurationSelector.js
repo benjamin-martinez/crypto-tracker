@@ -19,6 +19,7 @@ const DurationSelector = (props) => {
       <ContentWrapper>
         {props.durations.map((duration) => (
           <Selection
+            key={duration.length}
             duration={duration}
             handleDurationClick={props.handleDurationClick}
           />
