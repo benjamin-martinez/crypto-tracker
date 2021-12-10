@@ -10,6 +10,7 @@ import {
 import { addCommas, addDecimalsAndShorten, convertDurationToUnix } from "utils";
 import { ChartHeaderText, ChartSubText } from "styles/Fonts";
 import { Wrapper, TextWrapper, SubWrapper } from "./ChartWrapper.styles";
+import { LoadingBarChart, LoadingLineChart } from "components/loading-animations";
 
 const ChartWrapper = (props) => {
   const [activeToken, setActiveToken] = useState("BTC");
@@ -134,9 +135,9 @@ const ChartWrapper = (props) => {
       />
       <SubWrapper>
         {props.chartType === "volume" ? (
-          <BarChart totalVolumes={tokenPriceHistory} />
+          isLoading ? <LoadingBarChart /> : <BarChart totalVolumes={tokenPriceHistory} />
         ) : (
-          <LineChart coinPrices={tokenPriceHistory} />
+          isLoading ? <LoadingLineChart /> : <LineChart coinPrices={tokenPriceHistory} />
         )}
       </SubWrapper>
     </Wrapper>

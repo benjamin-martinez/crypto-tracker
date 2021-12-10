@@ -20,9 +20,11 @@ import {
   THCircTotSup,
   THLast7d,
 } from "./CoinTable.styles";
+import { LoadingTableRow } from "components/loading-animations";
 
 const CoinTable = (props) => {
-
+  const isLoading = useSelector(state => state.coins.isLoading)
+  const loaders = Array.apply(null, Array(20)).map( function() {})
   const activeCurrency = useSelector(getActiveCurrency)
   const activeCategory = useSelector(state => state.coins.activeCategory)
   const activeDirection = useSelector(state => state.coins.activeDirection)
@@ -88,9 +90,9 @@ const CoinTable = (props) => {
             </THLast7d>
           </tr>
         </HeaderRow>
-        {!props.isLoading && props.coins.map((coin) => (
+        {!isLoading ? props.coins.map((coin) => (
           <TableRow key={coin.id} coin={coin} />
-        ))}
+        )) : loaders.map(() => <LoadingTableRow />)}
       </Wrapper>
     </OutsideWrapper>
   );
