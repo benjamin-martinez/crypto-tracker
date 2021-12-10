@@ -1,5 +1,3 @@
-import coinsReducer, { GET_COINS_ERROR } from "store/coins";
-
 const initialState = {
   data: {},
   isLoading: false,
@@ -27,7 +25,7 @@ function coinReducer(state = initialState, action) {
         hasError: false,
       };
     case GET_COIN_DATA_SUCCESS:
-        console.log("hit")
+      console.log("hit");
       return {
         ...state,
         data: action.payload,
@@ -39,4 +37,4 @@ function coinReducer(state = initialState, action) {
   }
 }
 
-export default coinReducer
+export default coinReducer;
