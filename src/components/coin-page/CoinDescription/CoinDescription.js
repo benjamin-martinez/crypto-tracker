@@ -14,7 +14,9 @@ import {
 } from "./CoinDescription.styles";
 
 const CoinDescription = (props) => {
-  return (
+  return !props.coin.id ? (
+    <></>
+  ) : (
     <Wrapper>
       <Title>
         <ChartSubText>Description</ChartSubText>
@@ -30,16 +32,17 @@ const CoinDescription = (props) => {
         </InnerTextWrapper>
       </TextWrapper>
       <LinksWrapper>
-        {props.coin.links.blockchain_site.filter((link, index) => index < 3).map((link) => <LinkWrapper>
-          <LinkIcon src="icons/link.svg" />
-          <ExternalLinkText
-            href={link}
-            target="_blank"
-          >
-            {link}
-          </ExternalLinkText>
-          <CopyIcon src="icons/copy.svg" />
-        </LinkWrapper>)}
+        {props.coin.links.blockchain_site
+          .filter((link, index) => index < 3)
+          .map((link) => (
+            <LinkWrapper>
+              <LinkIcon src="icons/link.svg" />
+              <ExternalLinkText href={link} target="_blank">
+                {link}
+              </ExternalLinkText>
+              <CopyIcon src="icons/copy.svg" />
+            </LinkWrapper>
+          ))}
       </LinksWrapper>
     </Wrapper>
   );

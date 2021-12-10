@@ -44,10 +44,15 @@ const InteractiveComponent = (props) => {
   };
 
   useEffect(() => {
-    setFiatAmount(props.coin.market_data.current_price[activeCurrency.name]);
+    if (props.coin.id)
+      setFiatAmount(props.coin.market_data.current_price[activeCurrency.name]);
   }, [activeCurrency]);
 
-  return (
+  console.log(props.coin);
+
+  return !props.coin.id ? (
+    <></>
+  ) : (
     <Wrapper>
       <ConversionWrapper>
         <CoinInput>

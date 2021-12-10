@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
-import axios from "axios";
 import { debounce } from "lodash";
+import { useSelector, useDispatch } from "react-redux";
+import { clearSearchResults, getSearchResults } from "store/search/actions";
 import { SearchResults } from "components";
 import { SearchResultsText } from "styles/Fonts";
 import {
@@ -13,10 +14,11 @@ import {
 
 const Searchbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [results, setResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [hasError, setHasError] = useState(false);
+  const results = useSelector((state) => state.search.data);
+  const isLoading = useSelector((state) => state.search.isLoading);
+  const hasError = useSelector((state) => state.search.hasError);
+  const dispatch = useDispatch();
 
   const wrapperRef = useRef();
   useOutsideAlerter(wrapperRef);
@@ -36,29 +38,17 @@ const Searchbar = () => {
     }, [ref]);
   }
 
-  const getFilteredTokens = async (searchTerm) => {
-    setIsLoading(true);
-    try {
-      const { data } = await axios(
-        `https://crypto-app-server.herokuapp.com/coins/${searchTerm}`
-      );
-      setResults(data);
-      setShowResults(true);
-      setIsLoading(false);
-      setHasError(false);
-    } catch (err) {
-      console.log(err);
-      setIsLoading(false);
-      setHasError(true);
-    }
+  const getFilteredTokens = (searchTerm) => {
+    dispatch(getSearchResults(searchTerm));
   };
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
     if (e.target.value.length > 2) {
-      debounce(getFilteredTokens, 500)(e.target.value);
+      debounce(getFilteredTokens, 1000)(e.target.value);
     } else {
-      setResults([]);
+      dispatch(clearSearchResults());
+      setShowResults(false);
     }
   };
 
@@ -67,9 +57,15 @@ const Searchbar = () => {
     setShowResults(false);
   };
 
+  // useEffect(() => {
+  //   if (searchTerm.length < 3) dispatch(clearSearchResults());
+  // }, [searchTerm]);
+
   useEffect(() => {
-    if (searchTerm.length < 2) setResults([]);
-  }, [searchTerm]);
+    if (results && results.length > 0) {
+      setShowResults(true);
+    }
+  }, [results]);
 
   return (
     <Wrapper ref={wrapperRef} onSubmit={(e) => e.preventDefault()}>
@@ -81,7 +77,7 @@ const Searchbar = () => {
         value={searchTerm}
       />
       {showResults &&
-        (results.length > 0 ? (
+        (results ? (
           <SearchResults
             showResults={showResults}
             results={results}
@@ -90,14 +86,18 @@ const Searchbar = () => {
         ) : (
           <ErrorMessageWrapper>
             <ErrorMessage>
-              {searchTerm.length < 3 ? (
+              {isLoading ? (
+                <SearchResultsText>Loading. Please wait...</SearchResultsText>
+              ) : searchTerm.length < 3 ? (
                 <SearchResultsText>
                   Please enter at least 3 characters.
                 </SearchResultsText>
               ) : (
-                <SearchResultsText>
-                  No results found. Try another search.
-                </SearchResultsText>
+                !results && (
+                  <SearchResultsText>
+                    No results found. Try another search.
+                  </SearchResultsText>
+                )
               )}
             </ErrorMessage>
           </ErrorMessageWrapper>
