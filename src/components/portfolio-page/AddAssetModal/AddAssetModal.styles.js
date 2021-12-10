@@ -1,9 +1,15 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
+export const BackgroundWrapper = styled.div`
   position: absolute;
   top: 0px;
   left: 0px;
+  width: 1920px;
+  display: flex;
+  justify-content: center;
+`;
+
+export const Wrapper = styled.div`
   background: ${(props) => props.theme.card.active};
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
@@ -40,13 +46,39 @@ export const ModalSelectorWrapper = styled.div`
   height: 66px;
   border-radius: 10px;
   background: ${(props) => props.theme.card.background};
+  display: flex;
+  align-items: center;
+`;
+
+export const SearchCoinInput = styled.input`
+  margin-left: 34px;
+  background: none;
+  border: none;
+  height: 20px;
+  font-size: 19px;
+  color: ${(props) => props.theme.color};
+`;
+
+export const DateSelector = styled.input`
+  margin-left: 34px;
+  background: none;
+  border: none;
+  font-size: 19px;
+  color: ${(props) => props.theme.color};
+  :hover {
+    cursor: pointer;
+  }
+  ::-webkit-calendar-picker-indicator {
+    filter: ${(props) => props.theme.color === "#ffffff" && "invert(1)"};
+  }
 `;
 
 export const ModalButtonsWrapper = styled.div`
-display: flex;
-gap: 12px;
-align-items: center;
-justify-content: center;`;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+`;
 
 export const ExitButton = styled.img`
   position: absolute;
@@ -66,10 +98,12 @@ export const ModalButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${props => props.white === true ? "#ffffff" : props.theme.money.green};
-  color: ${props => props.white === true ? props.theme.money.green : "#ffffff"};
+  background: ${(props) =>
+    props.white === true ? "#ffffff" : props.theme.money.green};
+  color: ${(props) =>
+    props.white === true ? props.theme.money.green : "#ffffff"};
   :hover {
-      cursor: pointer;
+    cursor: pointer;
   }
 `;
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { AddAssetModal, Asset } from "components/portfolio-page";
 import { useSelector } from "react-redux"
 import { ButtonText, SectionHeading2 } from "styles/Fonts";
@@ -22,6 +22,25 @@ const Portfolio = () => {
     setIsModalActive(!isModalActive)
   }
 
+  const wrapperRef = useRef(null);
+  useOutsideAlerter(wrapperRef);
+
+  function useOutsideAlerter(ref) {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+          console.log("hit")
+          setIsModalActive(false);
+        }
+      }
+
+      document.addEventListener("mousedown", handleClickOutside);
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }, [ref]);
+  }
+
   return (
     <Wrapper>
       <ContentWrapper>
@@ -33,7 +52,7 @@ const Portfolio = () => {
             {assets.map(asset => <Asset asset={asset}/>)}
         </SectionWrapper>
       </ContentWrapper>
-      { isModalActive && <AddAssetModal handleExitClick={handleExitClick}/>}
+      { isModalActive && <AddAssetModal handleExitClick={handleExitClick} innerRef={wrapperRef}/>}
     </Wrapper>
   );
 };

@@ -21,7 +21,6 @@ import {
 
 const Asset = (props) => {
 
-    console.log(props.asset)
   return (
     <Wrapper>
       <IdOuterWrapper>
