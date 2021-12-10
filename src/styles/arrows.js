@@ -39,3 +39,51 @@ export const NeutralDot = styled.div`
   border-radius: 50%;
   background: ${(props) => props.background};
 `;
+
+export const DownNuetralArrow = styled.div`
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid ${props => props.theme.color};
+`;
+
+export const UpNuetralArrow = styled.div`
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid ${props => props.theme.color};
+`;
+
+export const SmallDownNuetralArrow = styled.div`
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid ${props => props.theme.color};
+`;
+
+export const SmallRightNuetralArrow = styled.div`
+  width: 0;
+  height: 0;
+  border-bottom: 4px solid transparent;
+  border-left: 4px solid ${props => props.theme.color};
+  border-right: 4px solid transparent;
+  border-top: 4px solid transparent;
+  :hover {
+    cursor: pointer;
+  }
+`;
+
+export const SmallLeftNuetralArrow = styled.div`
+  width: 0;
+  height: 0;
+  border-bottom: 4px solid transparent;
+  border-left: 4px solid transparent;
+  border-right: 4px solid ${props => props.theme.color};
+  border-top: 4px solid transparent;
+  :hover {
+    cursor: pointer;
+  }
+`;

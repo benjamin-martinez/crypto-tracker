@@ -24,11 +24,11 @@ export const themes = {
     },
   },
   light: {
-    background: "#fcfcfc",
+    background: "#f7f7f7",
     color: "#191b1f",
     card: {
       background: "#ffffff",
-      active: "#fcfcfc",
+      active: "#f7f7f7",
     },
     chart: {
       color: "#2c2f36",
