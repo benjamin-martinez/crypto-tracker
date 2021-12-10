@@ -24,7 +24,7 @@ import { LoadingTableRow } from "components/loading-animations";
 
 const CoinTable = (props) => {
   const isLoading = useSelector(state => state.coins.isLoading)
-  const loaders = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+  const loaders = Array.apply(null, Array(20)).map( function() {})
   const activeCurrency = useSelector(getActiveCurrency)
   const activeCategory = useSelector(state => state.coins.activeCategory)
   const activeDirection = useSelector(state => state.coins.activeDirection)

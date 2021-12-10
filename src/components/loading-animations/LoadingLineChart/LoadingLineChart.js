@@ -3,7 +3,7 @@ import { Line } from "react-chartjs-2";
 import { Wrapper } from "./LoadingLineChart.styles";
 
 const LoadingLineChart = (props) => {
-  const getLabels = () => {
+  const getRandomData = () => {
     const data = [];
     let prev = 100;
     for (let i = 0; i < 1000; i++) {
@@ -13,20 +13,11 @@ const LoadingLineChart = (props) => {
     return data;
   };
 
-  const getPrices = () => {
-    const data = [];
-    let prev = 100;
-    for (let i = 0; i < 1000; i++) {
-      prev += 5 - Math.random() * 10;
-      data.push({ x: i, y: prev });
-    }
-    return data;
-  };
   const chartData = () => {
-    let prices = getPrices();
+    let prices = getRandomData();
     const borderColor = "rgba(80, 80, 80, 1)";
     return {
-      labels: getLabels(),
+      labels: getRandomData(),
       datasets: [
         {
           data: prices,
@@ -37,7 +28,7 @@ const LoadingLineChart = (props) => {
     };
   };
   const totalDuration = 1000;
-  const delayBetweenPoints = totalDuration / getPrices().length;
+  const delayBetweenPoints = totalDuration / 100;
   const previousY = (ctx) =>
     ctx.index === 0
       ? ctx.chart.scales.y.getPixelForValue(100)

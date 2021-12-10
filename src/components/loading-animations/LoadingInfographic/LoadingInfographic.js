@@ -1,10 +1,12 @@
-import React from "react"
-import { InnerWrapper, Wrapper } from "./LoadingInfographic.styles.js"
+import React from "react";
+import { InnerWrapper, Wrapper } from "./LoadingInfographic.styles.js";
 
 const LoadingInfographic = (props) => {
-    return <Wrapper>
-        <InnerWrapper />
+  return (
+    <Wrapper>
+      <InnerWrapper />
     </Wrapper>
-}
+  );
+};
 
-export default LoadingInfographic 
+export default LoadingInfographic;
