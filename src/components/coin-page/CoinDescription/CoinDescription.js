@@ -14,9 +14,7 @@ import {
 } from "./CoinDescription.styles";
 
 const CoinDescription = (props) => {
-  return !props.coin.id ? (
-    <></>
-  ) : (
+  return (
     <Wrapper>
       <Title>
         <ChartSubText>Description</ChartSubText>

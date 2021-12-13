@@ -24,11 +24,13 @@ const Coin = (props) => {
 
   return (
     <Wrapper>
-      <ContentWrapper>
-        <CoinSummary coin={coin} isLoading={isLoading} />
-        <CoinDescription coin={coin} isLoading={isLoading} />
-        <InteractiveComponent coin={coin} isLoading={isLoading} />
-      </ContentWrapper>
+      {coin.id && (
+        <ContentWrapper>
+          <CoinSummary coin={coin} isLoading={isLoading} />
+          <CoinDescription coin={coin} isLoading={isLoading} />
+          <InteractiveComponent coin={coin} isLoading={isLoading} />
+        </ContentWrapper>
+      )}
     </Wrapper>
   );
 };

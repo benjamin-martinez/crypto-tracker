@@ -11,15 +11,19 @@ import {
 import { addCommas, addDecimalsAndShorten, convertDurationToUnix } from "utils";
 import { ChartHeaderText, ChartSubText } from "styles/Fonts";
 import { Wrapper, TextWrapper, SubWrapper } from "./ChartWrapper.styles";
-import { LoadingBarChart, LoadingLineChart } from "components/loading-animations";
+import {
+  LoadingBarChart,
+  LoadingLineChart,
+} from "components/loading-animations";
 
 const ChartWrapper = (props) => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [activeToken, setActiveToken] = useState("BTC");
   const [activePrice, setActivePrice] = useState("0.00");
   const [activeDate, setActiveDate] = useState("Nov 17, 2021");
-  const tokenPriceHistory = useSelector(state => state.charts.lineData)
-  const tokenVolumeHistory = useSelector(state => state.charts.barData)
+  const [isPriceSet, setIsPriceSet] = useState(false)
+  const tokenPriceHistory = useSelector((state) => state.charts.lineData);
+  const tokenVolumeHistory = useSelector((state) => state.charts.barData);
   const [durations, setDurations] = useState([
     {
       length: "1d",
@@ -46,10 +50,9 @@ const ChartWrapper = (props) => {
       active: false,
     },
   ]);
-  const activeCurrency = useSelector(getActiveCurrency)
-  const isLoading = useSelector(state => state.charts.isLoading)
-  const isLineLoading = useSelector(state => state.charts.isLineLoading)
-  const isBarLoading = useSelector(state => state.charts.isBarLoading)
+  const activeCurrency = useSelector(getActiveCurrency);
+  const isLineLoading = useSelector((state) => state.charts.isLineLoading);
+  const isBarLoading = useSelector((state) => state.charts.isBarLoading);
   const handleDurationClick = (duration) => {
     const tempArr = durations.map((dur) => {
       return {
@@ -62,13 +65,22 @@ const ChartWrapper = (props) => {
   useEffect(() => {
     durations.map(
       (duration) =>
-        duration.active && dispatch(getChartData(activeCurrency, convertDurationToUnix(duration.length), props.chartType))
+        duration.active &&
+        dispatch(
+          getChartData(
+            activeCurrency,
+            convertDurationToUnix(duration.length),
+            props.chartType
+          )
+        )
     );
     //eslint-disable-next-line
   }, [durations]);
 
   useEffect(() => {
-    dispatch(getChartData(activeCurrency, convertDurationToUnix("1d"), props.chartType));
+    dispatch(
+      getChartData(activeCurrency, convertDurationToUnix("1d"), props.chartType)
+    );
     let date = new Date().toLocaleString(undefined, {
       month: "short",
       day: "numeric",
@@ -79,7 +91,9 @@ const ChartWrapper = (props) => {
   }, []);
 
   useEffect(() => {
-    dispatch(getChartData(activeCurrency, convertDurationToUnix("1d"), props.chartType));
+    dispatch(
+      getChartData(activeCurrency, convertDurationToUnix("1d"), props.chartType)
+    );
     let date = new Date().toLocaleString(undefined, {
       month: "short",
       day: "numeric",
@@ -89,7 +103,17 @@ const ChartWrapper = (props) => {
     //eslint-disable-next-line
   }, [activeCurrency]);
 
-  console.log(tokenPriceHistory)
+  useEffect(() => {
+
+    if (props.chartType === "volume" && tokenVolumeHistory.length > 0 && !isPriceSet) {
+      setActivePrice(tokenVolumeHistory[tokenVolumeHistory.length - 1][1]);
+      setIsPriceSet(true);
+    }
+    if (props.chartType === "price" && tokenPriceHistory.length > 0 && !isPriceSet)
+      setActivePrice(tokenPriceHistory[tokenPriceHistory.length - 1][1]);
+      setIsPriceSet(true);
+  }, [tokenVolumeHistory, tokenPriceHistory]);
+
   return (
     <Wrapper>
       <TextWrapper>
@@ -108,11 +132,20 @@ const ChartWrapper = (props) => {
         handleDurationClick={handleDurationClick}
       />
       <SubWrapper>
-        {props.chartType === "volume" ? (
-          isBarLoading ? <LoadingBarChart /> : tokenVolumeHistory && !!tokenVolumeHistory.length && <BarChart totalVolumes={tokenVolumeHistory} />
-        ) : (
-          isLineLoading ? <LoadingLineChart /> : tokenPriceHistory && !!tokenPriceHistory.length && <LineChart coinPrices={tokenPriceHistory} />
-        )}
+        {props.chartType === "volume"
+          ? isBarLoading && <LoadingBarChart />
+          : isLineLoading && <LoadingLineChart />}
+        {props.chartType === "volume"
+          ? !isBarLoading &&
+            tokenVolumeHistory &&
+            !!tokenVolumeHistory.length && (
+              <BarChart totalVolumes={tokenVolumeHistory} />
+            )
+          : !isLineLoading &&
+            tokenPriceHistory &&
+            !!tokenPriceHistory.length && (
+              <LineChart coinPrices={tokenPriceHistory} />
+            )}
       </SubWrapper>
     </Wrapper>
   );

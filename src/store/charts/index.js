@@ -4,7 +4,7 @@ const initialState = {
   isLineLoading: false,
   isBarLoading: false,
   hasError: false,
-  error: "",
+  error: ""
 };
 
 export const GET_LINE_CHART_DATA_ERROR = "GET_LINE_CHART_DATA_ERROR";
