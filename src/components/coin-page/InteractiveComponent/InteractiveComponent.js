@@ -48,11 +48,7 @@ const InteractiveComponent = (props) => {
       setFiatAmount(props.coin.market_data.current_price[activeCurrency.name]);
   }, [activeCurrency]);
 
-  console.log(props.coin);
-
-  return !props.coin.id ? (
-    <></>
-  ) : (
+  return (
     <Wrapper>
       <ConversionWrapper>
         <CoinInput>

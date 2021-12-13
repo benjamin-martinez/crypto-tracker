@@ -57,10 +57,6 @@ const Searchbar = () => {
     setShowResults(false);
   };
 
-  // useEffect(() => {
-  //   if (searchTerm.length < 3) dispatch(clearSearchResults());
-  // }, [searchTerm]);
-
   useEffect(() => {
     if (results && results.length > 0) {
       setShowResults(true);

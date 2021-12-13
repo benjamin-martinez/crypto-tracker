@@ -29,7 +29,6 @@ const Portfolio = () => {
     useEffect(() => {
       function handleClickOutside(event) {
         if (ref.current && !ref.current.contains(event.target)) {
-          console.log("hit")
           setIsModalActive(false);
         }
       }

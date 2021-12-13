@@ -28,7 +28,7 @@ const LoadingLineChart = (props) => {
     };
   };
   const totalDuration = 1000;
-  const delayBetweenPoints = totalDuration / 100;
+  const delayBetweenPoints = totalDuration / 500;
   const previousY = (ctx) =>
     ctx.index === 0
       ? ctx.chart.scales.y.getPixelForValue(100)
