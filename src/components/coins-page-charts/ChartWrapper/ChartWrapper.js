@@ -104,7 +104,6 @@ const ChartWrapper = (props) => {
   }, [activeCurrency]);
 
   useEffect(() => {
-
     if (props.chartType === "volume" && tokenVolumeHistory.length > 0 && !isPriceSet) {
       setActivePrice(tokenVolumeHistory[tokenVolumeHistory.length - 1][1]);
       setIsPriceSet(true);
@@ -112,7 +111,7 @@ const ChartWrapper = (props) => {
     if (props.chartType === "price" && tokenPriceHistory.length > 0 && !isPriceSet)
       setActivePrice(tokenPriceHistory[tokenPriceHistory.length - 1][1]);
       setIsPriceSet(true);
-  }, [tokenVolumeHistory, tokenPriceHistory]);
+  }, []);
 
   return (
     <Wrapper>
