@@ -1,3 +1,5 @@
+
+import { SearchAsset } from "components/portfolio-page"
 import {
   ModalTitleText,
   CoinTableRowText,
@@ -41,7 +43,7 @@ const AddAssetModal = (props) => {
             </IdOuterWrapper>
             <ModalSelectorsWrapper>
               <ModalSelectorWrapper>
-                <SearchCoinInput placeholder="Search Coins..." />
+                <SearchAsset />
               </ModalSelectorWrapper>
               <ModalSelectorWrapper>
                 <SearchCoinInput placeholder="Amount Purchased" />

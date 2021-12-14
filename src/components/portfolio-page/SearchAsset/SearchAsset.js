@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { debounce } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
-import { clearSearchResults, getSearchResults, setActiveSearchLocation } from "store/search/actions";
+import { setActiveSearchLocation } from "store/search/actions";
+import { clearSearchResults, getSearchResults } from "store/search/actions";
 import { SearchResults } from "components";
 import { SearchResultsText } from "styles/Fonts";
 import {
@@ -10,9 +11,9 @@ import {
   Input,
   ErrorMessage,
   ErrorMessageWrapper,
-} from "./Searchbar.styles";
+} from "./SearchAsset.styles";
 
-const Searchbar = () => {
+const SearchAsset = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showResults, setShowResults] = useState(false);
   const results = useSelector((state) => state.search.data);
@@ -61,18 +62,17 @@ const Searchbar = () => {
   };
 
   const handleWrapperClick = () => {
-    dispatch(setActiveSearchLocation("infographic"))
+    dispatch(setActiveSearchLocation("portfolio"))
   }
 
   useEffect(() => {
-    if (results && results.length > 0 && searchTerm.length > 2) {
+    if (results && results.length > 0) {
       setShowResults(true);
     }
   }, [results]);
 
   return (
     <Wrapper ref={wrapperRef} onSubmit={(e) => e.preventDefault()} onClick={handleWrapperClick}>
-      <Icon src="icons/search.svg" />
       <Input
         type="text"
         placeholder="Search..."
@@ -80,7 +80,7 @@ const Searchbar = () => {
         value={searchTerm}
       />
       {showResults &&
-        (results && activeSearchLocation === "infographic" ? (
+        (results && activeSearchLocation === "portfolio" ? (
           <SearchResults
             showResults={showResults}
             results={results}
@@ -109,4 +109,4 @@ const Searchbar = () => {
   );
 };
 
-export default Searchbar;
+export default SearchAsset;
