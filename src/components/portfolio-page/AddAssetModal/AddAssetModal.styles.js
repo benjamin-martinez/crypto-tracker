@@ -69,7 +69,7 @@ export const DateSelector = styled.input`
     cursor: pointer;
   }
   ::-webkit-calendar-picker-indicator {
-    filter: ${(props) => props.theme.color === "#ffffff" && "invert(1)"};
+    filter: ${(props) => props.theme.color === "white" && "invert(1)"};
   }
 `;
 
@@ -99,9 +99,9 @@ export const ModalButton = styled.div`
   justify-content: center;
   align-items: center;
   background: ${(props) =>
-    props.white === true ? "#ffffff" : props.theme.money.green};
+    props.white === true ? "white" : props.theme.money.green};
   color: ${(props) =>
-    props.white === true ? props.theme.money.green : "#ffffff"};
+    props.white === true ? props.theme.money.green : "white"};
   :hover {
     cursor: pointer;
   }
