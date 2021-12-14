@@ -30,7 +30,6 @@ function searchReducer(state = initialState, action) {
         error: null,
       };
     case GET_SEARCH_COINS_SUCCESS:
-      console.log("hit");
       return {
         ...state,
         data: action.payload,
