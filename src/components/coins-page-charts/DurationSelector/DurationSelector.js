@@ -5,10 +5,10 @@ import { Wrapper, ContentWrapper, SWrapper } from "./DurationSelector.styles";
 const Selection = (props) => {
   return (
     <SWrapper
-      active={props.duration.active}
-      onClick={() => props.handleDurationClick(props.duration)}
+      active={props.duration === props.activeChartDuration}
+      onClick={() => props.handleRDurationClick(props.duration)}
     >
-      <ChartDurationText>{props.duration.length}</ChartDurationText>
+      <ChartDurationText>{props.duration}</ChartDurationText>
     </SWrapper>
   );
 };
@@ -19,9 +19,10 @@ const DurationSelector = (props) => {
       <ContentWrapper>
         {props.durations.map((duration) => (
           <Selection
-            key={duration.length}
+            key={duration}
             duration={duration}
-            handleDurationClick={props.handleDurationClick}
+            activeChartDuration={props.activeChartDuration}
+            handleRDurationClick={props.handleRDurationClick}
           />
         ))}
       </ContentWrapper>

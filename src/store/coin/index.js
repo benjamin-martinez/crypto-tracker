@@ -25,7 +25,6 @@ function coinReducer(state = initialState, action) {
         hasError: false,
       };
     case GET_COIN_DATA_SUCCESS:
-      console.log("hit");
       return {
         ...state,
         data: action.payload,

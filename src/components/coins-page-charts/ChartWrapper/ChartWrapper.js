@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
-import { getChartData } from "store/charts/action";
 import { getActiveCurrency } from "store/currencies";
 import {
   BarChart,
   DurationSelector,
   LineChart,
 } from "components/coins-page-charts";
-import { addCommas, addDecimalsAndShorten, convertDurationToUnix } from "utils";
+import { addCommas, addDecimalsAndShorten } from "utils";
 import { ChartHeaderText, ChartSubText } from "styles/Fonts";
-import { Wrapper, TextWrapper, SubWrapper } from "./ChartWrapper.styles";
+import {
+  Wrapper,
+  TextWrapper,
+  SubWrapper,
+  ErrorWrapper,
+} from "./ChartWrapper.styles";
 import {
   LoadingBarChart,
   LoadingLineChart,
@@ -21,66 +24,14 @@ const ChartWrapper = (props) => {
   const [activeToken, setActiveToken] = useState("BTC");
   const [activePrice, setActivePrice] = useState("0.00");
   const [activeDate, setActiveDate] = useState("Nov 17, 2021");
-  const [isPriceSet, setIsPriceSet] = useState(false)
-  const tokenPriceHistory = useSelector((state) => state.charts.lineData);
-  const tokenVolumeHistory = useSelector((state) => state.charts.barData);
-  const [durations, setDurations] = useState([
-    {
-      length: "1d",
-      active: true,
-    },
-    {
-      length: "1w",
-      active: false,
-    },
-    {
-      length: "1m",
-      active: false,
-    },
-    {
-      length: "3m",
-      active: false,
-    },
-    {
-      length: "6m",
-      active: false,
-    },
-    {
-      length: "1y",
-      active: false,
-    },
-  ]);
+  const durations = useSelector((state) => state.charts.durations);
   const activeCurrency = useSelector(getActiveCurrency);
-  const isLineLoading = useSelector((state) => state.charts.isLineLoading);
-  const isBarLoading = useSelector((state) => state.charts.isBarLoading);
-  const handleDurationClick = (duration) => {
-    const tempArr = durations.map((dur) => {
-      return {
-        ...dur,
-        active: dur.length === duration.length,
-      };
-    });
-    setDurations(tempArr);
-  };
-  useEffect(() => {
-    durations.map(
-      (duration) =>
-        duration.active &&
-        dispatch(
-          getChartData(
-            activeCurrency,
-            convertDurationToUnix(duration.length),
-            props.chartType
-          )
-        )
-    );
-    //eslint-disable-next-line
-  }, [durations]);
+
+  function handleRDurationClick(duration) {
+    dispatch(props.setActiveChartDuration(duration));
+  }
 
   useEffect(() => {
-    dispatch(
-      getChartData(activeCurrency, convertDurationToUnix("1d"), props.chartType)
-    );
     let date = new Date().toLocaleString(undefined, {
       month: "short",
       day: "numeric",
@@ -90,35 +41,12 @@ const ChartWrapper = (props) => {
     //eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    dispatch(
-      getChartData(activeCurrency, convertDurationToUnix("1d"), props.chartType)
-    );
-    let date = new Date().toLocaleString(undefined, {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    });
-    setActiveDate(date);
-    //eslint-disable-next-line
-  }, [activeCurrency]);
-
-  useEffect(() => {
-
-    if (props.chartType === "volume" && tokenVolumeHistory.length > 0 && !isPriceSet) {
-      setActivePrice(tokenVolumeHistory[tokenVolumeHistory.length - 1][1]);
-      setIsPriceSet(true);
-    }
-    if (props.chartType === "price" && tokenPriceHistory.length > 0 && !isPriceSet)
-      setActivePrice(tokenPriceHistory[tokenPriceHistory.length - 1][1]);
-      setIsPriceSet(true);
-  }, [tokenVolumeHistory, tokenPriceHistory]);
-
-  return (
+  return !props.hasError ? (
     <Wrapper>
       <TextWrapper>
         <ChartSubText>
-          {activeToken} {props.chartType === "volume" && "Volume"}
+          {props.activeChartOption.symbol.toUpperCase()}{" "}
+          {props.chartType === "volume" && "Volume"}
         </ChartSubText>
         <ChartHeaderText>
           {props.chartType === "volume"
@@ -129,25 +57,30 @@ const ChartWrapper = (props) => {
       </TextWrapper>
       <DurationSelector
         durations={durations}
-        handleDurationClick={handleDurationClick}
+        activeChartDuration={props.activeChartDuration}
+        handleRDurationClick={handleRDurationClick}
       />
       <SubWrapper>
         {props.chartType === "volume"
-          ? isBarLoading && <LoadingBarChart />
-          : isLineLoading && <LoadingLineChart />}
+          ? props.isLoading && <LoadingBarChart />
+          : props.isLoading && <LoadingLineChart />}
         {props.chartType === "volume"
-          ? !isBarLoading &&
-            tokenVolumeHistory &&
-            !!tokenVolumeHistory.length && (
-              <BarChart totalVolumes={tokenVolumeHistory} />
+          ? !props.isLoading &&
+            props.chartHistory &&
+            props.chartHistory.length && (
+              <BarChart totalVolumes={props.chartHistory} />
             )
-          : !isLineLoading &&
-            tokenPriceHistory &&
-            !!tokenPriceHistory.length && (
-              <LineChart coinPrices={tokenPriceHistory} />
+          : !props.isLoading &&
+            props.chartHistory &&
+            props.chartHistory.length && (
+              <LineChart coinPrices={props.chartHistory} />
             )}
       </SubWrapper>
     </Wrapper>
+  ) : (
+    <ErrorWrapper>
+      <ChartSubText>There was an error retreiving chart data</ChartSubText>
+    </ErrorWrapper>
   );
 };
 
