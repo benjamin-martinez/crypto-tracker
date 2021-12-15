@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { ChartWrapper } from "components/coins-page-charts";
 import { SectionHeading } from "styles/Fonts";
-import { useSelector, useDispatch } from "react-redux";
 import {
   setActiveChartOption,
   setActivePriceChartDuration,
@@ -52,15 +52,9 @@ const Coins = () => {
   }
 
   //price data / line chart data
-  const activePriceChartDuration = useSelector(
-    (state) => state.charts.activePriceChartDuration
-  );
-  const priceChartHistory = useSelector(
-    (state) => state.charts.priceChartHistory
-  );
-  const priceChartIsLoading = useSelector(
-    (state) => state.charts.priceChartIsLoading
-  );
+
+  const { activePriceChartDuration, priceChartHistory, priceChartIsLoading } =
+    useSelector((state) => state.charts);
 
   useEffect(() => {
     dispatch(getChartData(activeCurrency, activePriceChartDuration, "price"));
@@ -68,18 +62,10 @@ const Coins = () => {
 
   useEffect(() => {
     dispatch(getChartData(activeCurrency, activeVolumeChartDuration, "price"));
-  }, [])
+  }, []);
 
   //volume data / bar chart data
-  const activeVolumeChartDuration = useSelector(
-    (state) => state.charts.activeVolumeChartDuration
-  );
-  const volumeChartHistory = useSelector(
-    (state) => state.charts.volumeChartHistory
-  );
-  const volumeChartIsLoading = useSelector(
-    (state) => state.charts.volumeChartIsLoading
-  );
+  const { activeVolumeChartDuration, volumeChartHistory, volumeChartIsLoading } = useSelector(state => state.charts)
 
   useEffect(() => {
     dispatch(getChartData(activeCurrency, activeVolumeChartDuration, "volume"));
@@ -87,10 +73,10 @@ const Coins = () => {
 
   useEffect(() => {
     dispatch(getChartData(activeCurrency, activeVolumeChartDuration, "volume"));
-  }, [])
+  }, []);
 
   //error handling
-  const hasError = useSelector(state => state.charts.hasError)
+  const hasError = useSelector((state) => state.charts.hasError);
 
   //handling component interaction
   const handleActivateDropdownClick = () => {
