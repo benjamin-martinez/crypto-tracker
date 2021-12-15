@@ -9,6 +9,9 @@ import {
   SELECT_DATE,
   CLEAR_SEARCH_RESULTS,
   SELECT_ASSET_FROM_RESULTS,
+  LOAD_SAVED_ASSETS_PENDING,
+  LOAD_SAVED_ASSETS_ERROR,
+  LOAD_SAVED_ASSETS_SUCCESS,
 } from "./index";
 
 export const getSearchResults = (searchTerm) => async (dispatch, getState) => {
@@ -46,21 +49,22 @@ export const selectAmount = (amount) => (dispatch, getState) => {
 
 export const addAsset = (asset) => (dispatch, getState) => {
   const state = getState();
-  const assets = state.portfolio.assets
+  const assets = state.portfolio.assets;
+  const newAssets = [...assets, asset]
   dispatch({
     type: ADD_PORTFOLIO_ASSET,
-    payload: [...assets, asset],
+    payload: newAssets,
   });
 };
 
 export const removeAsset = (asset) => (dispatch, getState) => {
   const state = getState();
-  const assets = state.portfolio.assets
+  const assets = state.portfolio.assets;
   dispatch({
     type: REMOVE_PORTFOLIO_ASSET,
-    payload: assets.filter(el => el.id !== asset.id)
-  })
-}
+    payload: assets.filter((el) => el.id !== asset.id),
+  });
+};
 
 export const selectDate = (date) => (dispatch, getState) => {
   dispatch({
@@ -75,3 +79,34 @@ export const clearSearchResults = () => (dispatch, getState) => {
     payload: [],
   });
 };
+
+export const loadSavedCoins =
+  (activeCurrency) => async (dispatch, getState) => {
+    const state = getState();
+    console.log(state.portfolio)
+    dispatch({ type: LOAD_SAVED_ASSETS_PENDING });
+    let loadedCoins = state.portfolio.assets
+    if (loadedCoins) {
+      loadedCoins = await Promise.all(
+        state.portfolio.assets.map(async (asset) => {
+          try {
+            const date = asset.datePurchased;
+            const { data } = await axios(
+              `https://api.coingecko.com/api/v3/coins/${asset.data.id}/market_chart?vs_currency=${activeCurrency.name}&days=23`
+            );
+            return {
+              ...asset,
+              marketData: data,
+            };
+          } catch (err) {
+            console.log(err);
+            return asset;
+          }
+        })
+      );
+      dispatch({
+        type: LOAD_SAVED_ASSETS_SUCCESS,
+        payload: loadedCoins,
+      });
+    }
+  };

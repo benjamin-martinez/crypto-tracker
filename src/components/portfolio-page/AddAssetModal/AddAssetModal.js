@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectAmount, selectDate, addAsset } from "store/portfolio/actions";
+import { addAsset } from "store/portfolio/actions";
 import { SearchAsset } from "components/portfolio-page";
 import {
   ModalTitleText,
@@ -28,8 +28,10 @@ import {
 } from "./AddAssetModal.styles";
 
 const AddAssetModal = (props) => {
+  const dispatch = useDispatch();
   const [amountInput, setAmountInput] = useState("");
   const [dateInput, setDateInput] = useState("2021-01-01");
+  const asset = useSelector(state => state.portfolio.addAssetSelection)
 
   const selectedCoin = useSelector(
     (state) => state.portfolio.addAssetSelection
@@ -44,9 +46,15 @@ const AddAssetModal = (props) => {
   };
 
   const handleSaveClick = () => {
-    props.handleExitClick();
+
     //dispatch save
-    //to do-->
+    props.handleExitClick();
+    console.log(asset)
+    dispatch(addAsset({
+      data: asset,
+      amount: amountInput,
+      datePurchased: dateInput
+    }))
   };
 
   const handleExitClick = () => {

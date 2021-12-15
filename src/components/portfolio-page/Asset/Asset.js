@@ -2,6 +2,7 @@ import { PortfolioEntryTitle, SubSectionHeading } from "styles/Fonts";
 import { UpArrow } from "styles/arrows";
 import { themes } from "styles/colors";
 import { Slider, SliderWrapper } from "styles/sliders";
+import { addCommas } from "utils";
 import {
   Wrapper,
   IdInnerWrapper,
@@ -20,16 +21,14 @@ import {
 } from "./Asset.styles";
 
 const Asset = (props) => {
-
-  console.log(props)
   return (
-    <Wrapper>
+    props.asset && <Wrapper>
       <IdOuterWrapper>
         <IdInnerWrapper>
           <CoinImageWrapper>
-            <CoinIcon src={props.asset.image} />
+            <CoinIcon src={props.asset.data.large} />
           </CoinImageWrapper>
-          <PortfolioEntryTitle>{props.asset.name}&nbsp;({props.asset.symbol.toUpperCase()})</PortfolioEntryTitle>
+          <PortfolioEntryTitle>{props.asset.data.name}&nbsp;({props.asset.data.symbol.toUpperCase()})</PortfolioEntryTitle>
         </IdInnerWrapper>
       </IdOuterWrapper>
       <PriceDataWrapper>
@@ -43,7 +42,7 @@ const Asset = (props) => {
           <SubSectionContent>
             <SubSectionSpan>
               <SubSectionHeading>Current price:</SubSectionHeading>
-              <PriceText>$12,000</PriceText>
+              <PriceText>${addCommas(props.asset.marketData.prices[0][1])}</PriceText>
             </SubSectionSpan>
             <SubSectionSpan>
               <SubSectionHeading>Price change 24h</SubSectionHeading>
