@@ -14,11 +14,11 @@ const Portfolio = () => {
   const assets = useSelector((state) => state.portfolio.assets);
 
   const handleAddAssetClick = () => {
-    setIsModalActive(!isModalActive);
+    setIsModalActive(true);
   };
 
   const handleExitClick = () => {
-    setIsModalActive(!isModalActive);
+    setIsModalActive(false);
   };
 
   const wrapperRef = useRef(null);
@@ -48,7 +48,7 @@ const Portfolio = () => {
         <SectionWrapper>
           <SectionHeading2>Your Statistics</SectionHeading2>
           {assets.map((asset) => (
-            <Asset asset={asset} />
+            <Asset key={asset.id} asset={asset} />
           ))}
         </SectionWrapper>
       </ContentWrapper>
