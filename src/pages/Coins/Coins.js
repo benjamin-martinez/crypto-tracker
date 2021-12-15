@@ -51,8 +51,6 @@ const Coins = () => {
     }, [ref]);
   }
 
-  //price data / line chart data
-
   const { activePriceChartDuration, priceChartHistory, priceChartIsLoading } =
     useSelector((state) => state.charts);
 
@@ -64,8 +62,11 @@ const Coins = () => {
     dispatch(getChartData(activeCurrency, activeVolumeChartDuration, "price"));
   }, []);
 
-  //volume data / bar chart data
-  const { activeVolumeChartDuration, volumeChartHistory, volumeChartIsLoading } = useSelector(state => state.charts)
+  const {
+    activeVolumeChartDuration,
+    volumeChartHistory,
+    volumeChartIsLoading,
+  } = useSelector((state) => state.charts);
 
   useEffect(() => {
     dispatch(getChartData(activeCurrency, activeVolumeChartDuration, "volume"));
@@ -75,10 +76,8 @@ const Coins = () => {
     dispatch(getChartData(activeCurrency, activeVolumeChartDuration, "volume"));
   }, []);
 
-  //error handling
   const hasError = useSelector((state) => state.charts.hasError);
 
-  //handling component interaction
   const handleActivateDropdownClick = () => {
     setDropdownActive(!dropdownActive);
   };
