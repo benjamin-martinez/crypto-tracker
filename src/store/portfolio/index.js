@@ -1,8 +1,10 @@
 const initialState = {
   portfolioSearchData: [],
-  addAssetSelection: {},
   isLoading: false,
   hasError: false,
+  addAssetSelection: {},
+  selectionDate: "",
+  selectionAmount: 0,
   assets: [
     {
       id: "bitcoin",
@@ -34,6 +36,8 @@ export const ADD_PORTFOLIO_ASSET = "ADD_PORTFOLIO_ASSET";
 export const REMOVE_PORTFOLIO_ASSET = "REMOVE_PORTFOLIO_ASSET";
 export const CLEAR_SEARCH_RESULTS = "CLEAR_SEARCH_RESULTS";
 export const SELECT_ASSET_FROM_RESULTS = "SELECT_ASSET_FROM_RESULTS";
+export const SELECT_DATE = "SELECT_DATE";
+export const SELECT_AMOUNT = "SELECT_AMOUNT";
 
 function portfolioReducer(state = initialState, action) {
   switch (action.type) {
@@ -77,6 +81,16 @@ function portfolioReducer(state = initialState, action) {
       return {
         ...state,
         addAssetSelection: action.payload,
+      };
+    case SELECT_AMOUNT:
+      return {
+        ...state,
+        selectionAmount: action.payload,
+      };
+    case SELECT_DATE:
+      return {
+        ...state,
+        selectionDate: action.payload,
       };
     default:
       return state;

@@ -5,6 +5,8 @@ import {
   LOAD_ASSET_SEARCH_ERROR,
   ADD_PORTFOLIO_ASSET,
   REMOVE_PORTFOLIO_ASSET,
+  SELECT_AMOUNT,
+  SELECT_DATE,
   CLEAR_SEARCH_RESULTS,
   SELECT_ASSET_FROM_RESULTS,
 } from "./index";
@@ -32,6 +34,38 @@ export const selectAssetFromResults = (selection) => (dispatch, getState) => {
   dispatch({
     type: SELECT_ASSET_FROM_RESULTS,
     payload: selection,
+  });
+};
+
+export const selectAmount = (amount) => (dispatch, getState) => {
+  dispatch({
+    type: SELECT_AMOUNT,
+    payload: amount,
+  });
+};
+
+export const addAsset = (asset) => (dispatch, getState) => {
+  const state = getState();
+  const assets = state.portfolio.assets
+  dispatch({
+    type: ADD_PORTFOLIO_ASSET,
+    payload: [...assets, asset],
+  });
+};
+
+export const removeAsset = (asset) => (dispatch, getState) => {
+  const state = getState();
+  const assets = state.portfolio.assets
+  dispatch({
+    type: REMOVE_PORTFOLIO_ASSET,
+    payload: assets.filter(el => el.id !== asset.id)
+  })
+}
+
+export const selectDate = (date) => (dispatch, getState) => {
+  dispatch({
+    type: SELECT_AMOUNT,
+    payload: date,
   });
 };
 

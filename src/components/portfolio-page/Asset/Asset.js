@@ -21,14 +21,15 @@ import {
 
 const Asset = (props) => {
 
+  console.log(props)
   return (
     <Wrapper>
       <IdOuterWrapper>
         <IdInnerWrapper>
           <CoinImageWrapper>
-            <CoinIcon src="icons/bitcoin.svg" />
+            <CoinIcon src={props.asset.image} />
           </CoinImageWrapper>
-          <PortfolioEntryTitle>Bitcoin (BTC)</PortfolioEntryTitle>
+          <PortfolioEntryTitle>{props.asset.name}&nbsp;({props.asset.symbol.toUpperCase()})</PortfolioEntryTitle>
         </IdInnerWrapper>
       </IdOuterWrapper>
       <PriceDataWrapper>
@@ -80,32 +81,24 @@ const Asset = (props) => {
           </SubSectionHeadingWrapper>
           <SubSectionContent>
             <SubSectionSpan>
-              <SubSectionHeading>Current price:</SubSectionHeading>
-              <PriceText>$12,000</PriceText>
+              <SubSectionHeading>Coin Amount:</SubSectionHeading>
+              <PriceText>{props.asset.amount}</PriceText>
             </SubSectionSpan>
             <SubSectionSpan>
-              <SubSectionHeading>Price change 24h</SubSectionHeading>
+              <SubSectionHeading>Amount Value</SubSectionHeading>
               <PriceChangeWrapper>
                 <UpArrow />
                 <PriceText>2.1%</PriceText>
               </PriceChangeWrapper>
             </SubSectionSpan>
             <SubSectionSpan>
-              <SubSectionHeading>Market Cap vs Volume</SubSectionHeading>
+              <SubSectionHeading>Amount Price Change Since Purchase</SubSectionHeading>
               <PriceText>2%</PriceText>
-              <SliderWrapper
-                height="13px"
-                width="55px"
-                background={themes.dark.money.blue}
-              >
-                <Slider width="35" background="white" />
-              </SliderWrapper>
             </SubSectionSpan>
             <SubSectionSpan>
-              <SubSectionHeading>Circ Supply vs Max Supply</SubSectionHeading>
+              <SubSectionHeading>Purchase Date</SubSectionHeading>
               <PriceChangeWrapper>
-                <UpArrow />
-                <PriceText>2.1%</PriceText>
+                <PriceText>{props.asset.datePurchased}</PriceText>
               </PriceChangeWrapper>
             </SubSectionSpan>
           </SubSectionContent>

@@ -51,10 +51,10 @@ const SearchAsset = () => {
     }
   };
 
-  const handleLinkClick = () => {
-    setSearchTerm("");
-    setShowResults(false);
-  };
+  const handleResultClick = (result) => {
+    setSearchTerm(result.name)
+    setShowResults(false)
+  }
 
   useEffect(() => {
     if (results && results.length > 0) {
@@ -79,7 +79,7 @@ const SearchAsset = () => {
           <SearchResults
             showResults={showResults}
             results={results}
-            handleLinkClick={handleLinkClick}
+            handleResultClick={handleResultClick}
           />
         ) : (
           <ErrorMessageWrapper>
