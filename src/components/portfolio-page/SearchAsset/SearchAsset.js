@@ -1,13 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import { debounce } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
-import { setActiveSearchLocation } from "store/search/actions";
-import { clearSearchResults, getSearchResults } from "store/search/actions";
-import { SearchResults } from "components";
+import { clearSearchResults, getSearchResults } from "store/portfolio/actions";
+import { SearchResults } from "components/portfolio-page";
 import { SearchResultsText } from "styles/Fonts";
 import {
   Wrapper,
-  Icon,
   Input,
   ErrorMessage,
   ErrorMessageWrapper,
@@ -16,10 +14,9 @@ import {
 const SearchAsset = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showResults, setShowResults] = useState(false);
-  const results = useSelector((state) => state.search.data);
-  const isLoading = useSelector((state) => state.search.isLoading);
-  const hasError = useSelector((state) => state.search.hasError);
-  const activeSearchLocation = useSelector(state => state.search.activeSearchLocation)
+  const results = useSelector((state) => state.portfolio.portfolioSearchData);
+  const isLoading = useSelector((state) => state.portfolio.isLoading);
+  const hasError = useSelector((state) => state.portfolio.hasError);
   const dispatch = useDispatch();
 
   const wrapperRef = useRef();
@@ -30,7 +27,6 @@ const SearchAsset = () => {
       function handleClickOutside(event) {
         if (ref.current && !ref.current.contains(event.target)) {
           setShowResults(false);
-          dispatch(setActiveSearchLocation(""))
         }
       }
 
@@ -58,12 +54,7 @@ const SearchAsset = () => {
   const handleLinkClick = () => {
     setSearchTerm("");
     setShowResults(false);
-    dispatch(setActiveSearchLocation(""))
   };
-
-  const handleWrapperClick = () => {
-    dispatch(setActiveSearchLocation("portfolio"))
-  }
 
   useEffect(() => {
     if (results && results.length > 0) {
@@ -71,8 +62,12 @@ const SearchAsset = () => {
     }
   }, [results]);
 
+  useEffect(() => {
+    setShowResults(false);
+  }, [])
+
   return (
-    <Wrapper ref={wrapperRef} onSubmit={(e) => e.preventDefault()} onClick={handleWrapperClick}>
+    <Wrapper ref={wrapperRef} onSubmit={(e) => e.preventDefault()}>
       <Input
         type="text"
         placeholder="Search..."
@@ -80,7 +75,7 @@ const SearchAsset = () => {
         value={searchTerm}
       />
       {showResults &&
-        (results && activeSearchLocation === "portfolio" ? (
+        (results ? (
           <SearchResults
             showResults={showResults}
             results={results}

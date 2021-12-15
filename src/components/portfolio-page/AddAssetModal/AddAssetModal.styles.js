@@ -1,12 +1,23 @@
 import styled from "styled-components";
 
-export const BackgroundWrapper = styled.div`
+export const BackgroundOuterWrapper = styled.div`
   position: absolute;
-  top: 0px;
+  top: -250px;
   left: 0px;
   width: 1920px;
+  height: 120vh;
   display: flex;
   justify-content: center;
+  align-items: center;
+`;
+
+export const BackgroundInnerWrapper = styled.div`
+  width: 1920px;
+  height: 120vh;
+  background: black;
+  opacity: 50%;
+  position: absolute;
+  z-index: 10;
 `;
 
 export const Wrapper = styled.div`
@@ -17,6 +28,7 @@ export const Wrapper = styled.div`
   height: 504px;
   border-radius: 10px;
   color: ${(props) => props.theme.color};
+  z-index: 11;
 `;
 
 export const ContentWrapper = styled.div`
@@ -55,8 +67,14 @@ export const SearchCoinInput = styled.input`
   background: none;
   border: none;
   height: 20px;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
   font-size: 19px;
   color: ${(props) => props.theme.color};
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const DateSelector = styled.input`

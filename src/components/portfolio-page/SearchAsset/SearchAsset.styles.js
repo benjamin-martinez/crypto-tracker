@@ -18,6 +18,9 @@ export const Input = styled.input`
   background: none;
   border: none;
   height: 20px;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
   font-size: 19px;
   color: ${(props) => props.theme.color};
   &:focus {

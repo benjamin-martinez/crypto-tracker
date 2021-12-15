@@ -3,8 +3,7 @@ import {
   GET_SEARCH_COINS_SUCCESS,
   GET_SEARCH_COINS_ERROR,
   GET_SEARCH_COINS_PENDING,
-  CLEAR_SEARCH_RESULTS,
-  SET_ACTIVE_SEARCH_LOCATION
+  CLEAR_SEARCH_RESULTS
 } from "./index";
 
 export const getSearchResults = (searchTerm) => async (dispatch, getState) => {
@@ -30,12 +29,5 @@ export const clearSearchResults = () => (dispatch, getState) => {
   dispatch({
     type: CLEAR_SEARCH_RESULTS,
     payload: [],
-  });
-};
-
-export const setActiveSearchLocation = (location) => (dispatch, getState) => {
-  dispatch({
-    type: SET_ACTIVE_SEARCH_LOCATION,
-    payload: location
   });
 };

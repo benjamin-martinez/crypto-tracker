@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { debounce } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
-import { clearSearchResults, getSearchResults, setActiveSearchLocation } from "store/search/actions";
+import { clearSearchResults, getSearchResults } from "store/search/actions";
 import { SearchResults } from "components";
 import { SearchResultsText } from "styles/Fonts";
 import {
@@ -18,7 +18,6 @@ const Searchbar = () => {
   const results = useSelector((state) => state.search.data);
   const isLoading = useSelector((state) => state.search.isLoading);
   const hasError = useSelector((state) => state.search.hasError);
-  const activeSearchLocation = useSelector(state => state.search.activeSearchLocation)
   const dispatch = useDispatch();
 
   const wrapperRef = useRef();
@@ -29,7 +28,6 @@ const Searchbar = () => {
       function handleClickOutside(event) {
         if (ref.current && !ref.current.contains(event.target)) {
           setShowResults(false);
-          dispatch(setActiveSearchLocation(""))
         }
       }
 
@@ -57,12 +55,7 @@ const Searchbar = () => {
   const handleLinkClick = () => {
     setSearchTerm("");
     setShowResults(false);
-    dispatch(setActiveSearchLocation(""))
   };
-
-  const handleWrapperClick = () => {
-    dispatch(setActiveSearchLocation("infographic"))
-  }
 
   useEffect(() => {
     if (results && results.length > 0 && searchTerm.length > 2) {
@@ -71,7 +64,7 @@ const Searchbar = () => {
   }, [results]);
 
   return (
-    <Wrapper ref={wrapperRef} onSubmit={(e) => e.preventDefault()} onClick={handleWrapperClick}>
+    <Wrapper ref={wrapperRef} onSubmit={(e) => e.preventDefault()} >
       <Icon src="icons/search.svg" />
       <Input
         type="text"
@@ -80,7 +73,7 @@ const Searchbar = () => {
         value={searchTerm}
       />
       {showResults &&
-        (results && activeSearchLocation === "infographic" ? (
+        (results ? (
           <SearchResults
             showResults={showResults}
             results={results}

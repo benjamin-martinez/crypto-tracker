@@ -1,5 +1,6 @@
 const initialState = {
   portfolioSearchData: [],
+  addAssetSelection: {},
   isLoading: false,
   hasError: false,
   assets: [
@@ -31,7 +32,8 @@ export const LOAD_ASSET_SEARCH_PENDING = "LOAD_ASSET_SEARCH_PENDING";
 export const LOAD_ASSET_SEARCH_ERROR = "LOAD_ASSET_SEARCH_ERROR";
 export const ADD_PORTFOLIO_ASSET = "ADD_PORTFOLIO_ASSET";
 export const REMOVE_PORTFOLIO_ASSET = "REMOVE_PORTFOLIO_ASSET";
-export const CLEAR_SEARCH_RESULTS = "CLEAR_SEARCH_RESULTS"
+export const CLEAR_SEARCH_RESULTS = "CLEAR_SEARCH_RESULTS";
+export const SELECT_ASSET_FROM_RESULTS = "SELECT_ASSET_FROM_RESULTS";
 
 function portfolioReducer(state = initialState, action) {
   switch (action.type) {
@@ -70,6 +72,11 @@ function portfolioReducer(state = initialState, action) {
       return {
         ...state,
         savedCoins: action.payload,
+      };
+    case SELECT_ASSET_FROM_RESULTS:
+      return {
+        ...state,
+        addAssetSelection: action.payload,
       };
     default:
       return state;

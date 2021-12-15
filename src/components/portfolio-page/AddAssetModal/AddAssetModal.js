@@ -6,7 +6,8 @@ import {
   ModalButtonText,
 } from "styles/Fonts";
 import {
-  BackgroundWrapper,
+  BackgroundOuterWrapper,
+  BackgroundInnerWrapper,
   Wrapper,
   ContentWrapper,
   IdInnerWrapper,
@@ -26,7 +27,8 @@ import {
 
 const AddAssetModal = (props) => {
   return (
-    <BackgroundWrapper>
+    <BackgroundOuterWrapper>
+      <BackgroundInnerWrapper></BackgroundInnerWrapper>
       <Wrapper ref={props.innerRef}>
         <ContentWrapper>
           <ModalTitleWrapper>
@@ -64,7 +66,7 @@ const AddAssetModal = (props) => {
           <ExitButton scr="icons/exit.svg" onClick={props.handleExitClick} />
         </ContentWrapper>
       </Wrapper>
-    </BackgroundWrapper>
+    </BackgroundOuterWrapper>
   );
 };
 
