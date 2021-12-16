@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getCoinData } from "store/coin/actions";
 import { getActiveCurrency } from "store/currencies";
 import {
   CoinDescription,
@@ -10,39 +10,25 @@ import {
 import { Wrapper, ContentWrapper } from "./Coin.styles";
 
 const Coin = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [coin, setCoin] = useState(null);
-  const activeCurrency = useSelector(getActiveCurrency)
+  const activeCurrency = useSelector(getActiveCurrency);
+  const isLoading = useSelector((state) => state.coin.isLoading);
+  const coin = useSelector((state) => state.coin.data);
+  const dispatch = useDispatch();
 
-  const getCoinData = async () => {
-    setIsLoading(true);
-    const { data } = await axios(
-      `https://api.coingecko.com/api/v3/coins/${props.match.params.id}?localization=false`
-    );
-    setIsLoading(false);
-    setCoin(data);
-  };
+  useEffect(() => {}, [activeCurrency]);
 
   useEffect(() => {
-    
-  }, [activeCurrency])
-
-  useEffect(() => {
-    getCoinData();
+    dispatch(getCoinData(props.match.params.id));
     //eslint-disable-next-line
   }, [props.location.pathname]);
 
-  useEffect(() => {
-    getCoinData();
-  });
-
   return (
     <Wrapper>
-      {coin && (
+      {coin.id && (
         <ContentWrapper>
-          <CoinSummary coin={coin} />
-          <CoinDescription coin={coin} />
-          <InteractiveComponent coin={coin} />
+          <CoinSummary coin={coin} isLoading={isLoading} />
+          <CoinDescription coin={coin} isLoading={isLoading} />
+          <InteractiveComponent coin={coin} isLoading={isLoading} />
         </ContentWrapper>
       )}
     </Wrapper>

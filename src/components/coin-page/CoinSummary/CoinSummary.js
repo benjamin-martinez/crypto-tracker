@@ -19,6 +19,7 @@ import {
   addDecimalsAndShorten,
   addCommasNoDec,
   formatPercentage,
+  camelizeKeys,
 } from "utils";
 import {
   Wrapper,
@@ -56,8 +57,31 @@ import {
 } from "./CoinSummary.styles";
 
 const CoinSummary = (props) => {
+  const { name: currencyName, symbol: currencySymbol } =
+    useSelector(getActiveCurrency);
 
-  const activeCurrency = useSelector(getActiveCurrency)
+  const {
+    image: coinImage,
+    name: coinName,
+    symbol: coinSymbol,
+    links: coinLinks,
+    market_data: coinMarketData,
+  } = props.coin;
+  
+  const {
+    current_price: currentPrice,
+    price_change_percentage_24h: priceChangePercentage24hr,
+    price_change_24h_in_currency: priceChange24hrInCurrency,
+    ath,
+    atl,
+    ath_date: athDate,
+    atl_date: atlDate,
+    market_cap: marketCap,
+    fully_diluted_valuation: fullyDilutedValuation,
+    total_volume: totalVolume,
+    circulating_supply: circulatingSupply,
+    max_supply: maxSupply,
+  } = coinMarketData;
   return (
     <Wrapper>
       <Title>
@@ -68,22 +92,19 @@ const CoinSummary = (props) => {
           <IdOuterWrapper>
             <IdInnerWrapper>
               <IconWrapper>
-                <Icon src={props.coin.image.large} />
+                <Icon src={coinImage.large} />
               </IconWrapper>
               <CoinName>
                 <PortfolioEntryTitle>
-                  {props.coin.name}&nbsp;({props.coin.symbol.toUpperCase()})
+                  {coinName}&nbsp;({coinSymbol.toUpperCase()})
                 </PortfolioEntryTitle>
               </CoinName>
             </IdInnerWrapper>
           </IdOuterWrapper>
           <LinkWrapper>
             <LinkIcon src="icons/link.svg" />
-            <ExternalLinkText
-              href={props.coin.links.homepage[0]}
-              target="_blank"
-            >
-              {props.coin.links.homepage[0]}
+            <ExternalLinkText href={coinLinks.homepage[0]} target="_blank">
+              {coinLinks.homepage[0]}
             </ExternalLinkText>
           </LinkWrapper>
         </CoinId>
@@ -91,31 +112,22 @@ const CoinSummary = (props) => {
           <PriceDetailsInnerWrapper>
             <PriceWrapper>
               <ChartHeaderText>
-                {activeCurrency.symbol + addCommas(props.coin.market_data.current_price[activeCurrency.name])}
+                {currencySymbol + addCommas(currentPrice[currencyName])}
               </ChartHeaderText>
               <PercentWrapper>
-                {props.coin.market_data.price_change_percentage_24h >= 0 ? (
-                  <UpArrow />
-                ) : (
-                  <DownArrow />
-                )}
-                <PriceText
-                  price={props.coin.market_data.price_change_percentage_24h}
-                >
-                  {formatPercentage(
-                    props.coin.market_data.price_change_percentage_24h
-                  )}
+                {priceChangePercentage24hr >= 0 ? <UpArrow /> : <DownArrow />}
+                <PriceText price={priceChangePercentage24hr}>
+                  {formatPercentage(priceChangePercentage24hr)}
                 </PriceText>
               </PercentWrapper>
             </PriceWrapper>
             <ProfitWrapper>
               <ChartCategoryText>Profit: </ChartCategoryText>
-              <PriceText
-                price={props.coin.market_data.price_change_24h_in_currency[activeCurrency.name]}
-              >
-                {activeCurrency.symbol + addDecimalsAndShorten(
-                  props.coin.market_data.price_change_24h_in_currency[activeCurrency.name]
-                )}
+              <PriceText price={priceChange24hrInCurrency[currencyName]}>
+                {currencySymbol +
+                  addDecimalsAndShorten(
+                    priceChange24hrInCurrency[currencyName]
+                  )}
               </PriceText>
             </ProfitWrapper>
             <StackIcon src="icons/stack.svg" />
@@ -128,14 +140,13 @@ const CoinSummary = (props) => {
                       All Time High:{" "}
                     </PortfolioEntryLabelText>
                     <PortfolioEntryText>
-                      {activeCurrency.symbol + addDecimalsAndShorten(props.coin.market_data.ath[activeCurrency.name])}
+                      {currencySymbol +
+                        addDecimalsAndShorten(ath[currencyName])}
                     </PortfolioEntryText>
                   </ATPriceWrapper>
                   <span>
                     <PortfolioEntryText>
-                      {new Date(
-                        props.coin.market_data.ath_date[activeCurrency.name]
-                      ).toLocaleString()}
+                      {new Date(athDate[currencyName]).toLocaleString()}
                     </PortfolioEntryText>
                   </span>
                 </PriceRangeTextWrapper>
@@ -148,14 +159,13 @@ const CoinSummary = (props) => {
                       All Time Low:{" "}
                     </PortfolioEntryLabelText>
                     <PortfolioEntryText>
-                      {activeCurrency.symbol + addDecimalsAndShorten(props.coin.market_data.atl[activeCurrency.name])}
+                      {currencySymbol +
+                        addDecimalsAndShorten(atl[currencyName])}
                     </PortfolioEntryText>
                   </ATPriceWrapper>
                   <span>
                     <PortfolioEntryText>
-                      {new Date(
-                        props.coin.market_data.atl_date[activeCurrency.name]
-                      ).toLocaleString()}
+                      {new Date(atlDate[currencyName]).toLocaleString()}
                     </PortfolioEntryText>
                   </span>
                 </PriceRangeTextWrapper>
@@ -171,7 +181,7 @@ const CoinSummary = (props) => {
                 <MarketDetailsLineText>
                   <PortfolioEntryLabelText>Market Cap:</PortfolioEntryLabelText>
                   <PortfolioEntryText>
-                    {activeCurrency.symbol + addCommas(props.coin.market_data.market_cap[activeCurrency.name])}
+                    {currencySymbol + addCommas(marketCap[currencyName])}
                   </PortfolioEntryText>
                 </MarketDetailsLineText>
               </MarketDetailsLine>
@@ -182,9 +192,8 @@ const CoinSummary = (props) => {
                     Fully Diluted Valuation:
                   </PortfolioEntryLabelText>
                   <PortfolioEntryText>
-                    {activeCurrency.symbol + addCommas(
-                      props.coin.market_data.fully_diluted_valuation[activeCurrency.name]
-                    )}
+                    {currencySymbol +
+                      addCommas(fullyDilutedValuation[currencyName])}
                   </PortfolioEntryText>
                 </MarketDetailsLineText>
               </MarketDetailsLine>
@@ -193,7 +202,7 @@ const CoinSummary = (props) => {
                 <MarketDetailsLineText>
                   <PortfolioEntryLabelText>Volume 24h:</PortfolioEntryLabelText>
                   <PortfolioEntryText>
-                    {activeCurrency.symbol + addCommas(props.coin.market_data.total_volume[activeCurrency.name])}
+                    {currencySymbol + addCommas(totalVolume[currencyName])}
                   </PortfolioEntryText>
                 </MarketDetailsLineText>
               </MarketDetailsLine>
@@ -205,8 +214,7 @@ const CoinSummary = (props) => {
                   </PortfolioEntryLabelText>
                   <PortfolioEntryText>
                     {fiveSigFigs(
-                      props.coin.market_data.total_volume[activeCurrency.name] /
-                        props.coin.market_data.market_cap[activeCurrency.name]
+                      totalVolume[currencyName] / marketCap[currencyName]
                     )}
                   </PortfolioEntryText>
                 </MarketDetailsLineText>
@@ -220,7 +228,7 @@ const CoinSummary = (props) => {
                     Total Volume:
                   </PortfolioEntryLabelText>
                   <PortfolioEntryText>
-                    {activeCurrency.symbol + addCommas(props.coin.market_data.total_volume[activeCurrency.name])}
+                    {currencySymbol + addCommas(totalVolume[currencyName])}
                   </PortfolioEntryText>
                 </MarketDetailsLineText>
               </MarketDetailsLine>
@@ -231,8 +239,8 @@ const CoinSummary = (props) => {
                     Circulating Supply:
                   </PortfolioEntryLabelText>
                   <PortfolioEntryText>
-                    {addCommasNoDec(props.coin.market_data.circulating_supply)}
-                    &nbsp;{props.coin.symbol.toUpperCase()}
+                    {addCommasNoDec(circulatingSupply)}
+                    &nbsp;{coinSymbol.toUpperCase()}
                   </PortfolioEntryText>
                 </MarketDetailsLineText>
               </MarketDetailsLine>
@@ -241,8 +249,8 @@ const CoinSummary = (props) => {
                 <MarketDetailsLineText>
                   <PortfolioEntryLabelText>Max Supply:</PortfolioEntryLabelText>
                   <PortfolioEntryText>
-                    {addCommasNoDec(props.coin.market_data.max_supply)}&nbsp;
-                    {props.coin.symbol.toUpperCase()}
+                    {addCommasNoDec(maxSupply)}&nbsp;
+                    {coinSymbol.toUpperCase()}
                   </PortfolioEntryText>
                 </MarketDetailsLineText>
               </MarketDetailsLine>

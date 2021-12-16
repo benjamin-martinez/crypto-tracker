@@ -6,9 +6,9 @@ const LoadingTableRow = (props) => {
   return (
     <Wrapper>
       <tr>
-        {loaders.map(() => (
-          <td>
-            <InnerWrapper />
+        {loaders.map((index) => (
+          <td key={index}>
+            <InnerWrapper  />
           </td>
         ))}
       </tr>

@@ -92,7 +92,7 @@ const CoinTable = (props) => {
         </HeaderRow>
         {!isLoading ? props.coins.map((coin) => (
           <TableRow key={coin.id} coin={coin} />
-        )) : loaders.map(() => <LoadingTableRow />)}
+        )) : loaders.map((index) => <LoadingTableRow key={index} />)}
       </Wrapper>
     </OutsideWrapper>
   );

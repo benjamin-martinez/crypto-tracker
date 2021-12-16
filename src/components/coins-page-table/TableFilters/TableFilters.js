@@ -95,6 +95,7 @@ const TableFilters = () => {
         <Categories>
           {categories.map((category) => (
             <CatWrapper
+              key={category.categoryId}
               selected={category.categoryId === activeCategory.categoryId}
               onClick={() => handleCategoryClick(category)}
             >
