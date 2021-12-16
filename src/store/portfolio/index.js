@@ -20,7 +20,6 @@ const initialState = {
         }
     ]
 }
-
 export const LOAD_ASSET_SEARCH_SUCCESS = "LOAD_ASSET_SEARCH_SUCCESS"
 export const LOAD_ASSET_SEARCH_PENDING = "LOAD_ASSET_SEARCH_PENDING"
 export const LOAD_ASSET_SEARCH_ERROR = "LOAD_ASSET_SEARCH_ERROR"
