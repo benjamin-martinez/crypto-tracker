@@ -25,7 +25,7 @@ const initialState = {
         name: "Ethereum",
         symbol: "eth",
         large:
-          "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
+          "https://assets.coingecko.com/coins/images/279/large/ethereum.png?1595348880",
       },
       amount: 12,
       datePurchased: "12-12-2018",

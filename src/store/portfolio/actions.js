@@ -88,7 +88,7 @@ export const loadSavedCoins =
     let loadedCoins = state.portfolio.assets
     if (loadedCoins) {
       loadedCoins = await Promise.all(
-        state.portfolio.assets.map(async (asset) => {
+        [...state.portfolio.assets].map(async (asset) => {
           try {
             const date = asset.datePurchased;
             const { data } = await axios(

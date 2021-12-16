@@ -14,7 +14,7 @@ import { getActiveCurrency } from "store/currencies";
 const Portfolio = () => {
   const dispatch = useDispatch();
   const [isModalActive, setIsModalActive] = useState(false);
-  const assets = useSelector((state) => state.portfolio.assets);
+  const { assets, isLoadingSavedAssets } = useSelector((state) => state.portfolio);
   const activeCurrency = useSelector(getActiveCurrency);
 
   const handleAddAssetClick = () => {
@@ -45,14 +45,13 @@ const Portfolio = () => {
 
   // useEffect(() => {
   //   dispatch(loadSavedCoins(activeCurrency))
-  // }, [assets])
+  // }, [isLoadingSavedAssets])
 
   useEffect(() => {
     dispatch(loadSavedCoins(activeCurrency));
     console.log(assets)
   }, []);
 
-  console.log(assets)
   return (
     <Wrapper>
       <ContentWrapper>
