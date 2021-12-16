@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.tbody`
     text-align: left;
-    height: 89px;
+    height: 72px;
     border-width: 1px;
     border-color: red;
     border-style: solid;

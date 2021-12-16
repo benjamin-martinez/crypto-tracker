@@ -42,7 +42,7 @@ const ChartWrapper = (props) => {
   }, []);
 
   return !props.hasError ? (
-    <Wrapper>
+    <Wrapper visible={props.visible} responsive={props.responsive}>
       <TextWrapper>
         <ChartSubText>
           {props.activeChartOption.symbol.toUpperCase()}{" "}

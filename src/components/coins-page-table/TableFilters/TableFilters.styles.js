@@ -8,7 +8,9 @@ export const Wrapper = styled.div`
 
 export const ContentWrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  gap:16px;
   justify-content: space-between;
   border-bottom: 1px solid ${(props) => props.theme.color};
 `;

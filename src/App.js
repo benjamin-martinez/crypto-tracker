@@ -9,7 +9,8 @@ import {
 import { Coins, Portfolio, Coin } from "pages";
 import { GlobalStyle } from "styles/GlobalStyle";
 import { themes } from "styles/colors";
-import Header from "components/header/Header/Header";
+import { Header } from "components";
+import { Footer } from "components/footer";
 
 function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
@@ -33,6 +34,7 @@ function App() {
               render={() => <Redirect to="/coins" component={Coins} />}
             />
           </Switch>
+          <Footer />
         </Router>
       </div>
     </ThemeProvider>

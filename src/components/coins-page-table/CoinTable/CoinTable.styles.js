@@ -7,8 +7,19 @@ export const OutsideWrapper = styled.div`
 
 export const Wrapper = styled.table`
     color: ${props => props.theme.color};
-    width: 1712px;
-    padding: 21px 21px 21px 21px;
+    position: relative;
+    padding: 17px 17px 17px 17px;
+    // width: 1380px;
+    display: block;
+    max-width: -moz-fit-content;
+    max-width: fit-content;
+    margin: 0 auto;
+    overflow-x: auto;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y:hidden;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
 `;
 
 export const HeaderRow = styled.thead`

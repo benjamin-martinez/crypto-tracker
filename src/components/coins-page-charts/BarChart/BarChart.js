@@ -76,7 +76,7 @@ const BarChart = (props) => {
   };
   return (
     <Wrapper>
-      <Bar data={chartData} options={options} width={650} height={275} />
+      <Bar data={chartData} options={options} width={520} height={220} />
     </Wrapper>
   );
 };

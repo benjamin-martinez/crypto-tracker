@@ -74,7 +74,7 @@ const BackgroundChart = (props) => {
       },
     },
   };
-  return (<Wrapper><Line data={chartData} options={options} width={1900} height={275} /></Wrapper>);
+  return (<Wrapper><Line data={chartData} options={options} width={1520} height={220} /></Wrapper>);
 };
 
 export default BackgroundChart;

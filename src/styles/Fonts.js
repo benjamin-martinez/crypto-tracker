@@ -7,11 +7,11 @@ export const NavLinkText = styled.h2`
 `;
 
 export const NavText = styled.p`
-  font-size: 17px;
+  font-size: 14px;
   font-weight: bold;
   line-height: 0px;
 
-  @media (max-width: 1250px) {
+  @media (max-width: 900px) {
     font-size: 11px;
     font-weight: 400;
   }
@@ -23,16 +23,16 @@ export const SectionHeading = styled.h2`
   line-height: 120%;
 `;
 
-export const ChartSubText = styled.p`
+export const ChartSubText = styled.p  `
   font-size: 22px;
   font-weight: regular;
-  line-height: 0;
+  line-height: 0%;
 `;
 
 export const ChartHeaderText = styled.h1`
-  font-size: 44px;
+  font-size: 36px;
   font-weight: semi-bold;
-  line-height: 0px;
+  line-height: 10%;
 `;
 
 export const ChartCategoryText = styled.p`
@@ -48,7 +48,7 @@ export const ChartDurationText = styled.p`
 `;
 
 export const CoinTableTitle = styled.p`
-  font-size: 19px;
+  font-size: 15px;
   font-weight: semi-bold;
   :hover {
     cursor: pointer;
@@ -56,7 +56,7 @@ export const CoinTableTitle = styled.p`
 `;
 
 export const CoinTableRowText = styled.p`
-  font-size: 19px;
+  font-size: 15px;
   font-weight: regular;
   line-height: 0px;
 `;
@@ -104,12 +104,12 @@ export const ExternalLinkText = styled.a`
 `;
 
 export const SearchResultsText = styled.p`
-  font-size: 17px;
+  font-size: 14px;
   line-height: 0%;
 `;
 
 export const SearchResultsSubText = styled.p`
-  font-size: 13px;
+  font-size: 11px;
   line-height: 0%;
 `;
 
