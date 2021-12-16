@@ -99,9 +99,9 @@ export const ModalButton = styled.div`
   justify-content: center;
   align-items: center;
   background: ${(props) =>
-    props.white === true ? "white" : props.theme.money.green};
+    props.white ? "white" : props.theme.money.green};
   color: ${(props) =>
-    props.white === true ? props.theme.money.green : "white"};
+    props.white ? props.theme.money.green : "white"};
   :hover {
     cursor: pointer;
   }

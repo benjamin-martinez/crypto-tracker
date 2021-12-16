@@ -19,6 +19,7 @@ import {
   addDecimalsAndShorten,
   addCommasNoDec,
   formatPercentage,
+  camelizeKeys,
 } from "utils";
 import {
   Wrapper,
@@ -58,6 +59,7 @@ import {
 const CoinSummary = (props) => {
   const { name: currencyName, symbol: currencySymbol } =
     useSelector(getActiveCurrency);
+
   const {
     image: coinImage,
     name: coinName,
@@ -65,6 +67,7 @@ const CoinSummary = (props) => {
     links: coinLinks,
     market_data: coinMarketData,
   } = props.coin;
+  
   const {
     current_price: currentPrice,
     price_change_percentage_24h: priceChangePercentage24hr,
