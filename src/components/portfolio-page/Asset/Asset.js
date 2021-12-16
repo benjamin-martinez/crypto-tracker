@@ -17,7 +17,7 @@ import {
   SubSectionContent,
   SubSectionSpan,
   PriceText,
-  PriceChangeWrapper
+  PriceChangeWrapper,
 } from "./Asset.styles";
 
 const Asset = (props) => {
