@@ -49,12 +49,14 @@ export const selectAmount = (amount) => (dispatch, getState) => {
 
 export const addAsset = (asset) => (dispatch, getState) => {
   const state = getState();
+  const activeCurrency = state.currencies.data.find((el) => el.isActive);
   const assets = state.portfolio.assets;
-  const newAssets = [...assets, asset]
+  const newAssets = [...assets, asset];
   dispatch({
     type: ADD_PORTFOLIO_ASSET,
     payload: newAssets,
   });
+  loadSavedCoins(activeCurrency.name);
 };
 
 export const removeAsset = (asset) => (dispatch, getState) => {
@@ -83,9 +85,34 @@ export const clearSearchResults = () => (dispatch, getState) => {
 export const loadSavedCoins =
   (activeCurrency) => async (dispatch, getState) => {
     const state = getState();
-    console.log(state.portfolio)
+
+    const ids = state.portfolio.assets.map((asset) => asset.data.id);
+    const idStrings = ids.toString().replace(",", "%2C");
+    console.log(idStrings);
+
+    let loadedCoins = state.portfolio.assets;
+
+    try {
+      const { data } = await axios(
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${activeCurrency.name}&ids=${idStrings}&order=market_cap_desc&per_page=100&page=1&sparkline=false`
+      );
+
+      loadedCoins = loadedCoins.map(coin => {
+        const currentMarketData = data.find(el => el.id === coin.data.id)
+        return {
+          ...coin,
+          currentMarketData
+        }
+      })
+
+      console.log(loadedCoins);
+    } catch (err) {
+      console.log(err);
+    }
+
+    
+
     dispatch({ type: LOAD_SAVED_ASSETS_PENDING });
-    let loadedCoins = state.portfolio.assets
     if (loadedCoins) {
       loadedCoins = await Promise.all(
         [...state.portfolio.assets].map(async (asset) => {

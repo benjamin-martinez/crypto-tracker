@@ -21,6 +21,7 @@ import {
 } from "./Asset.styles";
 
 const Asset = (props) => {
+  console.log(props.asset)
   return (
     props.asset && <Wrapper>
       <IdOuterWrapper>
