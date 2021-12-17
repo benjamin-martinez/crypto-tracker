@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
   padding-left: 21px;
   padding-right: 21px;
   padding-top: 21px;
+  width: 100%;
 `;
 
 export const ContentWrapper = styled.div`

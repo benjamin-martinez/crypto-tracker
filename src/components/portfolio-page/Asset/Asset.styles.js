@@ -7,8 +7,8 @@ export const Wrapper = styled.div`
 `;
 
 export const IdOuterWrapper = styled.div`
-    height: 295px;
-    width: 258px;
+    height: 236px;
+    width: 206px;
     background: ${props => props.theme.card.background};
     border-radius: 10px;
     display: grid;
@@ -23,13 +23,13 @@ export const IdInnerWrapper = styled.div`
 `;
 
 export const CoinIcon = styled.img`
-    height: 44px;
-    width: 44px;
+    height: 35px;
+    width: 35px;
 `;
 
 export const CoinImageWrapper = styled.div`
-    height: 104px;
-    width: 104px;
+    height: 86px;
+    width: 86px;
     background: ${props => props.theme.background};
     border-radius: 10px;
     display: grid;
@@ -74,8 +74,8 @@ export const SubSectionContent = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 1430px;
-    height: 100px;
+    width: 1144px;
+    height: 80px;
 `;
 
 export const SubSectionSpan = styled.span`
@@ -86,7 +86,7 @@ export const SubSectionSpan = styled.span`
 
 export const PriceText = styled.p`
     color: ${props => props.theme.money.green};
-    font-size: 19px;
+    font-size: 14px;
 `;
 
 export const PriceChangeWrapper = styled.span`

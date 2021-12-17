@@ -8,6 +8,8 @@ export const Wrapper = styled.tbody`
     border-style: solid;
     td {
         line-height: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 `;
 

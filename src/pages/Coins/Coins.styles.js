@@ -15,6 +15,10 @@ export const ChartsWrapper = styled.div`
   grid-auto-flow: column;
   align-items: center;
   gap: 45px;
+
+  @media (max-width: 900px) {
+    gap:20px;
+  }
 `;
 
 export const SectionWrapper = styled.div`

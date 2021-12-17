@@ -128,7 +128,7 @@ const Coins = () => {
             </HeadingDropdown>
           </HeadingDiv>
           <ChartsWrapper responsive={!responsive}>
-            {responsive && <LeftArrow onClick={handleLeftClick} />}
+            <LeftArrow onClick={handleLeftClick} />
             <ChartWrapper
               chartType="price"
               activeChartOption={activeChartOption}
@@ -151,7 +151,7 @@ const Coins = () => {
               responsive={responsive}
               visible={isVolumeVisible}
             />
-            {responsive && <RightArrow onClick={handleRightClick} />}
+            <RightArrow onClick={handleRightClick} />
           </ChartsWrapper>
         </SectionWrapper>
         <SectionWrapper>

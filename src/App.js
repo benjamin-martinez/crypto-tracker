@@ -10,7 +10,7 @@ import { Coins, Portfolio, Coin } from "pages";
 import { GlobalStyle } from "styles/GlobalStyle";
 import { themes } from "styles/colors";
 import { Header } from "components";
-import { Footer } from "components/footer";
+import { Footer, MobileFooter } from "components/footer";
 
 function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
@@ -35,6 +35,7 @@ function App() {
             />
           </Switch>
           <Footer />
+          <MobileFooter />
         </Router>
       </div>
     </ThemeProvider>

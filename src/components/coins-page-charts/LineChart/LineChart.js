@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Line } from "react-chartjs-2";
+import { useWindowSize } from "hooks";
 import { Wrapper } from "./LineChart.styles";
 
 const LineChart = (props) => {
+  const { width: screenWidth } = useWindowSize()
+
   const getLabels = (arr) => {
     let labels = arr.map((arr) =>
       new Date(arr[0]).toLocaleString(undefined, {
@@ -81,7 +84,16 @@ const LineChart = (props) => {
       },
     },
   };
-  return <Wrapper><Line data={chartData} options={options} width={520} height={220} /></Wrapper>
+  
+  return (
+    <Wrapper>
+      {screenWidth > 900 ? (
+        <Line data={chartData} options={options} width={520} height={220} />
+      ) : (
+        <Line data={chartData} options={options} width={312} height={132} />
+      )}
+    </Wrapper>
+  );
 };
 
 export default LineChart;

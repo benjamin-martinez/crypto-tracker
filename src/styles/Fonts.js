@@ -74,7 +74,7 @@ export const SectionHeading2 = styled.h1`
 `;
 
 export const SubSectionHeading = styled.h1`
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
   line-height: 100%;
 `;

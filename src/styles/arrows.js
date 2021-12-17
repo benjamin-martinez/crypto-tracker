@@ -105,8 +105,12 @@ export const LeftArrow = styled.div`
   border-left: 10px solid transparent;
   border-right: 10px solid ${(props) => props.theme.color};
   border-top: 10px solid transparent;
+  display: none;
   :hover {
     cursor: pointer;
+  }
+  @media (max-width: 900px) {
+    display: block;
   }
 `;
 
@@ -117,7 +121,11 @@ export const RightArrow = styled.div`
   border-left: 10px solid ${(props) => props.theme.color};
   border-right: 10px solid transparent;
   border-top: 10px solid transparent;
+  display: none;
   :hover {
     cursor: pointer;
+  }
+  @media (max-width: 900px) {
+    display: block;
   }
 `;

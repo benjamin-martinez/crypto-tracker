@@ -35,9 +35,6 @@ const Asset = (props) => {
         <MarketDataWrapper>
           <SubSectionHeadingWrapper>
             <SubSectionHeading>Market Price:</SubSectionHeading>
-            <EditIconWrapper>
-              <EditIcon src="icons/pencil-edit.svg" />
-            </EditIconWrapper>
           </SubSectionHeadingWrapper>
           <SubSectionContent>
             <SubSectionSpan>
