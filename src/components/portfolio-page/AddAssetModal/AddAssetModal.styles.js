@@ -1,4 +1,22 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const fadeInBackground = keyframes`
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 50%;
+  }
+`;
+
+const fadeInForeground = keyframes`
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+`;
 
 export const BackgroundOuterWrapper = styled.div``;
 
@@ -11,6 +29,7 @@ export const BackgroundInnerWrapper = styled.div`
   top: 0px;
   left: 0px;
   z-index: 10;
+  animation: ${fadeInBackground} 1s ease-out;
 `;
 
 export const Wrapper = styled.div`
@@ -25,6 +44,8 @@ export const Wrapper = styled.div`
   border-radius: 10px;
   color: ${(props) => props.theme.color};
   z-index: 11;
+  animation-delay: 0.5s;
+  animation: ${fadeInForeground} 0.5s ease-out;
 `;
 
 export const ContentWrapper = styled.div`

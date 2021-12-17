@@ -4,6 +4,9 @@ export const Wrapper = styled.div`
     display: flex;
     gap: 24px;
     align-items: center;
+    @media (max-width: 900px) {
+        flex-direction: column;
+    }
 `;
 
 export const IdOuterWrapper = styled.div`
@@ -44,13 +47,16 @@ export const PriceDataWrapper = styled.div`
 
 export const MarketDataWrapper = styled.div`
     display: grid;
-    align-items: space-between;
+    align-items: space-between; 
 `;
 
 export const SubSectionHeadingWrapper = styled.div`
     display: flex;
     gap: 14px;
     align-items: center;
+    @media (max-width: 900px) {
+        flex-direction: column;
+    }
 `;
 
 export const EditIconWrapper = styled.div`
@@ -74,8 +80,15 @@ export const SubSectionContent = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-around;
-    width: 1144px;
-    height: 80px;
+    padding-right: 45px;
+    padding-left: 45px;
+    gap: 45px;
+    @media (max-width: 900px) {
+        flex-direction: column;
+        padding-right: 45px;
+        padding-left: 45px;
+        gap: 0px;
+    }
 `;
 
 export const SubSectionSpan = styled.span`

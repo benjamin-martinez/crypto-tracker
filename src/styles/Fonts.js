@@ -80,7 +80,7 @@ export const SubSectionHeading = styled.h1`
 `;
 
 export const PortfolioEntryTitle = styled.p`
-  font-size: 25px;
+  font-size: 20px;
   font-weight: semi-bold;
   line-height: 0px;
 `;
