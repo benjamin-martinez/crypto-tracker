@@ -46,6 +46,13 @@ export const Wrapper = styled.div`
   z-index: 11;
   animation-delay: 0.5s;
   animation: ${fadeInForeground} 0.5s ease-out;
+
+  @media (max-width: 900px) {
+    width: 400px;
+    height: auto;
+    top: 50px;
+    left: ${(props) => props.width / 2 - 400 / 2}px;
+  }
 `;
 
 export const ContentWrapper = styled.div`
@@ -63,6 +70,11 @@ export const ModalTitleWrapper = styled.div``;
 export const ModalContentWrapper = styled.div`
   display: flex;
   gap: 41px;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const ModalSelectorsWrapper = styled.div`
@@ -77,6 +89,9 @@ export const ModalSelectorWrapper = styled.div`
   background: ${(props) => props.theme.card.background};
   display: flex;
   align-items: center;
+  @media (max-width: 900px) {
+    width: 300px;
+  }
 `;
 
 export const SearchCoinInput = styled.input`
@@ -115,6 +130,9 @@ export const ModalButtonsWrapper = styled.div`
   gap: 10px;
   align-items: center;
   justify-content: center;
+  @media (max-width: 900px) {
+    margin-bottom: 40px;
+  }
 `;
 
 export const ExitButton = styled.img`
@@ -139,6 +157,10 @@ export const ModalButton = styled.div`
   color: ${(props) => (props.white ? props.theme.money.green : "white")};
   :hover {
     cursor: pointer;
+  }
+  @media (max-width: 900px) {
+    height: 36px;
+    width: 176px;
   }
 `;
 

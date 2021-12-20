@@ -36,8 +36,11 @@ export const GET_BAR_CHART_DATA_SUCCESS = "GET_BAR_CHART_DATA_SUCCESS";
 export const SET_LINE_LOADING = "SET_LINE_LOADING";
 export const SET_BAR_LOADING = "SET_BAR_LOADING";
 export const SET_ACTIVE_CHART_OPTION = "SET_ACTIVE_CHART_OPTION";
-export const SET_ACTIVE_VOLUME_CHART_DURATION = "SET_ACTIVE_VOLUME_CHART_DURATION"
-export const SET_ACTIVE_PRICE_CHART_DURATION = "SET_ACTIVE_PRICE_CHART_DURATION"
+export const SET_ACTIVE_VOLUME_CHART_DURATION =
+  "SET_ACTIVE_VOLUME_CHART_DURATION";
+export const SET_ACTIVE_PRICE_CHART_DURATION =
+  "SET_ACTIVE_PRICE_CHART_DURATION";
+export const SET_BOTH_CHART_DURATIONS = "SET_BOTH_CHART_DURATIONS";
 
 function chartsReducer(state = initialState, action) {
   switch (action.type) {
@@ -92,6 +95,12 @@ function chartsReducer(state = initialState, action) {
     case SET_ACTIVE_VOLUME_CHART_DURATION:
       return {
         ...state,
+        activeVolumeChartDuration: action.payload,
+      };
+    case SET_BOTH_CHART_DURATIONS:
+      return {
+        ...state,
+        activePriceChartDuration: action.payload,
         activeVolumeChartDuration: action.payload,
       };
     default:

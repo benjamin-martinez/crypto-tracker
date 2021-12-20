@@ -10,6 +10,7 @@ import {
   SET_ACTIVE_CHART_OPTION,
   SET_ACTIVE_PRICE_CHART_DURATION,
   SET_ACTIVE_VOLUME_CHART_DURATION,
+  SET_BOTH_CHART_DURATIONS
 } from "./index";
 
 export const getChartData =
@@ -76,3 +77,10 @@ export const setActivePriceChartDuration =
       payload: selection,
     });
   };
+
+  export const setBothChartDurations = (selection) => (dispatch, getState) => {
+    dispatch({
+      type: SET_BOTH_CHART_DURATIONS,
+      payload: selection
+    })
+  }

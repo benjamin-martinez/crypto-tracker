@@ -79,11 +79,11 @@ const BarChart = (props) => {
   };
   return (
     <Wrapper>
-      {screenWidth > 900 ? (
+      {screenWidth && screenWidth > 900 ? (
         <Bar data={chartData} options={options} width={520} height={220} />
-      ) : (
+      ) : screenWidth > 450 ?(
         <Bar data={chartData} options={options} width={312} height={132} />
-      )}
+      ): <Bar data={chartData} options={options} width={234} height={132} />}
     </Wrapper>
   );
 };

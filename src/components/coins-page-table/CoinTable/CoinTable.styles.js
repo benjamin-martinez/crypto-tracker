@@ -3,11 +3,26 @@ import styled from "styled-components";
 export const OutsideWrapper = styled.div`
   background: ${(props) => props.theme.card.background};
   border-radius: 10px;
+  display: block;
+  width: 100%;
+  @media (max-width: 900px) {
+    margin-top:25px;
+    width:740px;
+  }
+  @media (max-width: 750px) {
+    margin-top:25px;
+    width: 600px;
+  }
+  @media (max-width: 600px) {
+    margin-top:25px;
+    width: 375px;
+  }
 `;
 
 export const ScrollWrapper = styled.div`
+  width: 100%;
+  overflow-x: scroll;
   @media (max-width: 900px) {
-    overflow-x: scroll;
     width: 100%;
   }
 `;

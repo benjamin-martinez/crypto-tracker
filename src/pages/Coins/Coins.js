@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ChartWrapper } from "components/coins-page-charts";
+import { useWindowSize } from "hooks";
 import { SectionHeading } from "styles/Fonts";
 import {
   setActiveChartOption,
@@ -25,7 +26,7 @@ import { CoinTable } from "components/coins-page-table";
 import { LeftArrow, RightArrow, SmallDownNuetralArrow } from "styles/arrows";
 
 const Coins = () => {
-  const [responsive, setResponsive] = useState(false);
+  const { width: screenWidth } = useWindowSize()
   const dispatch = useDispatch();
   const activeCurrency = useSelector(getActiveCurrency);
   //Data fetching for Charts
@@ -127,7 +128,7 @@ const Coins = () => {
               )}
             </HeadingDropdown>
           </HeadingDiv>
-          <ChartsWrapper responsive={!responsive}>
+          <ChartsWrapper screenWidth={screenWidth}>
             <LeftArrow onClick={handleLeftClick} />
             <ChartWrapper
               chartType="price"
@@ -137,7 +138,7 @@ const Coins = () => {
               chartHistory={priceChartHistory}
               isLoading={priceChartIsLoading}
               hasError={hasError}
-              responsive={responsive}
+              screenWidth={screenWidth}
               visible={isPriceVisible}
             />
             <ChartWrapper
@@ -148,7 +149,7 @@ const Coins = () => {
               chartHistory={volumeChartHistory}
               isLoading={volumeChartIsLoading}
               hasError={hasError}
-              responsive={responsive}
+              screenWidth={screenWidth}
               visible={isVolumeVisible}
             />
             <RightArrow onClick={handleRightClick} />

@@ -87,11 +87,11 @@ const LineChart = (props) => {
   
   return (
     <Wrapper>
-      {screenWidth > 900 ? (
+      {screenWidth && screenWidth > 900 ? (
         <Line data={chartData} options={options} width={520} height={220} />
-      ) : (
+      ) : screenWidth > 450 ?(
         <Line data={chartData} options={options} width={312} height={132} />
-      )}
+      ): <Line data={chartData} options={options} width={234} height={132} />}
     </Wrapper>
   );
 };

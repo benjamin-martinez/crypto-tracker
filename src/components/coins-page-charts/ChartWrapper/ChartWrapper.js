@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getActiveCurrency } from "store/currencies";
+import { setBothChartDurations } from "store/charts/action";
 import {
   BarChart,
   DurationSelector,
   LineChart,
 } from "components/coins-page-charts";
+import { useWindowSize } from "hooks";
 import { addCommas, addDecimalsAndShorten } from "utils";
 import { ChartHeaderText, ChartSubText } from "styles/Fonts";
 import {
@@ -25,10 +27,12 @@ const ChartWrapper = (props) => {
   const [activePrice, setActivePrice] = useState("0.00");
   const [activeDate, setActiveDate] = useState("Nov 17, 2021");
   const durations = useSelector((state) => state.charts.durations);
+  const { width: screenWidth } = useWindowSize();
   const activeCurrency = useSelector(getActiveCurrency);
 
   function handleRDurationClick(duration) {
-    dispatch(props.setActiveChartDuration(duration));
+    if (screenWidth > 900) dispatch(props.setActiveChartDuration(duration));
+    else dispatch(setBothChartDurations(duration));
   }
 
   useEffect(() => {

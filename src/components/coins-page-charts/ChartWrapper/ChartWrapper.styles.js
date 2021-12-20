@@ -22,7 +22,6 @@ const fadeOutRight = keyframes`
 `;
 
 export const Wrapper = styled.div`
-  display: ${(props) => !props.visible && !props.responsive && "none"};
   justify-self: start;
   width: 602px;
   height: 359px;
@@ -32,7 +31,14 @@ export const Wrapper = styled.div`
   background: ${(props) => props.theme.card.background};
 
   @media (max-width: 900px) {
+    display: ${(props) => !props.visible && !props.responsive && "none"};
     width: 361px;
+    height: 215px;
+  }
+
+  @media (max-width: 450px) {
+    display: ${(props) => !props.visible && !props.responsive && "none"};
+    width: 270px;
     height: 215px;
   }
 `;

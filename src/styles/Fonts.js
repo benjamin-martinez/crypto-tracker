@@ -33,6 +33,9 @@ export const ChartHeaderText = styled.h1`
   font-size: 36px;
   font-weight: semi-bold;
   line-height: 10%;
+  @media (max-width: 900px) {
+    font-size: 28px;
+  }
 `;
 
 export const ChartCategoryText = styled.p`
@@ -45,6 +48,10 @@ export const ChartDurationText = styled.p`
   font-size: 13px;
   font-weight: bold;
   line-height: 0px;
+  @media (max-width: 900px) {
+    font-size: 12px;
+    font-weight:400;
+  }
 `;
 
 export const CoinTableTitle = styled.p`
