@@ -9,9 +9,12 @@ import {
   SELECT_DATE,
   CLEAR_SEARCH_RESULTS,
   SELECT_ASSET_FROM_RESULTS,
-  LOAD_SAVED_ASSETS_PENDING,
-  LOAD_SAVED_ASSETS_ERROR,
-  LOAD_SAVED_ASSETS_SUCCESS,
+  LOAD_ASSETS_HISTORICAL_DATA_ERROR,
+  LOAD_ASSETS_HISTORICAL_DATA_PENDING,
+  LOAD_ASSETS_HISTORICAL_DATA_SUCCESS,
+  LOAD_ASSETS_CURRENT_DATA_ERROR,
+  LOAD_ASSETS_CURRENT_DATA_PENDING,
+  LOAD_ASSETS_CURRENT_DATA_SUCCESS,
 } from "./index";
 
 export const getSearchResults = (searchTerm) => async (dispatch, getState) => {
@@ -47,7 +50,7 @@ export const selectAmount = (amount) => (dispatch, getState) => {
   });
 };
 
-export const addAsset = (asset) => (dispatch, getState) => {
+export const addAsset = (asset) => async (dispatch, getState) => {
   const state = getState();
   const activeCurrency = state.currencies.data.find((el) => el.isActive);
   const assets = state.portfolio.assets;
@@ -56,7 +59,8 @@ export const addAsset = (asset) => (dispatch, getState) => {
     type: ADD_PORTFOLIO_ASSET,
     payload: newAssets,
   });
-  loadSavedCoins(activeCurrency.name);
+  await loadHistoricalCoinData(activeCurrency)
+  await loadCurrentCoinMarketData(activeCurrency)
 };
 
 export const removeAsset = (asset) => (dispatch, getState) => {
@@ -82,58 +86,67 @@ export const clearSearchResults = () => (dispatch, getState) => {
   });
 };
 
-export const loadSavedCoins =
+//change name to loadHistoricalCoinData
+export const loadHistoricalCoinData =
   (activeCurrency) => async (dispatch, getState) => {
     const state = getState();
+    const savedCoins = state.portfolio.assets;
+    const ids = savedCoins.map((asset) => asset.data.id);
+    const idStrings = ids.toString().replaceAll(",", "%2C");
 
-    const ids = state.portfolio.assets.map((asset) => asset.data.id);
-    const idStrings = ids.toString().replace(",", "%2C");
-    console.log(idStrings);
-
-    let loadedCoins = state.portfolio.assets;
-
+    let loadedCoins = savedCoins;
+    dispatch({ type: LOAD_ASSETS_HISTORICAL_DATA_PENDING });
     try {
       const { data } = await axios(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${activeCurrency.name}&ids=${idStrings}&order=market_cap_desc&per_page=100&page=1&sparkline=false`
       );
-
-      loadedCoins = loadedCoins.map(coin => {
-        const currentMarketData = data.find(el => el.id === coin.data.id)
+      loadedCoins = loadedCoins.map((coin) => {
+        const currentMarketData = data.find((el) => el.id === coin.data.id);
         return {
           ...coin,
-          currentMarketData
-        }
-      })
-
-      console.log(loadedCoins);
+          currentMarketData,
+        };
+      });
     } catch (err) {
       console.log(err);
-    }
-
-    
-
-    dispatch({ type: LOAD_SAVED_ASSETS_PENDING });
-    if (loadedCoins) {
-      loadedCoins = await Promise.all(
-        [...state.portfolio.assets].map(async (asset) => {
-          try {
-            const date = asset.datePurchased;
-            const { data } = await axios(
-              `https://api.coingecko.com/api/v3/coins/${asset.data.id}/market_chart?vs_currency=${activeCurrency.name}&days=23`
-            );
-            return {
-              ...asset,
-              marketData: data,
-            };
-          } catch (err) {
-            console.log(err);
-            return asset;
-          }
-        })
-      );
       dispatch({
-        type: LOAD_SAVED_ASSETS_SUCCESS,
+        type: LOAD_ASSETS_HISTORICAL_DATA_ERROR,
         payload: loadedCoins,
       });
     }
+
+    dispatch({
+      type: LOAD_ASSETS_HISTORICAL_DATA_SUCCESS,
+      payload: loadedCoins,
+    });
+  };
+
+//load current coin market data
+export const loadCurrentCoinMarketData =
+  (activeCurrency) => async (dispatch, getState) => {
+    const state = getState();
+    let loadedCoins = state.portfolio.assets;
+
+    dispatch({ type: LOAD_ASSETS_CURRENT_DATA_PENDING });
+    loadedCoins = await Promise.all(
+      [...state.portfolio.assets].map(async (asset) => {
+        try {
+          const date = asset.datePurchased;
+          const { data } = await axios(
+            `https://api.coingecko.com/api/v3/coins/${asset.data.id}/market_chart?vs_currency=${activeCurrency.name}&days=23`
+          );
+          return {
+            ...asset,
+            historicalMarketData: data,
+          };
+        } catch (err) {
+          console.log(err);
+          return asset;
+        }
+      })
+    );
+    dispatch({
+      type: LOAD_ASSETS_CURRENT_DATA_SUCCESS,
+      payload: loadedCoins,
+    });
   };

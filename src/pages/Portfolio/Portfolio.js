@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { loadSavedCoins } from "store/portfolio/actions";
+import { loadHistoricalCoinData, loadCurrentCoinMarketData } from "store/portfolio/actions";
 import { AddAssetModal, Asset } from "components/portfolio-page";
 import { ButtonText, SectionHeading2 } from "styles/Fonts";
 import {
@@ -48,7 +48,8 @@ const Portfolio = () => {
   // }, [isLoadingSavedAssets])
 
   useEffect(() => {
-    dispatch(loadSavedCoins(activeCurrency));
+    dispatch(loadHistoricalCoinData(activeCurrency));
+    dispatch(loadCurrentCoinMarketData(activeCurrency));
     console.log(assets)
   }, []);
 

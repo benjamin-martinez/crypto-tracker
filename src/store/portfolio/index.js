@@ -5,8 +5,10 @@ const initialState = {
   addAssetSelection: {},
   selectionDate: "",
   selectionAmount: 0,
-  isLoadingSavedAssets: false,
-  savedAssetsHasError: false,
+  isLoadingHistoricalData: false,
+  historicalDataHasError: false,
+  isLoadingCurrentData: false,
+  currentDataHasError: false,
   assets: [
     {
       data: {
@@ -42,9 +44,12 @@ export const CLEAR_SEARCH_RESULTS = "CLEAR_SEARCH_RESULTS";
 export const SELECT_ASSET_FROM_RESULTS = "SELECT_ASSET_FROM_RESULTS";
 export const SELECT_DATE = "SELECT_DATE";
 export const SELECT_AMOUNT = "SELECT_AMOUNT";
-export const LOAD_SAVED_ASSETS_ERROR = "LOAD_SAVED_ASSETS_ERROR";
-export const LOAD_SAVED_ASSETS_PENDING = "LOAD_SAVED_ASSETS_PENDING";
-export const LOAD_SAVED_ASSETS_SUCCESS = "LOAD_SAVED_ASSETS_SUCCESS";
+export const LOAD_ASSETS_HISTORICAL_DATA_ERROR = "LOAD_ASSETS_HISTORICAL_DATA_ERROR";
+export const LOAD_ASSETS_HISTORICAL_DATA_PENDING = "LOAD_ASSETS_HISTORICAL_DATA_PENDING";
+export const LOAD_ASSETS_HISTORICAL_DATA_SUCCESS = "LOAD_ASSETS_HISTORICAL_DATA_SUCCESS";
+export const LOAD_ASSETS_CURRENT_DATA_ERROR = "LOAD_ASSETS_CURRENT_DATA_ERROR";
+export const LOAD_ASSETS_CURRENT_DATA_PENDING = "LOAD_ASSETS_CURRENT_DATA_PENDING";
+export const LOAD_ASSETS_CURRENT_DATA_SUCCESS = "LOAD_ASSETS_CURRENT_DATA_SUCCESS";
 
 function portfolioReducer(state = initialState, action) {
   switch (action.type) {
@@ -99,26 +104,47 @@ function portfolioReducer(state = initialState, action) {
         ...state,
         selectionDate: action.payload,
       };
-    case LOAD_SAVED_ASSETS_ERROR:
+    case LOAD_ASSETS_HISTORICAL_DATA_ERROR:
       return {
         ...state,
         assets: action.payload,
-        isLoadingSavedAssets: false,
-        savedAssetsHasError: true,
+        isLoadingHistoricalData: false,
+        historicalDataHasError: true,
       };
-    case LOAD_SAVED_ASSETS_PENDING:
+    case LOAD_ASSETS_HISTORICAL_DATA_PENDING:
       return {
         ...state,
         assets: action.payload,
-        isLoadingSavedAssets: true,
-        savedAssetsHasError: false,
+        isLoadingHistoricalData: true,
+        historicalDataHasError: false,
       };
-    case LOAD_SAVED_ASSETS_SUCCESS:
+    case LOAD_ASSETS_HISTORICAL_DATA_SUCCESS:
       return {
         ...state,
         assets: action.payload,
-        isLoadingSavedAssets: false,
-        savedAssetsHasError: false,
+        isLoadingHistoricalData: false,
+        historicalDataHasError: false,
+      };
+      case LOAD_ASSETS_CURRENT_DATA_ERROR:
+      return {
+        ...state,
+        assets: action.payload,
+        isLoadingCurrentData: false,
+        currentDataHasError: true,
+      };
+    case LOAD_ASSETS_CURRENT_DATA_PENDING:
+      return {
+        ...state,
+        assets: action.payload,
+        isLoadingCurrentData: true,
+        currentDataHasError: false,
+      };
+    case LOAD_ASSETS_CURRENT_DATA_SUCCESS:
+      return {
+        ...state,
+        assets: action.payload,
+        isLoadingCurrentData: false,
+        currentDataHasError: false,
       };
     default:
       return state;
