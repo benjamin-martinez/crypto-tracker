@@ -10,6 +10,9 @@ export const Wrapper = styled.tbody`
         line-height: 100%;
         overflow: hidden;
         text-overflow: ellipsis;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 `;
 

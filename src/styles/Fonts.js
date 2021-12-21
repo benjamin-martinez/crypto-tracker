@@ -30,7 +30,7 @@ export const ChartSubText = styled.p  `
 `;
 
 export const ChartHeaderText = styled.h1`
-  font-size: 36px;
+  font-size: 30px;
   font-weight: semi-bold;
   line-height: 10%;
   @media (max-width: 900px) {
@@ -93,19 +93,19 @@ export const PortfolioEntryTitle = styled.p`
 `;
 
 export const PortfolioEntryLabelText = styled.p`
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
   line-height: 0px;
 `;
 
 export const PortfolioEntryText = styled.p`
-  font-size: 18px;
+  font-size: 14px;
   font-weight: regular;
   line-height: 0px;
 `;
 
 export const ExternalLinkText = styled.a`
-  font-size: 15px;
+  font-size: 13px;
   font-weight: regular;
   line-height: 0%;
 `;
