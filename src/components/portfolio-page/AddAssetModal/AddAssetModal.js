@@ -46,10 +46,7 @@ const AddAssetModal = (props) => {
   };
 
   const handleSaveClick = () => {
-
-    //dispatch save
     props.handleExitClick();
-    console.log(asset)
     dispatch(addAsset({
       data: asset,
       amount: amountInput,
