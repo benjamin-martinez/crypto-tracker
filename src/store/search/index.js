@@ -8,7 +8,7 @@ const initialState = {
 export const GET_SEARCH_COINS_SUCCESS = "GET_SEARCH_COINS_SUCCESS";
 export const GET_SEARCH_COINS_PENDING = "GET_SEARCH_COINS_PENDING";
 export const GET_SEARCH_COINS_ERROR = "GET_SEARCH_COINS_ERROR";
-export const CLEAR_SEARCH_RESULTS = "CLEAR_SEARCH_RESULTS"
+export const CLEAR_SEARCH_RESULTS = "CLEAR_SEARCH_RESULTS";
 
 function searchReducer(state = initialState, action) {
   switch (action.type) {
@@ -28,7 +28,6 @@ function searchReducer(state = initialState, action) {
         error: null,
       };
     case GET_SEARCH_COINS_SUCCESS:
-        console.log("hit")
       return {
         ...state,
         data: action.payload,
@@ -36,10 +35,10 @@ function searchReducer(state = initialState, action) {
         hasError: false,
       };
     case CLEAR_SEARCH_RESULTS:
-        return {
-            ...state,
-            data: action.payload
-        }
+      return {
+        ...state,
+        data: action.payload,
+      };
     default:
       return state;
   }

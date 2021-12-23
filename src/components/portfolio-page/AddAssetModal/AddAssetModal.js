@@ -1,10 +1,15 @@
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addAsset } from "store/portfolio/actions";
+import { SearchAsset } from "components/portfolio-page";
 import {
   ModalTitleText,
   CoinTableRowText,
   ModalButtonText,
 } from "styles/Fonts";
 import {
-  BackgroundWrapper,
+  BackgroundOuterWrapper,
+  BackgroundInnerWrapper,
   Wrapper,
   ContentWrapper,
   IdInnerWrapper,
@@ -23,8 +28,39 @@ import {
 } from "./AddAssetModal.styles";
 
 const AddAssetModal = (props) => {
+  const dispatch = useDispatch();
+  const [amountInput, setAmountInput] = useState("");
+  const [dateInput, setDateInput] = useState("2021-01-01");
+  const asset = useSelector(state => state.portfolio.addAssetSelection)
+
+  const selectedCoin = useSelector(
+    (state) => state.portfolio.addAssetSelection
+  );
+
+  const handleAmountChange = (e) => {
+    setAmountInput(e.target.value);
+  };
+
+  const handleDateChange = (e) => {
+    setDateInput(e.target.value);
+  };
+
+  const handleSaveClick = () => {
+    props.handleExitClick();
+    dispatch(addAsset({
+      data: asset,
+      amount: amountInput,
+      datePurchased: dateInput
+    }))
+  };
+
+  const handleExitClick = () => {
+    props.handleExitClick();
+  };
+
   return (
-    <BackgroundWrapper>
+    <BackgroundOuterWrapper>
+      <BackgroundInnerWrapper></BackgroundInnerWrapper>
       <Wrapper ref={props.innerRef}>
         <ContentWrapper>
           <ModalTitleWrapper>
@@ -34,35 +70,47 @@ const AddAssetModal = (props) => {
             <IdOuterWrapper>
               <IdInnerWrapper>
                 <CoinImageWrapper>
-                  <CoinIcon src="icons/bitcoin.svg" />
+                  <CoinIcon src={selectedCoin.large} />
                 </CoinImageWrapper>
-                <CoinTableRowText>Bitcoin (BTC)</CoinTableRowText>
+                {selectedCoin.name && (
+                  <CoinTableRowText>
+                    {selectedCoin.name}&nbsp;({selectedCoin.symbol})
+                  </CoinTableRowText>
+                )}
               </IdInnerWrapper>
             </IdOuterWrapper>
             <ModalSelectorsWrapper>
               <ModalSelectorWrapper>
-                <SearchCoinInput placeholder="Search Coins..." />
+                <SearchAsset />
               </ModalSelectorWrapper>
               <ModalSelectorWrapper>
-                <SearchCoinInput placeholder="Amount Purchased" />
+                <SearchCoinInput
+                  placeholder="Amount Purchased"
+                  onChange={handleAmountChange}
+                  value={amountInput}
+                />
               </ModalSelectorWrapper>
               <ModalSelectorWrapper>
-                <DateSelector type="date" />
+                <DateSelector
+                  type="date"
+                  onChange={handleDateChange}
+                  value={dateInput}
+                />
               </ModalSelectorWrapper>
             </ModalSelectorsWrapper>
           </ModalContentWrapper>
           <ModalButtonsWrapper>
-            <ModalButton white={true}>
+            <ModalButton white={true} onClick={handleExitClick}>
               <ModalButtonText>Close</ModalButtonText>
             </ModalButton>
-            <ModalButton>
+            <ModalButton onClick={handleSaveClick}>
               <ModalButtonText>Save and Continue</ModalButtonText>
             </ModalButton>
           </ModalButtonsWrapper>
-          <ExitButton scr="icons/exit.svg" onClick={props.handleExitClick} />
+          <ExitButton scr="icons/exit.svg" onClick={handleExitClick} />
         </ContentWrapper>
       </Wrapper>
-    </BackgroundWrapper>
+    </BackgroundOuterWrapper>
   );
 };
 

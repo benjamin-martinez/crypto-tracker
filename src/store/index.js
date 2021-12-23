@@ -6,6 +6,7 @@ import currenciesReducer from "./currencies";
 import portfolioReducer from "./portfolio";
 import searchReducer from "./search";
 import chartsReducer from "./charts";
+import infographicReducer from "./infographic";
 
 const reducers = combineReducers({
     currencies: currenciesReducer,
@@ -13,7 +14,8 @@ const reducers = combineReducers({
     coin: coinReducer,
     portfolio: portfolioReducer,
     search: searchReducer,
-    charts: chartsReducer
+    charts: chartsReducer,
+    infographic: infographicReducer
 })
 
 export const store = createStore(reducers, applyMiddleware(thunk))

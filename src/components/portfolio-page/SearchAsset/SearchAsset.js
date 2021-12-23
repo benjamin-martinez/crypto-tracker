@@ -1,23 +1,22 @@
 import React, { useEffect, useState, useRef } from "react";
 import { debounce } from "lodash";
 import { useSelector, useDispatch } from "react-redux";
-import { clearSearchResults, getSearchResults } from "store/search/actions";
-import { SearchResults } from "components";
+import { clearSearchResults, getSearchResults } from "store/portfolio/actions";
+import { SearchResults } from "components/portfolio-page";
 import { SearchResultsText } from "styles/Fonts";
 import {
   Wrapper,
-  Icon,
   Input,
   ErrorMessage,
   ErrorMessageWrapper,
-} from "./Searchbar.styles";
+} from "./SearchAsset.styles";
 
-const Searchbar = () => {
+const SearchAsset = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [showResults, setShowResults] = useState(false);
-  const results = useSelector((state) => state.search.data);
-  const isLoading = useSelector((state) => state.search.isLoading);
-  const hasError = useSelector((state) => state.search.hasError);
+  const results = useSelector((state) => state.portfolio.portfolioSearchData);
+  const isLoading = useSelector((state) => state.portfolio.isLoading);
+  const hasError = useSelector((state) => state.portfolio.hasError);
   const dispatch = useDispatch();
 
   const wrapperRef = useRef();
@@ -52,20 +51,23 @@ const Searchbar = () => {
     }
   };
 
-  const handleLinkClick = () => {
-    setSearchTerm("");
-    setShowResults(false);
-  };
+  const handleResultClick = (result) => {
+    setSearchTerm(result.name)
+    setShowResults(false)
+  }
 
   useEffect(() => {
-    if (results && results.length > 0 && searchTerm.length > 2) {
+    if (results && results.length > 0) {
       setShowResults(true);
     }
   }, [results]);
 
+  useEffect(() => {
+    setShowResults(false);
+  }, [])
+
   return (
-    <Wrapper ref={wrapperRef} onSubmit={(e) => e.preventDefault()} >
-      <Icon src="icons/search.svg" />
+    <Wrapper ref={wrapperRef} onSubmit={(e) => e.preventDefault()}>
       <Input
         type="text"
         placeholder="Search..."
@@ -77,7 +79,7 @@ const Searchbar = () => {
           <SearchResults
             showResults={showResults}
             results={results}
-            handleLinkClick={handleLinkClick}
+            handleResultClick={handleResultClick}
           />
         ) : (
           <ErrorMessageWrapper>
@@ -102,4 +104,4 @@ const Searchbar = () => {
   );
 };
 
-export default Searchbar;
+export default SearchAsset;
