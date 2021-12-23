@@ -2,9 +2,10 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 import { useWindowSize } from "hooks";
 import { Wrapper } from "./BarChart.styles";
+import { getHeight, getWidth } from "utils";
 
 const BarChart = (props) => {
-  const { width: screenWidth } = useWindowSize()
+  const { width: screenWidth } = useWindowSize();
 
   const getLabels = (arr) => {
     let labels = arr.map((arr) =>
@@ -78,12 +79,8 @@ const BarChart = (props) => {
     },
   };
   return (
-    <Wrapper>
-      {screenWidth && screenWidth > 900 ? (
-        <Bar data={chartData} options={options} width={520} height={220} />
-      ) : screenWidth > 450 ?(
-        <Bar data={chartData} options={options} width={312} height={132} />
-      ): <Bar data={chartData} options={options} width={234} height={132} />}
+    <Wrapper width={getWidth(screenWidth)} height={getHeight(screenWidth)}>
+      <Bar data={chartData} options={options}  />
     </Wrapper>
   );
 };

@@ -22,9 +22,11 @@ import {
   THLast7d,
 } from "./CoinTable.styles";
 import { LoadingTableRow } from "components/loading-animations";
+import { useWindowSize } from "hooks";
 
 const CoinTable = (props) => {
   const isLoading = useSelector((state) => state.coins.isLoading);
+  const { width: screenWidth } = useWindowSize();
   const loaders = Array.apply(null, Array(20)).map(function () {});
   const activeCurrency = useSelector(getActiveCurrency);
   const activeCategory = useSelector((state) => state.coins.activeCategory);
@@ -59,7 +61,7 @@ const CoinTable = (props) => {
   }, [activeResultsPerPage]);
 
   return (
-    <OutsideWrapper>
+    <OutsideWrapper width={screenWidth}>
       <TableFilters />
       <ScrollWrapper>
         <Wrapper>

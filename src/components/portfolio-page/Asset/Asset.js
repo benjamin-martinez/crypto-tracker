@@ -49,7 +49,7 @@ const Asset = (props) => {
             <SubSectionContent>
               <SubSectionSpan>
                 <SubSectionHeading>Current price:</SubSectionHeading>
-                <PriceText>${addCommas(props.asset.current_price)}</PriceText>
+                <PriceText>{activeCurrency.symbol + addCommas(props.asset.current_price)}</PriceText>
               </SubSectionSpan>
               <SubSectionSpan>
                 <SubSectionHeading>Price change 24h</SubSectionHeading>

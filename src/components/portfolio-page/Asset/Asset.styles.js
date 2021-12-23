@@ -100,7 +100,7 @@ export const SubSectionSpan = styled.span`
 export const PriceText = styled.p`
   color: ${(props) =>
     props.isNegative ? props.theme.money.red : props.theme.money.green};
-  font-size: 19px;
+  font-size: 15px;
 `;
 
 export const PriceChangeWrapper = styled.span`

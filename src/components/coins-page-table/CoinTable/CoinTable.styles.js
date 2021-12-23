@@ -4,24 +4,26 @@ export const OutsideWrapper = styled.div`
   background: ${(props) => props.theme.card.background};
   border-radius: 10px;
   display: block;
-  width: 100%;
+  width: 1300px;
   @media (max-width: 900px) {
-    margin-top:25px;
-    width:740px;
-  }
-  @media (max-width: 750px) {
-    margin-top:25px;
-    width: 600px;
-  }
-  @media (max-width: 600px) {
-    margin-top:25px;
-    width: 375px;
+    margin-top: 25px;
+    width: ${(props) => props.width}px;
+    border-radius: 0px;
   }
 `;
 
 export const ScrollWrapper = styled.div`
   width: 100%;
   overflow-x: scroll;
+  &::-webkit-scrollbar {
+    width: 10px;
+    background: ${props => props.theme.background};
+  }
+  &::-webkit-scrollbar-thumb {
+    background: ${props => props.theme.money.green};
+    border-radius: 120px;
+    height: 5px;
+  }
   @media (max-width: 900px) {
     width: 100%;
   }

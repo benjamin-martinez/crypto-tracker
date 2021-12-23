@@ -1,8 +1,11 @@
+import { useWindowSize } from "hooks";
 import React from "react";
 import { Bar } from "react-chartjs-2";
+import { getHeight, getWidth } from "utils";
 import { Wrapper } from "./LoadingBarChart.styles";
 
 const LoadingBarChart = (props) => {
+  const { width: screenWidth } = useWindowSize();
     const getLabels = () => {
         const data = [];
         let prev = 100;
@@ -88,8 +91,8 @@ const LoadingBarChart = (props) => {
     },
   };
   return (
-    <Wrapper>
-      <Bar data={chartData} options={options} width={650} height={275} />
+    <Wrapper width={getWidth(screenWidth)} height={getHeight(screenWidth)}>
+      <Bar data={chartData} options={options} />
     </Wrapper>
   );
 };

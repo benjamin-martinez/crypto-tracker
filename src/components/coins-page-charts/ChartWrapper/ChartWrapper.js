@@ -45,6 +45,18 @@ const ChartWrapper = (props) => {
     //eslint-disable-next-line
   }, []);
 
+  const getWidth = () => {
+    if( screenWidth > 900) return 520;
+    if( screenWidth > 450) return 312;
+    return 234;
+  }
+
+  const getHeight = () => {
+    if( screenWidth > 900) return 220;
+    if( screenWidth > 450) return 132;
+    return 132;
+  }
+
   return !props.hasError ? (
     <Wrapper visible={props.visible} responsive={props.responsive}>
       <TextWrapper>
@@ -71,11 +83,11 @@ const ChartWrapper = (props) => {
         {props.chartType === "volume"
           ? !props.isLoading &&
             props.chartHistory.length && (
-              <BarChart totalVolumes={props.chartHistory} />
+              <BarChart totalVolumes={props.chartHistory} getHeight={getHeight} getWidth={getWidth} />
             )
           : !props.isLoading &&
             props.chartHistory.length && (
-              <LineChart coinPrices={props.chartHistory} />
+              <LineChart coinPrices={props.chartHistory} getHeight={getHeight} getWidth={getWidth} />
             )}
       </SubWrapper>
     </Wrapper>
