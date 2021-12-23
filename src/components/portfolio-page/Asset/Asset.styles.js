@@ -1,6 +1,7 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const Wrapper = styled.div`
+<<<<<<< HEAD
     display: flex;
     gap: 24px;
     align-items: center;
@@ -17,12 +18,27 @@ export const IdOuterWrapper = styled.div`
     display: grid;
     justify-items: center;
     align-items: center;
+=======
+  display: flex;
+  gap: 24px;
+  align-items: center;
+`;
+
+export const IdOuterWrapper = styled.div`
+  height: 295px;
+  width: 258px;
+  background: ${(props) => props.theme.card.background};
+  border-radius: 10px;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+>>>>>>> 72f160762602790d02a5ecaa5ab5e6156b842ae6
 `;
 
 export const IdInnerWrapper = styled.div`
-    display: grid;
-    justify-items: center;
-    align-items: center;
+  display: grid;
+  justify-items: center;
+  align-items: center;
 `;
 
 export const CoinIcon = styled.img`
@@ -41,8 +57,8 @@ export const CoinImageWrapper = styled.div`
 `;
 
 export const PriceDataWrapper = styled.div`
-    display: grid;
-    height: 100%;
+  display: grid;
+  height: 100%;
 `;
 
 export const MarketDataWrapper = styled.div`
@@ -60,21 +76,22 @@ export const SubSectionHeadingWrapper = styled.div`
 `;
 
 export const EditIconWrapper = styled.div`
-    height: 37px;
-    width: 37px;
-    background: ${props => props.theme.card.background};
-    display: grid;
-    justify-items: center;
-    align-items: center;
-    border-radius: 6px;
+  height: 37px;
+  width: 37px;
+  background: ${(props) => props.theme.card.background};
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  border-radius: 6px;
 `;
 
 export const EditIcon = styled.img`
-    width: 14px;
-    height: 14px;
+  width: 14px;
+  height: 14px;
 `;
 
 export const SubSectionContent = styled.div`
+<<<<<<< HEAD
     background: ${props => props.theme.card.background};
     border-radius: 10px;
     display: flex;
@@ -89,21 +106,36 @@ export const SubSectionContent = styled.div`
         padding-left: 45px;
         gap: 0px;
     }
+=======
+  background: ${(props) => props.theme.card.background};
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 1430px;
+  height: 100px;
+>>>>>>> 72f160762602790d02a5ecaa5ab5e6156b842ae6
 `;
 
 export const SubSectionSpan = styled.span`
-    display: flex;
-    align-items: center;
-    gap: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 `;
 
 export const PriceText = styled.p`
+<<<<<<< HEAD
     color: ${props => props.theme.money.green};
     font-size: 14px;
+=======
+  color: ${(props) =>
+    props.isNegative ? props.theme.money.red : props.theme.money.green};
+  font-size: 19px;
+>>>>>>> 72f160762602790d02a5ecaa5ab5e6156b842ae6
 `;
 
 export const PriceChangeWrapper = styled.span`
-    display: flex;
-    gap: 4px;
-    align-items: center;
+  display: flex;
+  gap: 4px;
+  align-items: center;
 `;

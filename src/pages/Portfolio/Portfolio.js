@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { loadSavedCoins } from "store/portfolio/actions";
+import { loadHistoricalCoinData } from "store/portfolio/actions";
 import { AddAssetModal, Asset } from "components/portfolio-page";
 import { ButtonText, SectionHeading2 } from "styles/Fonts";
 import {
@@ -14,7 +14,9 @@ import { getActiveCurrency } from "store/currencies";
 const Portfolio = () => {
   const dispatch = useDispatch();
   const [isModalActive, setIsModalActive] = useState(false);
-  const { assets, isLoadingSavedAssets } = useSelector((state) => state.portfolio);
+  const { assets, isLoadingSavedAssets } = useSelector(
+    (state) => state.portfolio
+  );
   const activeCurrency = useSelector(getActiveCurrency);
 
   const handleAddAssetClick = () => {
@@ -43,15 +45,9 @@ const Portfolio = () => {
     }, [ref]);
   }
 
-  // useEffect(() => {
-  //   dispatch(loadSavedCoins(activeCurrency))
-  // }, [isLoadingSavedAssets])
-
   useEffect(() => {
-    dispatch(loadSavedCoins(activeCurrency));
-    console.log(assets)
+    dispatch(loadHistoricalCoinData(activeCurrency));
   }, []);
-
   return (
     <Wrapper>
       <ContentWrapper>
@@ -61,7 +57,9 @@ const Portfolio = () => {
         <SectionWrapper>
           <SectionHeading2>Your Assets</SectionHeading2>
           {assets &&
-            assets.map((asset) => asset.marketData && <Asset key={asset.id} asset={asset} />)}
+            assets.map(
+              (asset) => asset.first && <Asset key={asset.id} asset={asset} />
+            )}
         </SectionWrapper>
       </ContentWrapper>
       {isModalActive && (

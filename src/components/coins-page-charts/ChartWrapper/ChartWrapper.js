@@ -70,12 +70,10 @@ const ChartWrapper = (props) => {
           : props.isLoading && <LoadingLineChart />}
         {props.chartType === "volume"
           ? !props.isLoading &&
-            props.chartHistory &&
             props.chartHistory.length && (
               <BarChart totalVolumes={props.chartHistory} />
             )
           : !props.isLoading &&
-            props.chartHistory &&
             props.chartHistory.length && (
               <LineChart coinPrices={props.chartHistory} />
             )}

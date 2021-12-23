@@ -17,7 +17,6 @@ export const getSearchResults = (searchTerm) => async (dispatch, getState) => {
       payload: data,
     });
   } catch (err) {
-    console.log(err);
     dispatch({
       type: GET_SEARCH_COINS_ERROR,
       payload: err,
