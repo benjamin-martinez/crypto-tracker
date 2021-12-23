@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-<<<<<<< HEAD
     display: flex;
     gap: 24px;
     align-items: center;
@@ -18,21 +17,6 @@ export const IdOuterWrapper = styled.div`
     display: grid;
     justify-items: center;
     align-items: center;
-=======
-  display: flex;
-  gap: 24px;
-  align-items: center;
-`;
-
-export const IdOuterWrapper = styled.div`
-  height: 295px;
-  width: 258px;
-  background: ${(props) => props.theme.card.background};
-  border-radius: 10px;
-  display: grid;
-  justify-items: center;
-  align-items: center;
->>>>>>> 72f160762602790d02a5ecaa5ab5e6156b842ae6
 `;
 
 export const IdInnerWrapper = styled.div`
@@ -114,14 +98,9 @@ export const SubSectionSpan = styled.span`
 `;
 
 export const PriceText = styled.p`
-<<<<<<< HEAD
-    color: ${props => props.theme.money.green};
-    font-size: 14px;
-=======
   color: ${(props) =>
     props.isNegative ? props.theme.money.red : props.theme.money.green};
   font-size: 19px;
->>>>>>> 72f160762602790d02a5ecaa5ab5e6156b842ae6
 `;
 
 export const PriceChangeWrapper = styled.span`
