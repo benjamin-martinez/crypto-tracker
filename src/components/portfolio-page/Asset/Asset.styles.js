@@ -91,7 +91,6 @@ export const EditIcon = styled.img`
 `;
 
 export const SubSectionContent = styled.div`
-<<<<<<< HEAD
     background: ${props => props.theme.card.background};
     border-radius: 10px;
     display: flex;
@@ -106,15 +105,6 @@ export const SubSectionContent = styled.div`
         padding-left: 45px;
         gap: 0px;
     }
-=======
-  background: ${(props) => props.theme.card.background};
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 1430px;
-  height: 100px;
->>>>>>> 72f160762602790d02a5ecaa5ab5e6156b842ae6
 `;
 
 export const SubSectionSpan = styled.span`
