@@ -8,7 +8,7 @@ import {
   LineChart,
 } from "components/coins-page-charts";
 import { useWindowSize } from "hooks";
-import { addCommas, addDecimalsAndShorten } from "utils";
+//import { addCommas, addDecimalsAndShorten } from "utils";
 import { ChartHeaderText, ChartSubText } from "styles/Fonts";
 import {
   Wrapper,
@@ -23,8 +23,6 @@ import {
 
 const ChartWrapper = (props) => {
   const dispatch = useDispatch();
-  const [activeToken, setActiveToken] = useState("BTC");
-  const [activePrice, setActivePrice] = useState("0.00");
   const [activeDate, setActiveDate] = useState("Nov 17, 2021");
   const durations = useSelector((state) => state.charts.durations);
   const { width: screenWidth } = useWindowSize();
@@ -65,9 +63,9 @@ const ChartWrapper = (props) => {
           {props.chartType === "volume" && "Volume"}
         </ChartSubText>
         <ChartHeaderText>
-          {props.chartType === "volume"
-            ? activeCurrency.symbol + addDecimalsAndShorten(activePrice)
-            : activeCurrency.symbol + addCommas(activePrice)}
+          {props.chartType === "volume" 
+            ? activeCurrency.symbol 
+            : activeCurrency.symbol }
         </ChartHeaderText>
         <ChartSubText>{activeDate}</ChartSubText>
       </TextWrapper>

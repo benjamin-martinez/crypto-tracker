@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getActiveCurrency } from "store/currencies";
 import { getInfographicData } from "store/infographic/actions";
@@ -25,47 +24,16 @@ import {
 import { addDecimalsAndShorten } from "utils";
 
 const Infographic = (props) => {
-  const [numCoins, setNumCoins] = useState(0);
-  const [numExchanges, setNumExchanges] = useState(0);
-  const [marketCap, setMarketCap] = useState(0);
-  const [marketCapChange, setMarketCapChange] = useState(0);
-  const [volume, setVolume] = useState(0);
   const isLoading = useSelector((state) => state.infographic.isLoading);
   const isFetched = useSelector((state) => state.infographic.isFetched);
-  const [hasError, setHasError] = useState(false);
-  const [dominance, setDominance] = useState({
-    eth: 0,
-    btc: 0,
-  });
   const activeCurrency = useSelector(getActiveCurrency);
   const data = useSelector((state) => state.infographic.data);
   const dispatch = useDispatch();
-  // const getGlobalCryptoData = async () => {
-  //   try {
-  //     setIsLoading(true);
-  //     const { data } = await axios("https://api.coingecko.com/api/v3/global");
-  //     setIsLoading(false);
-  //     setHasError(false);
-  //     setNumCoins(data.data.active_cryptocurrencies);
-  //     setNumExchanges(data.data.markets);
-  //     const { btc, eth } = data.data.market_cap_percentage;
-  //     setDominance({btc, eth})
-  //     setMarketCap(data.data.total_market_cap[activeCurrency.name]);
-  //     setMarketCapChange(data.data[`market_cap_change_percentage_24h_${activeCurrency.name}`]);
-  //     setVolume(data.data.total_volume[activeCurrency.name]);
-  //   } catch (err) {
-  //     console.log(err);
-  //     setIsLoading(false);
-  //     setHasError(true);
-  //   }
-  // };
 
   useEffect(() => {
-    //getGlobalCryptoData();
     dispatch(getInfographicData());
+    //eslint-disable-next-line
   }, []);
-
-  console.log(data);
   return (
     <Wrapper>
       {isLoading && !isFetched && <LoadingInfographic />}

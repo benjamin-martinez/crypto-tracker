@@ -7,7 +7,6 @@ import {
   ADD_PORTFOLIO_ASSET,
   REMOVE_PORTFOLIO_ASSET,
   SELECT_AMOUNT,
-  SELECT_DATE,
   CLEAR_SEARCH_RESULTS,
   SELECT_ASSET_FROM_RESULTS,
   LOAD_ASSETS_HISTORICAL_DATA_ERROR,
@@ -52,7 +51,7 @@ export const addAsset = (asset) => async (dispatch, getState) => {
   const state = getState();
   const activeCurrency = state.currencies.data.find((el) => el.isActive);
   const assets = state.portfolio.assets;
-  const daysSince = convertDateToDaysSince(asset.datePurchased)
+  const daysSince = convertDateToDaysSince(asset.datePurchased);
   const { data } = await axios(
     `https://api.coingecko.com/api/v3/coins/${asset.data.id}/market_chart?vs_currency=${activeCurrency.name}&days=${daysSince}`
   );
@@ -62,7 +61,12 @@ export const addAsset = (asset) => async (dispatch, getState) => {
   const someOtherData = await axios(
     `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${activeCurrency.name}&ids=${asset.data.id}&order=market_cap_desc&per_page=100&page=1&sparkline=false`
   );
-  const { max_supply, circulating_supply, price_change_percentage_24h, current_price } = someOtherData.data[0];
+  const {
+    max_supply,
+    circulating_supply,
+    price_change_percentage_24h,
+    current_price,
+  } = someOtherData.data[0];
   asset = {
     ...asset,
     first,
@@ -70,8 +74,8 @@ export const addAsset = (asset) => async (dispatch, getState) => {
     max_supply,
     circulating_supply,
     price_change_percentage_24h,
-    current_price
-  }
+    current_price,
+  };
   const newAssets = [...assets, asset];
   dispatch({
     type: ADD_PORTFOLIO_ASSET,
@@ -102,39 +106,52 @@ export const clearSearchResults = () => (dispatch, getState) => {
   });
 };
 
-//change name to loadHistoricalCoinData
 export const loadHistoricalCoinData =
   (activeCurrency) => async (dispatch, getState) => {
     const state = getState();
     const savedCoins = state.portfolio.assets;
     let loadedCoins = savedCoins;
-    const newAssets = await Promise.all(
-      loadedCoins.map(async (coin) => {
-        const daysSince = convertDateToDaysSince(coin.datePurchased)
-        const { data } = await axios(
-          `https://api.coingecko.com/api/v3/coins/${coin.data.id}/market_chart?vs_currency=${activeCurrency.name}&days=${daysSince}`
-        );
-        const { prices } = data;
-        const [, first] = prices[0];
-        const [, last] = prices[prices.length - 1];
-        const someOtherData = await axios(
-          `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coin.data.id}&order=market_cap_desc&per_page=100&page=1&sparkline=false`
-        );
-        const { max_supply, circulating_supply, price_change_percentage_24h, current_price } = someOtherData.data[0];
-        return {
-          ...coin,
-          first,
-          last,
-          max_supply,
-          circulating_supply,
-          price_change_percentage_24h,
-          current_price
-        };
-      })
-    );
     dispatch({
-      type: LOAD_ASSETS_HISTORICAL_DATA_SUCCESS,
-      payload: newAssets,
+      type: LOAD_ASSETS_HISTORICAL_DATA_PENDING,
     });
-    
+    try {
+      const newAssets = await Promise.all(
+        loadedCoins.map(async (coin) => {
+          const daysSince = convertDateToDaysSince(coin.datePurchased);
+          const { data } = await axios(
+            `https://api.coingecko.com/api/v3/coins/${coin.data.id}/market_chart?vs_currency=${activeCurrency.name}&days=${daysSince}`
+          );
+          const { prices } = data;
+          const [, first] = prices[0];
+          const [, last] = prices[prices.length - 1];
+          const someOtherData = await axios(
+            `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coin.data.id}&order=market_cap_desc&per_page=100&page=1&sparkline=false`
+          );
+          const {
+            max_supply,
+            circulating_supply,
+            price_change_percentage_24h,
+            current_price,
+          } = someOtherData.data[0];
+          return {
+            ...coin,
+            first,
+            last,
+            max_supply,
+            circulating_supply,
+            price_change_percentage_24h,
+            current_price,
+          };
+        })
+      );
+      dispatch({
+        type: LOAD_ASSETS_HISTORICAL_DATA_SUCCESS,
+        payload: newAssets,
+      });
+    } catch (err) {
+      dispatch({
+        type: LOAD_ASSETS_HISTORICAL_DATA_ERROR,
+        payload: err,
+      });
+    }
   };
