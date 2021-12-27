@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+  margin-left: 10%;
+  margin-right: 10%;
+`;
 
 export const Title = styled.div`
   margin-top: 40px;
@@ -174,7 +177,7 @@ export const BulletPoint = styled.div`
   background: ${(props) => props.theme.money.blue};
   display: grid;
   justify-items: center;
-  align-items: center;
+  align-content: center;
 `;
 
 export const MarketDetails = styled.div`

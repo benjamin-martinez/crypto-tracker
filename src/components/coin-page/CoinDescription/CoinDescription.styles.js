@@ -3,7 +3,9 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   display: grid;
   justify-items: center;
-  width: 912px;
+  width: 100%;
+  margin-left: 10%;
+  margin-right: 10%;
 `;
 
 export const Title = styled.div`
@@ -13,13 +15,15 @@ export const Title = styled.div`
 `;
 
 export const TextWrapper = styled.div`
-  width: 912px;
+  width: 100%;
   background: ${(props) => props.theme.card.background};
   border-radius: 10px;
   display: grid;
   justify-items: center;
   align-items: center;
   margin-bottom: 19px;
+  margin-left: 10%;
+  margin-right: 10%;
 `;
 
 export const InnerTextWrapper = styled.div`

@@ -1,5 +1,8 @@
 import React from "react";
 import { ChartSubText, ExternalLinkText } from "styles/Fonts";
+import StackSVG from "media/icons/stack.svg";
+import CopySVG from "media/icons/copy.png";
+import LinkSVG from "media/icons/link.svg";
 import {
   Wrapper,
   Title,
@@ -21,7 +24,7 @@ const CoinDescription = (props) => {
       </Title>
       <TextWrapper>
         <InnerTextWrapper>
-          <StackIcon src="icons/stack.svg" />
+          <StackIcon src={StackSVG} />
           <DescText>
             <div
               dangerouslySetInnerHTML={{ __html: props.coin.description.en }}
@@ -34,11 +37,11 @@ const CoinDescription = (props) => {
           .filter((link, index) => index < 3)
           .map((link) => (
             <LinkWrapper>
-              <LinkIcon src="icons/link.svg" />
+              <LinkIcon src={LinkSVG} />
               <ExternalLinkText href={link} target="_blank">
                 {link}
               </ExternalLinkText>
-              <CopyIcon src="icons/copy.svg" />
+              <CopyIcon src={CopySVG} />
             </LinkWrapper>
           ))}
       </LinksWrapper>
