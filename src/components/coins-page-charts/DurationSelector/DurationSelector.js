@@ -1,6 +1,5 @@
 import React from "react";
 import { ChartDurationText } from "styles/Fonts";
-import { useWindowSize } from "hooks";
 import { Wrapper, ContentWrapper, SWrapper } from "./DurationSelector.styles";
 
 const Selection = (props) => {

@@ -6,4 +6,3 @@ export { default as DarkModeToggle } from './header/DarkModeToggle';
 export { default as Searchbar } from './header/Searchbar';
 export { default as SearchResults } from "./header/SearchResults";
 export { default as Result } from "./header/Result";
-export { default as MobileHeader } from "./header/MobileHeader"

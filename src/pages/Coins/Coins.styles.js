@@ -15,10 +15,6 @@ export const ChartsWrapper = styled.div`
   grid-auto-flow: column;
   align-items: center;
   gap: 45px;
-
-  @media (max-width: 900px) {
-    gap:20px;
-  }
 `;
 
 export const SectionWrapper = styled.div`
@@ -51,21 +47,16 @@ export const Dropdown = styled.div`
   gap: 2px;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
-  z-index: 10;
+    z-index: 10;
 `;
 
 export const DropdownSelectionWrapper = styled.div`
-  width: 100%;
-  padding: 2px;
-  padding-left: 8px;
-  border-radius: 10px;
-  :hover {
-    background: ${(props) => props.theme.card.background};
-  }
-`;
+width: 100%;
+padding: 2px;
+padding-left: 8px;
+border-radius: 10px;
+:hover {
+    background: ${props => props.theme.card.background}
+}`;
 
 export const CoinTableWrapper = styled.div``;
-
-export const MobileChartsWrapper = styled.div`
-  display: grid;
-`;

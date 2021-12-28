@@ -12,8 +12,8 @@ export const ContentWrapper = styled.div`
 `;
 
 export const AddAssetButton = styled.span`
-    width: 405px;
-    height: 61px;
+    width: 506px;
+    height: 76px;
     display: grid;
     justify-self: center;
     justify-items: center;
@@ -28,6 +28,7 @@ export const AddAssetButton = styled.span`
 
 export const SectionWrapper = styled.div`
     display: grid;
+    width: 100%;
     color: ${props => props.theme.color};
     justify-content: start;
     gap: 50px;
@@ -40,8 +41,8 @@ export const AssetWrapper = styled.div`
 `;
 
 export const IdOuterWrapper = styled.div`
-    height: 236px;
-    width: 206px;
+    height: 295px;
+    width: 258px;
     background: ${props => props.theme.card.background};
     border-radius: 10px;
     display: grid;
@@ -56,13 +57,13 @@ export const IdInnerWrapper = styled.div`
 `;
 
 export const CoinIcon = styled.img`
-    height: 35px;
-    width: 35px;
+    height: 44px;
+    width: 44px;
 `;
 
 export const CoinImageWrapper = styled.div`
-    height: 83px;
-    width: 83px;
+    height: 104px;
+    width: 104px;
     background: ${props => props.theme.background};
     border-radius: 10px;
     display: grid;
@@ -87,8 +88,8 @@ export const SubSectionHeadingWrapper = styled.div`
 `;
 
 export const EditIconWrapper = styled.div`
-    height: 30px;
-    width: 30px;
+    height: 37px;
+    width: 37px;
     background: ${props => props.theme.card.background};
     display: grid;
     justify-items: center;
@@ -97,8 +98,8 @@ export const EditIconWrapper = styled.div`
 `;
 
 export const EditIcon = styled.img`
-    width: 11px;
-    height: 11px;
+    width: 14px;
+    height: 14px;
 `;
 
 export const SubSectionContent = styled.div`

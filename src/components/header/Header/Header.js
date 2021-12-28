@@ -13,7 +13,6 @@ import {
   RightNav,
   LeftNav,
   NavLinkWrapper,
-  MobileHeader,
 } from "./Header.styles";
 
 const Header = (props) => {
@@ -36,9 +35,6 @@ const Header = (props) => {
             </NavLinkWrapper>
           </Link>
         </RightNav>
-        <MobileHeader>
-          <NavLinkText>Overview</NavLinkText>
-        </MobileHeader>
         <LeftNav>
           <Searchbar />
           <CurrencyToggle />

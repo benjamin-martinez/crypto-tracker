@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ChartWrapper } from "components/coins-page-charts";
-import { useWindowSize } from "hooks";
 import { SectionHeading } from "styles/Fonts";
 import {
   setActiveChartOption,
@@ -14,7 +13,6 @@ import {
   Wrapper,
   Dropdown,
   ChartsWrapper,
-  MobileChartsWrapper,
   ContentWrapper,
   SectionWrapper,
   HeadingDropdown,
@@ -23,10 +21,9 @@ import {
   CoinTableWrapper,
 } from "./Coins.styles";
 import { CoinTable } from "components/coins-page-table";
-import { LeftArrow, RightArrow, SmallDownNuetralArrow } from "styles/arrows";
+import { SmallDownNuetralArrow } from "styles/arrows";
 
 const Coins = () => {
-  const { width: screenWidth } = useWindowSize()
   const dispatch = useDispatch();
   const activeCurrency = useSelector(getActiveCurrency);
   //Data fetching for Charts
@@ -89,21 +86,6 @@ const Coins = () => {
     dispatch(setActiveChartOption(selection));
   };
 
-  const [fadeLeft, setFadeLeft] = useState(false);
-  const [isPriceVisible, setIsPriceVisible] = useState(true);
-  const [isVolumeVisible, setIsVolumeVisible] = useState(false);
-  const handleRightClick = () => {
-    setFadeLeft(true);
-    setIsPriceVisible(!isPriceVisible);
-    setIsVolumeVisible(!isVolumeVisible);
-  };
-
-  const handleLeftClick = () => {
-    setFadeLeft(true);
-    setIsPriceVisible(!isPriceVisible);
-    setIsVolumeVisible(!isVolumeVisible);
-  };
-
   return (
     <Wrapper>
       <ContentWrapper>
@@ -128,8 +110,7 @@ const Coins = () => {
               )}
             </HeadingDropdown>
           </HeadingDiv>
-          <ChartsWrapper screenWidth={screenWidth}>
-            <LeftArrow onClick={handleLeftClick} />
+          <ChartsWrapper>
             <ChartWrapper
               chartType="price"
               activeChartOption={activeChartOption}
@@ -138,8 +119,6 @@ const Coins = () => {
               chartHistory={priceChartHistory}
               isLoading={priceChartIsLoading}
               hasError={hasError}
-              screenWidth={screenWidth}
-              visible={isPriceVisible}
             />
             <ChartWrapper
               chartType="volume"
@@ -149,10 +128,7 @@ const Coins = () => {
               chartHistory={volumeChartHistory}
               isLoading={volumeChartIsLoading}
               hasError={hasError}
-              screenWidth={screenWidth}
-              visible={isVolumeVisible}
             />
-            <RightArrow onClick={handleRightClick} />
           </ChartsWrapper>
         </SectionWrapper>
         <SectionWrapper>

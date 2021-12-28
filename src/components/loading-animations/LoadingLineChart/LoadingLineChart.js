@@ -1,11 +1,8 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
 import { Wrapper } from "./LoadingLineChart.styles";
-import { getHeight, getWidth } from "utils";
-import { useWindowSize } from "hooks";
 
 const LoadingLineChart = (props) => {
-  const { width: screenWidth } = useWindowSize();
   const getRandomData = () => {
     const data = [];
     let prev = 100;
@@ -105,12 +102,7 @@ const LoadingLineChart = (props) => {
   };
   return (
     <Wrapper>
-      <Line
-        data={chartData}
-        options={options}
-        width={getWidth(screenWidth)}
-        height={getHeight(screenWidth)}
-      />
+      <Line data={chartData} options={options} width={650} height={275} />
     </Wrapper>
   );
 };

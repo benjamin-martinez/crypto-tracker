@@ -9,4 +9,3 @@ export {
 export { convertDurationToUnix } from "./convertDurationToUnix";
 export { toCamelCase, camelizeKeys } from "./formatNames";
 export { convertDateToDaysSince } from "./convertDateToDaysSince";
-export { getWidth, getHeight } from "./responsiveCharts";

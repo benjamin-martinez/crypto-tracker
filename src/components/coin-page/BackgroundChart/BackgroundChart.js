@@ -1,10 +1,8 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
-import { useWindowSize } from "hooks";
 import { Wrapper } from "./BackgroundChart.styles";
 
 const BackgroundChart = (props) => {
-  const { width: screenWidth } = useWindowSize();
   const getLabels = (arr) => {
     let labels = arr.map((arr) =>
       new Date(arr[0]).toLocaleString(undefined, {
@@ -76,16 +74,7 @@ const BackgroundChart = (props) => {
       },
     },
   };
-  return (
-    <Wrapper>
-      <Line
-        data={chartData}
-        options={options}
-        width={screenWidth}
-        height={220}
-      />
-    </Wrapper>
-  );
+  return (<Wrapper><Line data={chartData} options={options} width={1900} height={275} /></Wrapper>);
 };
 
 export default BackgroundChart;

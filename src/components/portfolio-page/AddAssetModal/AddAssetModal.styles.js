@@ -1,58 +1,34 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 
-const fadeInBackground = keyframes`
-  0% {
-    opacity: 0%;
-  }
-  100% {
-    opacity: 50%;
-  }
+export const BackgroundOuterWrapper = styled.div`
+  position: absolute;
+  top: -250px;
+  left: 0px;
+  width: 1920px;
+  height: 120vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
-
-const fadeInForeground = keyframes`
-  0% {
-    opacity: 0%;
-  }
-  100% {
-    opacity: 100%;
-  }
-`;
-
-export const BackgroundOuterWrapper = styled.div``;
 
 export const BackgroundInnerWrapper = styled.div`
-  width: ${(props) => props.width}px;
-  height: ${(props) => props.height}px;
+  width: 1920px;
+  height: 120vh;
   background: black;
   opacity: 50%;
-  position: fixed;
-  top: 0px;
-  left: 0px;
+  position: absolute;
   z-index: 10;
-  animation: ${fadeInBackground} 1s ease-out;
 `;
 
 export const Wrapper = styled.div`
-  position: fixed;
-  top: ${(props) => props.height / 2 - 403 / 2}px;
-  left: ${(props) => props.width / 2 - 870 / 2}px;
   background: ${(props) => props.theme.card.active};
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
-  width: 870px;
-  height: 403px;
+  width: 1087px;
+  height: 504px;
   border-radius: 10px;
   color: ${(props) => props.theme.color};
   z-index: 11;
-  animation-delay: 0.5s;
-  animation: ${fadeInForeground} 0.5s ease-out;
-
-  @media (max-width: 900px) {
-    width: 400px;
-    height: auto;
-    top: 50px;
-    left: ${(props) => props.width / 2 - 400 / 2}px;
-  }
 `;
 
 export const ContentWrapper = styled.div`
@@ -70,11 +46,6 @@ export const ModalTitleWrapper = styled.div``;
 export const ModalContentWrapper = styled.div`
   display: flex;
   gap: 41px;
-
-  @media (max-width: 900px) {
-    flex-direction: column;
-    align-items: center;
-  }
 `;
 
 export const ModalSelectorsWrapper = styled.div`
@@ -83,26 +54,23 @@ export const ModalSelectorsWrapper = styled.div`
 `;
 
 export const ModalSelectorWrapper = styled.div`
-  width: 406px;
-  height: 53px;
+  width: 508px;
+  height: 66px;
   border-radius: 10px;
   background: ${(props) => props.theme.card.background};
   display: flex;
   align-items: center;
-  @media (max-width: 900px) {
-    width: 300px;
-  }
 `;
 
 export const SearchCoinInput = styled.input`
-  margin-left: 28px;
+  margin-left: 34px;
   background: none;
   border: none;
-  height: 16px;
+  height: 20px;
   width: 100%;
-  padding-top: 16px;
-  padding-bottom: 16px;
-  font-size: 15px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: 19px;
   color: ${(props) => props.theme.color};
   &:focus {
     outline: none;
@@ -110,68 +78,61 @@ export const SearchCoinInput = styled.input`
 `;
 
 export const DateSelector = styled.input`
-  margin-left: 27px;
-  margin-right: 27px;
-  width: 100%;
+  margin-left: 34px;
   background: none;
   border: none;
-  font-size: 15px;
+  font-size: 19px;
   color: ${(props) => props.theme.color};
   :hover {
     cursor: pointer;
   }
   ::-webkit-calendar-picker-indicator {
-    filter: invert(${(props) => (props.theme.color === "#ffffff" ? "1" : "0")});
+    filter: ${(props) => props.theme.color === "white" && "invert(1)"};
   }
 `;
 
 export const ModalButtonsWrapper = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 12px;
   align-items: center;
   justify-content: center;
-  @media (max-width: 900px) {
-    margin-bottom: 40px;
-  }
 `;
 
 export const ExitButton = styled.img`
   position: absolute;
-  top: 32px;
-  right: 30px;
-  width: 31px;
-  height: 31px;
+  top: 33px;
+  right: 38px;
+  width: 39px;
+  height: 39px;
   :hover {
     cursor: pointer;
   }
 `;
 
 export const ModalButton = styled.div`
-  height: 48px;
-  width: 235px;
+  height: 60px;
+  width: 294px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${(props) => (props.white ? "white" : props.theme.money.green)};
-  color: ${(props) => (props.white ? props.theme.money.green : "white")};
+  background: ${(props) =>
+    props.white ? "white" : props.theme.money.green};
+  color: ${(props) =>
+    props.white ? props.theme.money.green : "white"};
   :hover {
     cursor: pointer;
-  }
-  @media (max-width: 900px) {
-    height: 36px;
-    width: 176px;
   }
 `;
 
 export const CoinIcon = styled.img`
-  height: 28px;
-  width: 28px;
+  height: 35px;
+  width: 35px;
 `;
 
 export const CoinImageWrapper = styled.div`
-  height: 66px;
-  width: 66px;
+  height: 83px;
+  width: 82px;
   background: ${(props) => props.theme.background};
   border-radius: 10px;
   display: grid;
@@ -180,8 +141,8 @@ export const CoinImageWrapper = styled.div`
 `;
 
 export const IdOuterWrapper = styled.div`
-  height: 186px;
-  width: 163px;
+  height: 233px;
+  width: 204px;
   background: ${(props) => props.theme.card.background};
   border-radius: 10px;
   display: grid;

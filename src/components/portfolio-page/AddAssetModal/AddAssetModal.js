@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useWindowSize } from "hooks";
 import { addAsset } from "store/portfolio/actions";
 import { SearchAsset } from "components/portfolio-page";
 import {
@@ -33,7 +32,6 @@ const AddAssetModal = (props) => {
   const [amountInput, setAmountInput] = useState("");
   const [dateInput, setDateInput] = useState("2021-01-01");
   const asset = useSelector(state => state.portfolio.addAssetSelection)
-  const { width: screenWidth, height: screenHeight } = useWindowSize()
 
   const selectedCoin = useSelector(
     (state) => state.portfolio.addAssetSelection
@@ -61,9 +59,9 @@ const AddAssetModal = (props) => {
   };
 
   return (
-    <BackgroundOuterWrapper width={screenWidth} height={screenHeight}>
-      <BackgroundInnerWrapper width={screenWidth} height={screenHeight}></BackgroundInnerWrapper>
-      <Wrapper ref={props.innerRef} width={screenWidth} height={screenHeight}>
+    <BackgroundOuterWrapper>
+      <BackgroundInnerWrapper></BackgroundInnerWrapper>
+      <Wrapper ref={props.innerRef}>
         <ContentWrapper>
           <ModalTitleWrapper>
             <ModalTitleText>Select Coins</ModalTitleText>

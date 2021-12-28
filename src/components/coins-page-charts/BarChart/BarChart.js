@@ -1,12 +1,8 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
-import { useWindowSize } from "hooks";
 import { Wrapper } from "./BarChart.styles";
-import { getHeight, getWidth } from "utils";
 
 const BarChart = (props) => {
-  const { width: screenWidth } = useWindowSize();
-
   const getLabels = (arr) => {
     let labels = arr.map((arr) =>
       new Date(arr[0]).toLocaleString(undefined, {
@@ -79,8 +75,8 @@ const BarChart = (props) => {
     },
   };
   return (
-    <Wrapper width={getWidth(screenWidth)} height={getHeight(screenWidth)}>
-      <Bar data={chartData} options={options}  />
+    <Wrapper>
+      <Bar data={chartData} options={options} width={650} height={275} />
     </Wrapper>
   );
 };
