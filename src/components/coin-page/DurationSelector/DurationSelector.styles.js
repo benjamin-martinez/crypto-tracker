@@ -5,6 +5,9 @@ export const Wrapper = styled.div`
     gap: 30px;
     margin-top: 47px;
     margin-bottom: 22px;
+    @media (max-width: 900px) {
+        gap: 20px;
+    }
 `;
 
 export const ButtonSpan = styled.span`

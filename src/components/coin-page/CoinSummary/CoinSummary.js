@@ -20,8 +20,8 @@ import {
   addCommasNoDec,
   formatPercentage,
 } from "utils";
-import LinkSVG from "media/icons/link.svg"
-import StackSVG from "media/icons/stack.svg"
+import LinkSVG from "media/icons/link.svg";
+import StackSVG from "media/icons/stack.svg";
 import {
   Wrapper,
   Title,
@@ -32,8 +32,10 @@ import {
   IconWrapper,
   Icon,
   CoinName,
+  FirstWrapper,
   LinkWrapper,
   LinkIcon,
+  LinkSpan,
   PriceDetails,
   PriceDetailsInnerWrapper,
   PriceWrapper,
@@ -68,7 +70,7 @@ const CoinSummary = (props) => {
     links: coinLinks,
     market_data: coinMarketData,
   } = props.coin;
-  
+
   const {
     current_price: currentPrice,
     price_change_percentage_24h: priceChangePercentage24hr,
@@ -89,6 +91,7 @@ const CoinSummary = (props) => {
         <ChartSubText>Your Summary</ChartSubText>
       </Title>
       <SectionWrapper>
+        <FirstWrapper>
         <CoinId>
           <IdOuterWrapper>
             <IdInnerWrapper>
@@ -104,9 +107,11 @@ const CoinSummary = (props) => {
           </IdOuterWrapper>
           <LinkWrapper>
             <LinkIcon src={LinkSVG} />
-            <ExternalLinkText href={coinLinks.homepage[0]} target="_blank">
-              {coinLinks.homepage[0]}
-            </ExternalLinkText>
+            <LinkSpan>
+              <ExternalLinkText href={coinLinks.homepage[0]} target="_blank">
+                {coinLinks.homepage[0].replace(/(^\w+:|^)\/\//, '')}
+              </ExternalLinkText>
+            </LinkSpan>
           </LinkWrapper>
         </CoinId>
         <PriceDetails>
@@ -173,7 +178,7 @@ const CoinSummary = (props) => {
               </PriceRangeWrapper>
             </PriceRangeDetailsWrapper>
           </PriceDetailsInnerWrapper>
-        </PriceDetails>
+        </PriceDetails></FirstWrapper>
         <MarketDetails>
           <MarketDetailsInnerWrapper>
             <MarketDetailsTop>

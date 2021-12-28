@@ -3,6 +3,7 @@ import axios from "axios";
 import { convertDurationToUnix } from "utils";
 import { DurationSelector, BackgroundChart } from "components/coin-page";
 import { Wrapper } from "./BackgroundChartWrapper.styles";
+import { LoadingSpinner } from "components/loading-animations";
 
 const BackgroundChartWrapper = (props) => {
   const [tokenPriceHistory, setTokenPriceHistory] = useState([]);
@@ -87,6 +88,7 @@ const BackgroundChartWrapper = (props) => {
       {!isLoading && !hasError && (
         <BackgroundChart coinPrices={tokenPriceHistory} />
       )}
+      {isLoading && <LoadingSpinner />}
     </Wrapper>
   );
 };
