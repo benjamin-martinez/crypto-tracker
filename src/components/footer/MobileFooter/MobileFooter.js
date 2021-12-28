@@ -1,4 +1,8 @@
 import { Link } from "react-router-dom";
+import OverviewSVG from "media/icons/overview.svg";
+import PortfolioSVG from "media/icons/portfolio.svg";
+import SummarySVG from "media/icons/summary.svg";
+import SearchSVG from "media/icons/search.svg";
 import {
   Wrapper,
   MenuWrapper,
@@ -13,26 +17,26 @@ const MobileFooter = () => {
       <MenuWrapper>
         <Link to="/coins">
           <MenuItem>
-            <Icon src="icons/overview.svg" />
+            <Icon src={OverviewSVG} />
             <Title>Overview</Title>
           </MenuItem>
         </Link>
         <Link to="/portfolio">
           <MenuItem>
-            <Icon src="icons/portfolio.svg" />
+            <Icon src={PortfolioSVG} />
             <Title>Portfolio</Title>
           </MenuItem>
         </Link>
         <Link to="/coins">
           <MenuItem>
-            <Icon src="icons/summary.svg" />
+            <Icon src={SummarySVG} />
             <Title>Summary</Title>
           </MenuItem>
         </Link>
-          <MenuItem>
-            <Icon src="icons/search.svg" />
-            <Title>Search</Title>
-          </MenuItem>
+        <MenuItem>
+          <Icon src={SearchSVG} />
+          <Title>Search</Title>
+        </MenuItem>
       </MenuWrapper>
     </Wrapper>
   );
