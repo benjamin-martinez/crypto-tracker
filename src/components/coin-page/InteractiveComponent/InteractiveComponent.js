@@ -46,6 +46,7 @@ const InteractiveComponent = (props) => {
   useEffect(() => {
     if (props.coin.id)
       setFiatAmount(props.coin.market_data.current_price[activeCurrency.name]);
+    //eslint-disable-next-line
   }, [activeCurrency]);
 
   return (

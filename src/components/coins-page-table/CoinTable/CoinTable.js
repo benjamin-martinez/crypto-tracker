@@ -38,27 +38,13 @@ const CoinTable = (props) => {
 
   useEffect(() => {
     props.getCoinsDataByCategory(activeCategory);
+    //eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     props.getCoinsDataByCategory(activeCategory);
-  }, [activeCurrency]);
-
-  useEffect(() => {
-    props.getCoinsDataByCategory(activeCategory);
-  }, [activeCategory]);
-
-  useEffect(() => {
-    props.getCoinsDataByCategory(activeCategory);
-  }, [activeDirection]);
-
-  useEffect(() => {
-    props.getCoinsDataByCategory(activeCategory);
-  }, [activePageNum]);
-
-  useEffect(() => {
-    props.getCoinsDataByCategory(activeCategory);
-  }, [activeResultsPerPage]);
+    //eslint-disable-next-line
+  }, [activeCurrency, activeCategory, activeDirection, activePageNum, activeResultsPerPage]);
 
   return (
     <OutsideWrapper width={screenWidth}>

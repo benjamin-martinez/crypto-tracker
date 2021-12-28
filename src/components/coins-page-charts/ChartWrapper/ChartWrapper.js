@@ -6,6 +6,7 @@ import {
   DurationSelector,
   LineChart,
 } from "components/coins-page-charts";
+import { useWindowSize } from "hooks";
 import { addCommas, addDecimalsAndShorten } from "utils";
 import { ChartHeaderText, ChartSubText } from "styles/Fonts";
 import {
@@ -21,8 +22,6 @@ import {
 
 const ChartWrapper = (props) => {
   const dispatch = useDispatch();
-  const [activeToken, setActiveToken] = useState("BTC");
-  const [activePrice, setActivePrice] = useState("0.00");
   const [activeDate, setActiveDate] = useState("Nov 17, 2021");
   const durations = useSelector((state) => state.charts.durations);
   const activeCurrency = useSelector(getActiveCurrency);
@@ -57,7 +56,7 @@ const ChartWrapper = (props) => {
           {isVolumeChart && "Volume"}
         </ChartSubText>
         <ChartHeaderText>
-          {`${currentSymbol}${isVolumeChart ? addDecimalsAndShorten(activePrice) :  addCommas(activePrice)}`}
+          {`${currentSymbol}${isVolumeChart ? addDecimalsAndShorten(0) :  addCommas(0)}`}
         </ChartHeaderText>
         <ChartSubText>{activeDate}</ChartSubText>
       </TextWrapper>

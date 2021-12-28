@@ -1,25 +1,4 @@
-import styled, { css, keyframes } from "styled-components";
-
-const fadeOutLeft = keyframes`
-  0% {
-    transform: translateX(0);
-    opacity: 100%
-  }
-  100% {
-    transform: translateX(-150px);
-    opacity: 0%;
-  }
-`;
-const fadeOutRight = keyframes`
-  0% {
-    transform: translateX(0);
-    opacity: 100%
-  }
-  100% {
-    transform: translateX(150px);
-    opacity: 0%;
-  }
-`;
+import styled from "styled-components";
 
 export const Wrapper = styled.div`
   justify-self: start;

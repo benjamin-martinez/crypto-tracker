@@ -30,7 +30,6 @@ function infographicReducer(state = initialState, action) {
         hasError: false,
       };
     case GET_INFOGRAPHIC_DATA_SUCCESS:
-        console.log(action.payload)
       return {
         ...state,
         data: action.payload,

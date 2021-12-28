@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getActiveCurrency } from "store/currencies";
 import { getInfographicData } from "store/infographic/actions";
@@ -25,27 +24,16 @@ import {
 import { addDecimalsAndShorten } from "utils";
 
 const Infographic = (props) => {
-  const [numCoins, setNumCoins] = useState(0);
-  const [numExchanges, setNumExchanges] = useState(0);
-  const [marketCap, setMarketCap] = useState(0);
-  const [marketCapChange, setMarketCapChange] = useState(0);
-  const [volume, setVolume] = useState(0);
   const isLoading = useSelector((state) => state.infographic.isLoading);
   const isFetched = useSelector((state) => state.infographic.isFetched);
-  const [hasError, setHasError] = useState(false);
-  const [dominance, setDominance] = useState({
-    eth: 0,
-    btc: 0,
-  });
   const activeCurrency = useSelector(getActiveCurrency);
   const data = useSelector((state) => state.infographic.data);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getInfographicData());
+    //eslint-disable-next-line
   }, []);
-
-  console.log(data);
   return (
     <Wrapper>
       {isLoading && !isFetched && <LoadingInfographic />}

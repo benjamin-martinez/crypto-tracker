@@ -16,7 +16,6 @@ const SearchAsset = () => {
   const [showResults, setShowResults] = useState(false);
   const results = useSelector((state) => state.portfolio.portfolioSearchData);
   const isLoading = useSelector((state) => state.portfolio.isLoading);
-  const hasError = useSelector((state) => state.portfolio.hasError);
   const dispatch = useDispatch();
 
   const wrapperRef = useRef();

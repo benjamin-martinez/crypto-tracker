@@ -14,7 +14,7 @@ import { getActiveCurrency } from "store/currencies";
 const Portfolio = () => {
   const dispatch = useDispatch();
   const [isModalActive, setIsModalActive] = useState(false);
-  const { assets, isLoadingSavedAssets } = useSelector(
+  const { assets } = useSelector(
     (state) => state.portfolio
   );
   const activeCurrency = useSelector(getActiveCurrency);
@@ -47,6 +47,7 @@ const Portfolio = () => {
 
   useEffect(() => {
     dispatch(loadHistoricalCoinData(activeCurrency));
+    //eslint-disable-next-line
   }, []);
   return (
     <Wrapper>

@@ -84,7 +84,9 @@ const BackgroundChartWrapper = (props) => {
         durations={durations}
         handleDurationClick={handleDurationClick}
       />
-      <BackgroundChart coinPrices={tokenPriceHistory} />
+      {!isLoading && !hasError && (
+        <BackgroundChart coinPrices={tokenPriceHistory} />
+      )}
     </Wrapper>
   );
 };

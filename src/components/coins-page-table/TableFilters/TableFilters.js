@@ -37,8 +37,6 @@ const TableFilters = () => {
   const activeCategory = useSelector((state) => state.coins.activeCategory);
   const directions = useSelector((state) => state.coins.directions);
   const activeDirection = useSelector((state) => state.coins.activeDirection);
-  const keys = useSelector((state) => state.coins.keys);
-  const activeKey = useSelector((state) => state.coins.activeKey);
   const resultsPerPage = useSelector((state) => state.coins.resultsPerPage);
   const pageNum = useSelector((state) => state.coins.pageNum);
   const activeResultsPerPage = useSelector(

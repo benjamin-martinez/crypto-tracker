@@ -14,7 +14,6 @@ import {
   Wrapper,
   Dropdown,
   ChartsWrapper,
-  MobileChartsWrapper,
   ContentWrapper,
   SectionWrapper,
   HeadingDropdown,
@@ -26,7 +25,7 @@ import { CoinTable } from "components/coins-page-table";
 import { LeftArrow, RightArrow, SmallDownNuetralArrow } from "styles/arrows";
 
 const Coins = () => {
-  const { width: screenWidth } = useWindowSize()
+  const { width: screenWidth } = useWindowSize();
   const dispatch = useDispatch();
   const activeCurrency = useSelector(getActiveCurrency);
   //Data fetching for Charts
@@ -59,10 +58,12 @@ const Coins = () => {
 
   useEffect(() => {
     dispatch(getChartData(activeCurrency, activePriceChartDuration, "price"));
+    //eslint-disable-next-line
   }, [activePriceChartDuration, activeCurrency, activeChartOption]);
 
   useEffect(() => {
     dispatch(getChartData(activeCurrency, activeVolumeChartDuration, "price"));
+    //eslint-disable-next-line
   }, []);
 
   const {
@@ -73,10 +74,12 @@ const Coins = () => {
 
   useEffect(() => {
     dispatch(getChartData(activeCurrency, activeVolumeChartDuration, "volume"));
+    //eslint-disable-next-line
   }, [activeVolumeChartDuration, activeCurrency, activeChartOption]);
 
   useEffect(() => {
     dispatch(getChartData(activeCurrency, activeVolumeChartDuration, "volume"));
+    //eslint-disable-next-line
   }, []);
 
   const hasError = useSelector((state) => state.charts.hasError);
@@ -89,17 +92,14 @@ const Coins = () => {
     dispatch(setActiveChartOption(selection));
   };
 
-  const [fadeLeft, setFadeLeft] = useState(false);
   const [isPriceVisible, setIsPriceVisible] = useState(true);
   const [isVolumeVisible, setIsVolumeVisible] = useState(false);
   const handleRightClick = () => {
-    setFadeLeft(true);
     setIsPriceVisible(!isPriceVisible);
     setIsVolumeVisible(!isVolumeVisible);
   };
 
   const handleLeftClick = () => {
-    setFadeLeft(true);
     setIsPriceVisible(!isPriceVisible);
     setIsVolumeVisible(!isVolumeVisible);
   };

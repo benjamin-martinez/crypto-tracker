@@ -18,7 +18,6 @@ const Searchbar = () => {
   const [showResults, setShowResults] = useState(false);
   const results = useSelector((state) => state.search.data);
   const isLoading = useSelector((state) => state.search.isLoading);
-  const hasError = useSelector((state) => state.search.hasError);
   const dispatch = useDispatch();
 
   const wrapperRef = useRef();
@@ -62,6 +61,7 @@ const Searchbar = () => {
     if (results && results.length > 0 && searchTerm.length > 2) {
       setShowResults(true);
     }
+    //eslint-disable-next-line
   }, [results]);
 
   return (
