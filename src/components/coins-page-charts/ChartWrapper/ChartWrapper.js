@@ -69,7 +69,6 @@ const ChartWrapper = (props) => {
       <SubWrapper>
           {showLoadingLineChart && <LoadingLineChart />}
           {showLoadingBarChart && <LoadingBarChart />}
-        
           {isVolumeChart && showBarChart && <BarChart totalVolumes={props.chartHistory} />}
           {isPriceChart && showLineChart &&  <LineChart coinPrices={props.chartHistory} />}
       </SubWrapper>

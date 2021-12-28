@@ -40,28 +40,8 @@ const Infographic = (props) => {
   const activeCurrency = useSelector(getActiveCurrency);
   const data = useSelector((state) => state.infographic.data);
   const dispatch = useDispatch();
-  // const getGlobalCryptoData = async () => {
-  //   try {
-  //     setIsLoading(true);
-  //     const { data } = await axios("https://api.coingecko.com/api/v3/global");
-  //     setIsLoading(false);
-  //     setHasError(false);
-  //     setNumCoins(data.data.active_cryptocurrencies);
-  //     setNumExchanges(data.data.markets);
-  //     const { btc, eth } = data.data.market_cap_percentage;
-  //     setDominance({btc, eth})
-  //     setMarketCap(data.data.total_market_cap[activeCurrency.name]);
-  //     setMarketCapChange(data.data[`market_cap_change_percentage_24h_${activeCurrency.name}`]);
-  //     setVolume(data.data.total_volume[activeCurrency.name]);
-  //   } catch (err) {
-  //     console.log(err);
-  //     setIsLoading(false);
-  //     setHasError(true);
-  //   }
-  // };
 
   useEffect(() => {
-    //getGlobalCryptoData();
     dispatch(getInfographicData());
   }, []);
 
