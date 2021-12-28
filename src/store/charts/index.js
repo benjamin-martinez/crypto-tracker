@@ -21,6 +21,8 @@ const initialState = {
   activeVolumeChartDuration: "1d",
   priceChartHistory: {},
   volumeChartHistory: {},
+  currentPrice: 0,
+  currentVolume: 0,
   priceChartIsLoading: false,
   volumeChartIsLoading: false,
   hasError: false,
@@ -41,6 +43,7 @@ export const SET_ACTIVE_VOLUME_CHART_DURATION =
 export const SET_ACTIVE_PRICE_CHART_DURATION =
   "SET_ACTIVE_PRICE_CHART_DURATION";
 export const SET_BOTH_CHART_DURATIONS = "SET_BOTH_CHART_DURATIONS";
+export const SET_CURRENT_PRICE_AND_VOLUME = "SET_CURRENT_PRICE_AND_VOLUME";
 
 function chartsReducer(state = initialState, action) {
   switch (action.type) {
@@ -103,6 +106,12 @@ function chartsReducer(state = initialState, action) {
         activePriceChartDuration: action.payload,
         activeVolumeChartDuration: action.payload,
       };
+    case SET_CURRENT_PRICE_AND_VOLUME: 
+    return {
+      ...state,
+      currentPrice: action.payload.price,
+      currentVolume: action.payload.volume
+    }
     default:
       return state;
   }

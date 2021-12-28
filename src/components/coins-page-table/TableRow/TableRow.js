@@ -9,7 +9,7 @@ import {
   ChangeSpan,
   Icon,
   DoubleSpan,
-  DoubleSpanTop,
+  DoubleSpanTop
 } from "./TableRow.styles";
 import { CoinTableRowText } from "styles/Fonts";
 import { UpArrow, DownArrow } from "styles/arrows";

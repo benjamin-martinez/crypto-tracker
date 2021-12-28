@@ -10,13 +10,12 @@ import {
   SectionWrapper,
 } from "./Portfolio.styles";
 import { getActiveCurrency } from "store/currencies";
+import LoadingPortfolioAssets from "components/loading-animations/LoadingPortfolioAssets";
 
 const Portfolio = () => {
   const dispatch = useDispatch();
   const [isModalActive, setIsModalActive] = useState(false);
-  const { assets } = useSelector(
-    (state) => state.portfolio
-  );
+  const { assets } = useSelector((state) => state.portfolio);
   const activeCurrency = useSelector(getActiveCurrency);
 
   const handleAddAssetClick = () => {
@@ -57,10 +56,13 @@ const Portfolio = () => {
         </AddAssetButton>
         <SectionWrapper>
           <SectionHeading2>Your Assets</SectionHeading2>
-          {assets &&
+          {assets ? (
             assets.map(
               (asset) => asset.first && <Asset key={asset.id} asset={asset} />
-            )}
+            )
+          ) : (
+            <LoadingPortfolioAssets />
+          )}
         </SectionWrapper>
       </ContentWrapper>
       {isModalActive && (
