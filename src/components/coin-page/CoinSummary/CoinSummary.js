@@ -19,8 +19,9 @@ import {
   addDecimalsAndShorten,
   addCommasNoDec,
   formatPercentage,
-  camelizeKeys,
 } from "utils";
+import LinkSVG from "media/icons/link.svg"
+import StackSVG from "media/icons/stack.svg"
 import {
   Wrapper,
   Title,
@@ -102,7 +103,7 @@ const CoinSummary = (props) => {
             </IdInnerWrapper>
           </IdOuterWrapper>
           <LinkWrapper>
-            <LinkIcon src="icons/link.svg" />
+            <LinkIcon src={LinkSVG} />
             <ExternalLinkText href={coinLinks.homepage[0]} target="_blank">
               {coinLinks.homepage[0]}
             </ExternalLinkText>
@@ -130,7 +131,7 @@ const CoinSummary = (props) => {
                   )}
               </PriceText>
             </ProfitWrapper>
-            <StackIcon src="icons/stack.svg" />
+            <StackIcon src={StackSVG} />
             <PriceRangeDetailsWrapper>
               <PriceRangeWrapper>
                 <UpArrow />

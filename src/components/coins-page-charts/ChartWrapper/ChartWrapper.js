@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getActiveCurrency } from "store/currencies";
-import { setBothChartDurations } from "store/charts/action";
 import {
   BarChart,
   DurationSelector,
   LineChart,
 } from "components/coins-page-charts";
-import { useWindowSize } from "hooks";
 import { addCommas, addDecimalsAndShorten } from "utils";
 import { ChartHeaderText, ChartSubText } from "styles/Fonts";
 import {
@@ -27,12 +25,10 @@ const ChartWrapper = (props) => {
   const [activePrice, setActivePrice] = useState("0.00");
   const [activeDate, setActiveDate] = useState("Nov 17, 2021");
   const durations = useSelector((state) => state.charts.durations);
-  const { width: screenWidth } = useWindowSize();
   const activeCurrency = useSelector(getActiveCurrency);
 
   function handleRDurationClick(duration) {
-    if (screenWidth > 900) dispatch(props.setActiveChartDuration(duration));
-    else dispatch(setBothChartDurations(duration));
+    dispatch(props.setActiveChartDuration(duration));
   }
 
   useEffect(() => {
@@ -45,29 +41,23 @@ const ChartWrapper = (props) => {
     //eslint-disable-next-line
   }, []);
 
-  const getWidth = () => {
-    if( screenWidth > 900) return 520;
-    if( screenWidth > 450) return 312;
-    return 234;
-  }
-
-  const getHeight = () => {
-    if( screenWidth > 900) return 220;
-    if( screenWidth > 450) return 132;
-    return 132;
-  }
+  const isVolumeChart = props.chartType === "volume";
+  const isPriceChart = props.chartType === "price"
+  const showBarChart = !props.isLoading && props.chartHistory.length
+  const showLineChart = !props.isLoading && props.chartHistory.length
+  const showLoadingLineChart = isVolumeChart && props.isLoading;
+  const showLoadingBarChart = isPriceChart && props.isLoading;
+  const currentSymbol = activeCurrency.symbol;
 
   return !props.hasError ? (
-    <Wrapper visible={props.visible} responsive={props.responsive}>
+    <Wrapper>
       <TextWrapper>
         <ChartSubText>
           {props.activeChartOption.symbol.toUpperCase()}{" "}
-          {props.chartType === "volume" && "Volume"}
+          {isVolumeChart && "Volume"}
         </ChartSubText>
         <ChartHeaderText>
-          {props.chartType === "volume"
-            ? activeCurrency.symbol + addDecimalsAndShorten(activePrice)
-            : activeCurrency.symbol + addCommas(activePrice)}
+          {`${currentSymbol}${isVolumeChart ? addDecimalsAndShorten(activePrice) :  addCommas(activePrice)}`}
         </ChartHeaderText>
         <ChartSubText>{activeDate}</ChartSubText>
       </TextWrapper>
@@ -77,18 +67,10 @@ const ChartWrapper = (props) => {
         handleRDurationClick={handleRDurationClick}
       />
       <SubWrapper>
-        {props.chartType === "volume"
-          ? props.isLoading && <LoadingBarChart />
-          : props.isLoading && <LoadingLineChart />}
-        {props.chartType === "volume"
-          ? !props.isLoading &&
-            props.chartHistory.length && (
-              <BarChart totalVolumes={props.chartHistory} getHeight={getHeight} getWidth={getWidth} />
-            )
-          : !props.isLoading &&
-            props.chartHistory.length && (
-              <LineChart coinPrices={props.chartHistory} getHeight={getHeight} getWidth={getWidth} />
-            )}
+          {showLoadingLineChart && <LoadingLineChart />}
+          {showLoadingBarChart && <LoadingBarChart />}
+          {isVolumeChart && showBarChart && <BarChart totalVolumes={props.chartHistory} />}
+          {isPriceChart && showLineChart &&  <LineChart coinPrices={props.chartHistory} />}
       </SubWrapper>
     </Wrapper>
   ) : (

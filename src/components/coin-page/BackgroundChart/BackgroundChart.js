@@ -77,12 +77,10 @@ const BackgroundChart = (props) => {
     },
   };
   return (
-    <Wrapper>
+    <Wrapper width={screenWidth}>
       <Line
         data={chartData}
         options={options}
-        width={screenWidth}
-        height={220}
       />
     </Wrapper>
   );

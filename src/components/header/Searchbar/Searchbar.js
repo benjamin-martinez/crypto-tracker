@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { clearSearchResults, getSearchResults } from "store/search/actions";
 import { SearchResults } from "components";
 import { SearchResultsText } from "styles/Fonts";
+import SearchSVG from "media/icons/search.svg";
 import {
   Wrapper,
   Icon,
@@ -65,7 +66,7 @@ const Searchbar = () => {
 
   return (
     <Wrapper ref={wrapperRef} onSubmit={(e) => e.preventDefault()} >
-      <Icon src="icons/search.svg" />
+      <Icon src={SearchSVG} />
       <Input
         type="text"
         placeholder="Search..."

@@ -53,7 +53,7 @@ export const Name = styled.div`
     border-bottom-left-radius: 10px;
     display: grid;
     justify-items: center;
-    align-items: center;
+    align-content: center;
 `;
 
 export const InputPriceDiv = styled.div`

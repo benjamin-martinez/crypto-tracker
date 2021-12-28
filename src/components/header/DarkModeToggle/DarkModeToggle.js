@@ -1,4 +1,5 @@
 import React from "react";
+import ToggleSVG from "media/icons/scan.svg";
 import { Wrapper, Icon } from "./DarkModeToggle.styles";
 
 const DarkModeToggle = (props) => {
@@ -7,7 +8,7 @@ const DarkModeToggle = (props) => {
   };
   return (
     <Wrapper onClick={() => handleClick()}>
-      <Icon src="icons/scan.svg" />
+      <Icon src={ToggleSVG} />
     </Wrapper>
   );
 };
