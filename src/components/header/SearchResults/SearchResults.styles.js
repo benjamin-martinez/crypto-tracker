@@ -10,18 +10,18 @@ const fadeIn = keyframes`
 `;
 
 export const Wrapper = styled.div`
-    width: 510px;
+    width: 408px;
     background: ${props => props.theme.card.active};
     border-radius: 10px;
     display: ${props => props.showResults ? "flex" : " none"};
     position: absolute;
-    top: 83px;
+    top: 66px;
     z-index: 10;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
     animation: ${fadeIn} .1s ease-in-out;
 `;
 
 export const ResultsWrapper = styled.div`
-    padding: 10px;
+    padding: 8px;
     width: 100%;
 `;

@@ -8,20 +8,20 @@ export const Wrapper = styled.div`
 
 export const Form = styled.form`
     display: flex;
-    gap: 37px;
-    margin-top: 58px;
-    margin-bottom: 27px;
+    gap: 30px;
+    margin-top: 47px;
+    margin-bottom: 21px;
 `;
 
 export const ButtonSpan = styled.span`
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 7px;
 `;
 
 export const RadioButton = styled.span`
-    height: 27px;
-    width: 27px;
+    height: 22px;
+    width: 22px;
     border: solid 1px ${props => props.theme.money.green};
     border-radius: 50%;
     background: ${props => props.isSelected === true ? props.theme.money.green : "none"};
@@ -38,7 +38,7 @@ export const ButtonLabel = styled.label`
 export const ConversionWrapper = styled.div`
     display: flex;
     align-items: center;
-    gap:32px;
+    gap:26px;
 `;
 
 export const CoinInput = styled.div`
@@ -46,8 +46,8 @@ export const CoinInput = styled.div`
 `;
 
 export const Name = styled.div`
-    height: 45px;
-    width: 83px;
+    height: 36px;
+    width: 65px;
     background: ${props => props.theme.money.green};
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -57,14 +57,14 @@ export const Name = styled.div`
 `;
 
 export const InputPriceDiv = styled.div`
-    width: 248px;
-    height: 45px;
+    width: 198px;
+    height: 36px;
     background: ${props => props.theme.card.active};
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
     display: flex;
     align-items: center;
-    padding-left: 19px;
+    padding-left: 16px;
 
     :hover {
         cursor: text
@@ -77,6 +77,6 @@ export const Input = styled.input`
     color: white;`;
 
 export const ConversionArrowsIcon = styled.img`
-    width: 24px;
-    height: 18px;
+    width: 20px;
+    height: 14px;
 `;

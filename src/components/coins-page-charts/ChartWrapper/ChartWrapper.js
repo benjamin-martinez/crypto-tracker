@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getActiveCurrency } from "store/currencies";
+import { setBothChartDurations } from "store/charts/action";
 import {
   BarChart,
   DurationSelector,
   LineChart,
 } from "components/coins-page-charts";
+import { useWindowSize } from "hooks";
 import { addCommas, addDecimalsAndShorten } from "utils";
 import { ChartHeaderText, ChartSubText } from "styles/Fonts";
 import {
@@ -25,10 +27,12 @@ const ChartWrapper = (props) => {
   const [activePrice, setActivePrice] = useState("0.00");
   const [activeDate, setActiveDate] = useState("Nov 17, 2021");
   const durations = useSelector((state) => state.charts.durations);
+  const { width: screenWidth } = useWindowSize();
   const activeCurrency = useSelector(getActiveCurrency);
 
   function handleRDurationClick(duration) {
-    dispatch(props.setActiveChartDuration(duration));
+    if (screenWidth > 900) dispatch(props.setActiveChartDuration(duration));
+    else dispatch(setBothChartDurations(duration));
   }
 
   useEffect(() => {
@@ -41,8 +45,20 @@ const ChartWrapper = (props) => {
     //eslint-disable-next-line
   }, []);
 
+  const getWidth = () => {
+    if( screenWidth > 900) return 520;
+    if( screenWidth > 450) return 312;
+    return 234;
+  }
+
+  const getHeight = () => {
+    if( screenWidth > 900) return 220;
+    if( screenWidth > 450) return 132;
+    return 132;
+  }
+
   return !props.hasError ? (
-    <Wrapper>
+    <Wrapper visible={props.visible} responsive={props.responsive}>
       <TextWrapper>
         <ChartSubText>
           {props.activeChartOption.symbol.toUpperCase()}{" "}
@@ -67,11 +83,11 @@ const ChartWrapper = (props) => {
         {props.chartType === "volume"
           ? !props.isLoading &&
             props.chartHistory.length && (
-              <BarChart totalVolumes={props.chartHistory} />
+              <BarChart totalVolumes={props.chartHistory} getHeight={getHeight} getWidth={getWidth} />
             )
           : !props.isLoading &&
             props.chartHistory.length && (
-              <LineChart coinPrices={props.chartHistory} />
+              <LineChart coinPrices={props.chartHistory} getHeight={getHeight} getWidth={getWidth} />
             )}
       </SubWrapper>
     </Wrapper>

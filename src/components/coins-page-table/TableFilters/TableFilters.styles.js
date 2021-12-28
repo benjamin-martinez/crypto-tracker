@@ -1,22 +1,32 @@
 import styled from "styled-components";
 
 export const Wrapper = styled.div`
-  padding-left: 21px;
-  padding-right: 21px;
   padding-top: 21px;
+  width: 100%;
 `;
 
 export const ContentWrapper = styled.div`
   display: flex;
+  padding-left: 21px;
+  padding-right: 21px;
+  flex-wrap: wrap;
   align-items: center;
+  gap: 16px;
   justify-content: space-between;
   border-bottom: 1px solid ${(props) => props.theme.color};
+  @media (max-width: 900px) {
+    flex-direction: column;
+  }
 `;
 
 export const OrderBy = styled.div`
   display: flex;
   align-items: center;
   gap: 12px;
+  @media (max-width: 900px) {
+    flex-direction: column;
+    gap: 6px;
+  }
 `;
 
 export const DirectionToggle = styled.div`
@@ -33,6 +43,7 @@ export const DirectionToggle = styled.div`
 export const Categories = styled.div`
   display: flex;
   gap: 12px;
+  flex-wrap: wrap;
 `;
 
 export const CatWrapper = styled.div`
@@ -76,22 +87,24 @@ export const RowsDropdown = styled.div`
   left: 0px;
   display: flex;
   flex-direction: column;
-  background: ${props => props.theme.card.active};
+  background: ${(props) => props.theme.card.active};
   padding: 8px;
   border-radius: 10px;
   justify-items: center;
   align-items: center;
   gap: 2px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
 `;
 
 export const SelectionWrapper = styled.div`
-width: 100%;
-padding: 2px;
-border-radius: 10px;
-:hover {
-    background: ${props => props.theme.card.background}
-}`;
+  width: 100%;
+  padding: 2px;
+  border-radius: 10px;
+  :hover {
+    background: ${(props) => props.theme.card.background};
+  }
+`;
 
 export const PageSelectorWrapper = styled.div`
   display: flex;

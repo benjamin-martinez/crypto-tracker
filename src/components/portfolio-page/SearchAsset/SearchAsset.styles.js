@@ -1,11 +1,11 @@
 import styled, { keyframes } from "styled-components";
 
 export const Wrapper = styled.form`
-  width: 510px;
-  height: 63px;
+  width: 408px;
+  height: 50px;
   border-radius: 10px;
   display: flex;
-  gap: 20px;
+  gap: 16px;
   align-items: center;
   position: relative;
   :hover {
@@ -14,14 +14,14 @@ export const Wrapper = styled.form`
 `;
 
 export const Input = styled.input`
-  margin-left: 34px;
+  margin-left: 27px;
   background: none;
   border: none;
-  height: 20px;
+  height: 16px;
   width: 100%;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  font-size: 19px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  font-size: 15px;
   color: ${(props) => props.theme.color};
   &:focus {
     outline: none;
@@ -38,12 +38,12 @@ const fadeIn = keyframes`
 `;
 
 export const ErrorMessageWrapper = styled.div`
-  width: 510px;
+  width: 408px;
   background: ${(props) => props.theme.card.active};
   border-radius: 10px;
   display: flex;
   position: absolute;
-  top: 83px;
+  top: 66px;
   z-index: 10;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
     rgba(0, 0, 0, 0.22) 0px 15px 12px;
