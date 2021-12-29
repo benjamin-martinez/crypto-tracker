@@ -5,7 +5,7 @@ import { Wrapper, ResultsWrapper } from "./SearchResults.styles";
 
 const SearchResults = (props) => {
   return (
-    <Wrapper showResults={props.showResults}>
+    <Wrapper results={props.results} showResults={props.showResults}>
       <ResultsWrapper>
         {props.results.map((result) => (
           <Link
