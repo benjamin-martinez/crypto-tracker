@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
     border-radius: 10px;
     display: ${props => props.showResults ? "flex" : " none"};
     position: absolute;
-    top: 80px;
+    top: 60px;
     z-index: 10;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
     animation: ${fadeIn} .1s ease-in-out;

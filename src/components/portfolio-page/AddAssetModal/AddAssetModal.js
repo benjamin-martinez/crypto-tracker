@@ -7,7 +7,9 @@ import {
   ModalTitleText,
   CoinTableRowText,
   ModalButtonText,
+  PortfolioModalText,
 } from "styles/Fonts";
+import ExitSVG from "media/icons/exit.svg"
 import {
   BackgroundOuterWrapper,
   BackgroundInnerWrapper,
@@ -16,6 +18,7 @@ import {
   IdInnerWrapper,
   IdOuterWrapper,
   CoinIcon,
+  CoinName,
   CoinImageWrapper,
   ModalTitleWrapper,
   ModalContentWrapper,
@@ -72,12 +75,14 @@ const AddAssetModal = (props) => {
             <IdOuterWrapper>
               <IdInnerWrapper>
                 <CoinImageWrapper>
-                  <CoinIcon src={selectedCoin.large} />
+                  {selectedCoin.large && <CoinIcon src={selectedCoin.large} />}
                 </CoinImageWrapper>
                 {selectedCoin.name && (
-                  <CoinTableRowText>
+                  <CoinName>
+                  <PortfolioModalText>
                     {selectedCoin.name}&nbsp;({selectedCoin.symbol})
-                  </CoinTableRowText>
+                  </PortfolioModalText>
+                  </CoinName>
                 )}
               </IdInnerWrapper>
             </IdOuterWrapper>
@@ -109,7 +114,7 @@ const AddAssetModal = (props) => {
               <ModalButtonText>Save and Continue</ModalButtonText>
             </ModalButton>
           </ModalButtonsWrapper>
-          <ExitButton scr="icons/exit.svg" onClick={handleExitClick} />
+          <ExitButton src={ExitSVG} onClick={handleExitClick} />
         </ContentWrapper>
       </Wrapper>
     </BackgroundOuterWrapper>

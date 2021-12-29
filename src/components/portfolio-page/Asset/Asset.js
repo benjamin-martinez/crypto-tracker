@@ -10,6 +10,7 @@ import {
   IdInnerWrapper,
   IdOuterWrapper,
   CoinIcon,
+  CoinName,
   CoinImageWrapper,
   PriceDataWrapper,
   MarketDataWrapper,
@@ -32,10 +33,12 @@ const Asset = (props) => {
             <CoinImageWrapper>
               <CoinIcon src={props.asset.data.large} />
             </CoinImageWrapper>
-            <PortfolioEntryTitle>
-              {props.asset.data.name}&nbsp;(
-              {props.asset.data.symbol.toUpperCase()})
-            </PortfolioEntryTitle>
+            <CoinName>
+              <PortfolioEntryTitle>
+                {props.asset.data.name}&nbsp;(
+                {props.asset.data.symbol.toUpperCase()})
+              </PortfolioEntryTitle>
+            </CoinName>
           </IdInnerWrapper>
         </IdOuterWrapper>
         <PriceDataWrapper>
@@ -49,7 +52,9 @@ const Asset = (props) => {
             <SubSectionContent>
               <SubSectionSpan>
                 <SubSectionHeading>Current price:</SubSectionHeading>
-                <PriceText>{activeCurrency.symbol + addCommas(props.asset.current_price)}</PriceText>
+                <PriceText>
+                  {activeCurrency.symbol + addCommas(props.asset.current_price)}
+                </PriceText>
               </SubSectionSpan>
               <SubSectionSpan>
                 <SubSectionHeading>Price change 24h</SubSectionHeading>
@@ -120,7 +125,9 @@ const Asset = (props) => {
                   ) : (
                     <DownArrow />
                   )}
-                  <PriceText isNegative={ 0 > props.asset.last - props.asset.first}>
+                  <PriceText
+                    isNegative={0 > props.asset.last - props.asset.first}
+                  >
                     {activeCurrency.symbol +
                       addCommas(
                         (props.asset.last - props.asset.first) *

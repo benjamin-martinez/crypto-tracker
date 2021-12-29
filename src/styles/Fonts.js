@@ -23,7 +23,7 @@ export const SectionHeading = styled.h2`
   line-height: 120%;
 `;
 
-export const ChartSubText = styled.p  `
+export const ChartSubText = styled.p`
   font-size: 22px;
   font-weight: regular;
   line-height: 0%;
@@ -50,7 +50,7 @@ export const ChartDurationText = styled.p`
   line-height: 0px;
   @media (max-width: 900px) {
     font-size: 12px;
-    font-weight:400;
+    font-weight: 400;
   }
 `;
 
@@ -65,7 +65,13 @@ export const CoinTableTitle = styled.p`
 export const CoinTableRowText = styled.p`
   font-size: 15px;
   font-weight: regular;
-  line-height: 0px;
+  line-height: 0;
+`;
+
+export const PortfolioModalText = styled.p`
+  font-size: 15px;
+  font-weight: regular;
+  line-height: 100%;
 `;
 
 export const ButtonText = styled.span`

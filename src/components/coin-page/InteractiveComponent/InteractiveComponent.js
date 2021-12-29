@@ -50,7 +50,11 @@ const InteractiveComponent = (props) => {
     //eslint-disable-next-line
   }, [activeCurrency]);
 
-  console.log(window)
+  useEffect(() => {
+    if (props.coin.id)
+      setFiatAmount(props.coin.market_data.current_price[activeCurrency.name]);
+    //eslint-disable-next-line
+  }, []);
 
   return (
     <Wrapper>
