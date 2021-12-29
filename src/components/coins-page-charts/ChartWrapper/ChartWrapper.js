@@ -17,8 +17,6 @@ import {
   ErrorWrapper,
 } from "./ChartWrapper.styles";
 import {
-  LoadingBarChart,
-  LoadingLineChart,
   LoadingSpinner,
 } from "components/loading-animations";
 
@@ -56,7 +54,7 @@ const ChartWrapper = (props) => {
   const currentSymbol = activeCurrency.symbol;
 
   return !props.hasError ? (
-    <Wrapper>
+    <Wrapper visible={props.visible}>
       <TextWrapper>
         <ChartSubText>
           {props.activeChartOption.symbol.toUpperCase()}{" "}
@@ -73,8 +71,8 @@ const ChartWrapper = (props) => {
         handleRDurationClick={handleRDurationClick}
       />
       <SubWrapper>
-          {showLoadingLineChart && <LoadingLineChart />}
-          {showLoadingBarChart && <LoadingBarChart />}
+          {showLoadingLineChart && <LoadingSpinner />}
+          {showLoadingBarChart && <LoadingSpinner />}
           {isVolumeChart && showBarChart && <BarChart totalVolumes={props.chartHistory} />}
           {isPriceChart && showLineChart &&  <LineChart coinPrices={props.chartHistory} />}
       </SubWrapper>
