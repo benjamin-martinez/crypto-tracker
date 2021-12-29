@@ -10,13 +10,13 @@ export const Wrapper = styled.div`
   background: ${(props) => props.theme.card.background};
 
   @media (max-width: 900px) {
-    display: ${(props) => !props.visible && !props.responsive && "none"};
+    display: ${(props) => !props.visible && "none"};
     width: 361px;
     height: 215px;
   }
 
   @media (max-width: 450px) {
-    display: ${(props) => !props.visible && !props.responsive && "none"};
+    display: ${(props) => !props.visible && "none"};
     width: 270px;
     height: 215px;
   }
