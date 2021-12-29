@@ -39,6 +39,10 @@ export const Wrapper = styled.table`
 
 export const HeaderRow = styled.thead`
   text-align: left;
+  width:100%;
+  tr {
+    width:100%;
+  }
   th {
     line-height: 100%;
   }
@@ -54,7 +58,7 @@ export const THName = styled.th`
   text-overflow: ellipsis;
 
   @media (max-width: 900px) {
-    with: 25%;
+    width: 25%;
   }
 `;
 

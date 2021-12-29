@@ -10,7 +10,8 @@ import {
   SET_ACTIVE_CHART_OPTION,
   SET_ACTIVE_PRICE_CHART_DURATION,
   SET_ACTIVE_VOLUME_CHART_DURATION,
-  SET_BOTH_CHART_DURATIONS
+  SET_BOTH_CHART_DURATIONS,
+  SET_CURRENT_PRICE_AND_VOLUME
 } from "./index";
 
 export const getChartData =
@@ -82,5 +83,20 @@ export const setActivePriceChartDuration =
     dispatch({
       type: SET_BOTH_CHART_DURATIONS,
       payload: selection
+    })
+  }
+
+  export const setCurrentPriceAndVolume = (activeCurrency) => async  (dispatch, getState) => {
+    const state = getState();
+    const activeCoinId = state.charts.activeChartOption.id;
+    const { data } = await axios(`https://api.coingecko.com/api/v3/coins/${activeCoinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false`);
+    
+    const payload = {
+      price: data.market_data.current_price[activeCurrency.name],
+      volume: data.market_data.total_volume[activeCurrency.name]
+    }
+    dispatch({
+      type: SET_CURRENT_PRICE_AND_VOLUME,
+      payload
     })
   }

@@ -48,6 +48,10 @@ const BarChart = (props) => {
       },
     },
     maintainAspectRatio: false,
+    interaction: {
+      mode: 'index',
+      intersect: false,
+    },
     elements: {
       point: {
         radius: 0,

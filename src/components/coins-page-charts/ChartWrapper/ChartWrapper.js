@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getActiveCurrency } from "store/currencies";
+import { setBothChartDurations, setCurrentPriceAndVolume } from "store/charts/action";
 import {
   BarChart,
   DurationSelector,
@@ -18,6 +19,7 @@ import {
 import {
   LoadingBarChart,
   LoadingLineChart,
+  LoadingSpinner,
 } from "components/loading-animations";
 
 const ChartWrapper = (props) => {
@@ -25,6 +27,8 @@ const ChartWrapper = (props) => {
   const [activeDate, setActiveDate] = useState("Nov 17, 2021");
   const durations = useSelector((state) => state.charts.durations);
   const activeCurrency = useSelector(getActiveCurrency);
+  const currentPrice = useSelector(state => state.charts.currentPrice)
+  const currentVolume = useSelector(state => state.charts.currentVolume)
 
   function handleRDurationClick(duration) {
     dispatch(props.setActiveChartDuration(duration));
@@ -37,8 +41,11 @@ const ChartWrapper = (props) => {
       year: "numeric",
     });
     setActiveDate(date);
+
+    dispatch(setCurrentPriceAndVolume(activeCurrency))
     //eslint-disable-next-line
   }, []);
+
 
   const isVolumeChart = props.chartType === "volume";
   const isPriceChart = props.chartType === "price"
@@ -56,7 +63,7 @@ const ChartWrapper = (props) => {
           {isVolumeChart && "Volume"}
         </ChartSubText>
         <ChartHeaderText>
-          {`${currentSymbol}${isVolumeChart ? addDecimalsAndShorten(0) :  addCommas(0)}`}
+          {`${currentSymbol}${isVolumeChart ? addDecimalsAndShorten(currentVolume) :  addCommas(currentPrice)}`}
         </ChartHeaderText>
         <ChartSubText>{activeDate}</ChartSubText>
       </TextWrapper>
