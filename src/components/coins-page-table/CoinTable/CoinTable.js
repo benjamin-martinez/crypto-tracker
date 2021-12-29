@@ -29,12 +29,12 @@ const CoinTable = (props) => {
   const { width: screenWidth } = useWindowSize();
   const loaders = Array.apply(null, Array(20)).map(function () {});
   const activeCurrency = useSelector(getActiveCurrency);
-  const activeCategory = useSelector((state) => state.coins.activeCategory);
-  const activeDirection = useSelector((state) => state.coins.activeDirection);
-  const activePageNum = useSelector((state) => state.coins.pageNum);
-  const activeResultsPerPage = useSelector(
-    (state) => state.coins.activeResultsPerPage
-  );
+  const {
+    activeCategory,
+    activeDirection,
+    activePageNum,
+    activeResultsPerPage,
+  } = useSelector((state) => state.coins);
 
   useEffect(() => {
     props.getCoinsDataByCategory(activeCategory);
