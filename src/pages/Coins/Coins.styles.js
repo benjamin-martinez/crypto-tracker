@@ -25,7 +25,8 @@ export const SectionWrapper = styled.div`
   color: ${(props) => props.theme.color};
 `;
 
-export const HeadingDiv = styled.div``;
+export const HeadingDiv = styled.div`
+width: 200px;`;
 
 export const HeadingDropdown = styled.div`
   display: flex;

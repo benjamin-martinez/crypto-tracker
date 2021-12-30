@@ -109,7 +109,7 @@ export const LeftArrow = styled.div`
   :hover {
     cursor: pointer;
   }
-  @media (max-width: 900px) {
+  @media (max-width: 1300px) {
     display: block;
   }
 `;
@@ -125,7 +125,7 @@ export const RightArrow = styled.div`
   :hover {
     cursor: pointer;
   }
-  @media (max-width: 900px) {
+  @media (max-width: 1300px) {
     display: block;
   }
 `;

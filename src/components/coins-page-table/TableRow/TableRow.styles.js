@@ -26,6 +26,10 @@ export const TokenSpan = styled.span`
   display: flex;
   gap: 13px;
   align-items: center;
+
+  :hover {
+    text-decoration: underline;
+  }
 `;
 
 export const DoubleSpan = styled.span`
