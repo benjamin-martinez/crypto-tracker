@@ -55,7 +55,7 @@ const InteractiveComponent = (props) => {
       setFiatAmount(props.coin.market_data.current_price[activeCurrency.name]);
     //eslint-disable-next-line
   }, []);
-
+  
   return (
     <Wrapper>
       <ConversionWrapper>
