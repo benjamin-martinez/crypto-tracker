@@ -108,3 +108,10 @@ export const PriceChangeWrapper = styled.span`
   gap: 4px;
   align-items: center;
 `;
+
+export const CoinName = styled.span`
+  width: 200px;
+  text-align: center;
+  word-wrap: break-word;
+  overflow: hidden;
+`;

@@ -12,13 +12,20 @@ const shimmer = keyframes`
 export const Wrapper = styled.div`
   display: flex;
   width: 100%;
-  gap: 24px;
+  gap: 50px;
   align-items: center;
   border-radius: 10px;
-  @media (max-width: 900px) {
-    flex-direction: column;
-  }
+  flex-direction: column;
 `;
+
+export const TopWrapper = styled.div`
+display: flex;
+width: 100%;
+gap: 24px;
+align-items: center;
+@media (max-width: 900px) {
+  flex-direction: column;
+}`;
 
 export const InnerDiv1 = styled.div`
   height: 236px;

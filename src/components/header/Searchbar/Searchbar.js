@@ -44,7 +44,7 @@ const Searchbar = () => {
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
-    if (e.target.value.length > 2) {
+    if (e.target.value.length > 0) {
       debounce(getFilteredTokens, 1000)(e.target.value);
     } else {
       dispatch(clearSearchResults());
@@ -58,14 +58,21 @@ const Searchbar = () => {
   };
 
   useEffect(() => {
-    if (results && results.length > 0 && searchTerm.length > 2) {
+    if (searchTerm.length === 0) {
+      setSearchTerm("");
+      setShowResults(false);
+    }
+  }, [searchTerm]);
+
+  useEffect(() => {
+    if (results && results.length > 0) {
       setShowResults(true);
     }
     //eslint-disable-next-line
   }, [results]);
 
   return (
-    <Wrapper ref={wrapperRef} onSubmit={(e) => e.preventDefault()} >
+    <Wrapper ref={wrapperRef} onSubmit={(e) => e.preventDefault()}>
       <Icon src={SearchSVG} />
       <Input
         type="text"
@@ -85,10 +92,6 @@ const Searchbar = () => {
             <ErrorMessage>
               {isLoading ? (
                 <SearchResultsText>Loading. Please wait...</SearchResultsText>
-              ) : searchTerm.length < 3 ? (
-                <SearchResultsText>
-                  Please enter at least 3 characters.
-                </SearchResultsText>
               ) : (
                 !results && (
                   <SearchResultsText>

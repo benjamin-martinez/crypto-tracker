@@ -164,9 +164,18 @@ export const ModalButton = styled.div`
   }
 `;
 
+export const CoinName = styled.span`
+  width: 150px;
+  text-align: center;
+  line-height: 100%;
+  word-wrap: break-word;
+  overflow: hidden;
+`;
+
 export const CoinIcon = styled.img`
   height: 28px;
   width: 28px;
+  border: none;
 `;
 
 export const CoinImageWrapper = styled.div`

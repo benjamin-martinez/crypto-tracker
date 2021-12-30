@@ -22,7 +22,6 @@ function searchReducer(state = initialState, action) {
     case GET_SEARCH_COINS_PENDING:
       return {
         ...state,
-        data: action.payload,
         isLoading: true,
         hasError: false,
         error: null,
