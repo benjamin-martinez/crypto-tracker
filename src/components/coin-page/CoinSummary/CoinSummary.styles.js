@@ -15,7 +15,7 @@ export const SectionWrapper = styled.div`
   gap: 60px;
   justify-items: center;
   align-items: center;
-  @media (max-width: 900px) {
+  @media (max-width: 1100px) {
     flex-direction: column;
   }
 `;
@@ -25,6 +25,15 @@ export const CoinId = styled.div`
   width: 206px;
   display: grid;
   gap: 16px;
+`;
+
+export const FirstWrapper = styled.div`
+  display: flex;
+  gap: 60px;
+  @media (max-width: 900px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 export const IdOuterWrapper = styled.div`
@@ -58,7 +67,12 @@ export const Icon = styled.img`
   width: 35px;
 `;
 
-export const CoinName = styled.span``;
+export const CoinName = styled.span`
+  width: 150px;
+  text-align: center;
+  word-wrap: break-word;
+  overflow: hidden;
+`;
 
 export const LinkWrapper = styled.div`
   background: ${(props) => props.theme.card.background};
@@ -69,6 +83,12 @@ export const LinkWrapper = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+`;
+
+export const LinkSpan = styled.div`
+  width: 120px;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 export const LinkIcon = styled.img`
@@ -185,6 +205,10 @@ export const MarketDetails = styled.div`
   border-radius: 10px;
   height: 303px;
   width: 437px;
+
+  @media (max-width: 1100px) {
+    width: 100%;
+  }
 `;
 
 export const MarketDetailsTop = styled.div`

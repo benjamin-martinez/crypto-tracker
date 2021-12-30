@@ -8,6 +8,7 @@ import {
   InteractiveComponent,
 } from "components/coin-page";
 import { Wrapper, ContentWrapper } from "./Coin.styles";
+import LoadingCoinPage from "components/loading-animations/LoadingCoinPage";
 
 const Coin = (props) => {
   const activeCurrency = useSelector(getActiveCurrency);
@@ -24,12 +25,14 @@ const Coin = (props) => {
 
   return (
     <Wrapper>
-      {coin.id && (
+      {coin.id ? (
         <ContentWrapper>
           <CoinSummary coin={coin} isLoading={isLoading} />
           <CoinDescription coin={coin} isLoading={isLoading} />
           <InteractiveComponent coin={coin} isLoading={isLoading} />
         </ContentWrapper>
+      ) : (
+        <LoadingCoinPage />
       )}
     </Wrapper>
   );

@@ -21,11 +21,11 @@ const BackgroundChart = (props) => {
   };
   const chartData = (canvas) => {
     const ctx = canvas.getContext("2d");
-    var gradientFill = ctx.createLinearGradient(0, 0, 0, 350);
+    let gradientFill = ctx.createLinearGradient(0, 0, 0, 210);
     let prices = getPrices(props.coinPrices);
     const borderColor = "rgba(44, 47, 54, 1)";
-    gradientFill.addColorStop(0, "rgba(44, 47, 54, .5)");
     gradientFill.addColorStop(1, "rgba(0, 0, 0, 0.0)");
+    gradientFill.addColorStop(0, "rgba(44, 47, 54, .5)");
     return {
       labels: getLabels(props.coinPrices),
       datasets: [
@@ -77,11 +77,8 @@ const BackgroundChart = (props) => {
     },
   };
   return (
-    <Wrapper width={screenWidth}>
-      <Line
-        data={chartData}
-        options={options}
-      />
+    <Wrapper width={screenWidth - window.scrollX*2}>
+      <Line data={chartData} options={options} />
     </Wrapper>
   );
 };

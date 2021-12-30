@@ -3,9 +3,15 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   display: grid;
   justify-items: center;
-  width: 100%;
-  margin-left: 10%;
-  margin-right: 10%;
+  width: 1133px;
+
+  @media (max-width: 1100px) {
+    width: 636px;
+  }
+
+  @media (max-width: 900px) {
+    width: 437px;
+  }
 `;
 
 export const Title = styled.div`
@@ -66,6 +72,12 @@ export const LinkWrapper = styled.div`
   position: relative;
 `;
 
+export const LinkSpan = styled.div`
+  width: 120px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+`;
+
 export const LinkIcon = styled.img`
   width: 11px;
   height: 11px;
@@ -76,6 +88,8 @@ export const LinkIcon = styled.img`
 export const CopyIcon = styled.img`
   position: absolute;
   right: 12px;
+  top: 12px;
   height: 16px;
-  width: 16px;
+  width: 18px;
+  filter: grayscale(100%);
 `;

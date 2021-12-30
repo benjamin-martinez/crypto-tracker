@@ -13,6 +13,7 @@ import {
   LinksWrapper,
   LinkWrapper,
   LinkIcon,
+  LinkSpan,
   CopyIcon,
 } from "./CoinDescription.styles";
 
@@ -38,10 +39,12 @@ const CoinDescription = (props) => {
           .map((link) => (
             <LinkWrapper>
               <LinkIcon src={LinkSVG} />
-              <ExternalLinkText href={link} target="_blank">
-                {link}
-              </ExternalLinkText>
-              <CopyIcon src={CopySVG} />
+              <LinkSpan>
+                <ExternalLinkText href={link} target="_blank">
+                  {link}
+                </ExternalLinkText>
+                <CopyIcon src={CopySVG} />
+              </LinkSpan>
             </LinkWrapper>
           ))}
       </LinksWrapper>

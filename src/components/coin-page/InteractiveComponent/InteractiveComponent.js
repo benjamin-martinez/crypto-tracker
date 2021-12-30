@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { getActiveCurrency } from "store/currencies";
 import { SectionHeading } from "styles/Fonts";
 import { BackgroundChartWrapper } from "components/coin-page";
+import ConversionArrowsIMG from "media/icons/conversion-arrows.svg";
 import { addCommasNoDec } from "utils";
 import {
   Wrapper,
@@ -63,7 +64,7 @@ const InteractiveComponent = (props) => {
             />
           </InputPriceDiv>
         </CoinInput>
-        <ConversionArrowsIcon src="icons/conversion-arrows.svg" />
+        <ConversionArrowsIcon src={ConversionArrowsIMG} />
         <CoinInput>
           <Name>
             <SectionHeading>{activeCurrency.name.toUpperCase()}</SectionHeading>
