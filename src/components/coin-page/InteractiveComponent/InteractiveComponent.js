@@ -50,8 +50,6 @@ const InteractiveComponent = (props) => {
     //eslint-disable-next-line
   }, [activeCurrency]);
 
-  console.log(window)
-
   return (
     <Wrapper>
       <ConversionWrapper>
