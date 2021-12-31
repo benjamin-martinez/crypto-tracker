@@ -33,6 +33,11 @@ const ChartWrapper = (props) => {
   }
 
   useEffect(() => {
+    dispatch(setCurrentPriceAndVolume(activeCurrency))
+    //eslint-disable-next-line
+  }, [activeCurrency])
+
+  useEffect(() => {
     let date = new Date().toLocaleString(undefined, {
       month: "short",
       day: "numeric",
