@@ -12,5 +12,8 @@ export const SliderWrapper = styled.div`
     height: ${props => props.height};
     border-radius: 50px;
     background: ${props => props.background};
+    overflow: hidden;
+    border: .5px solid;
+    border-color: ${props => props.theme.headerSlider.border}
 `;
 

@@ -72,6 +72,9 @@ const LineChart = (props) => {
           maxRotation: 0,
           autoSkip: true,
           maxTicksLimit: 7,
+          font: {
+            size: 9,
+          },
         },
         grid: {
           display: false,
@@ -89,7 +92,6 @@ const LineChart = (props) => {
       },
     },
   };
-
   
   return (
     <Wrapper width={getWidth(screenWidth)} height={getHeight(screenWidth)}>

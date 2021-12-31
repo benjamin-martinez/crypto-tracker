@@ -11,7 +11,7 @@ import {
   DoubleSpan,
   DoubleSpanTop
 } from "./TableRow.styles";
-import { CoinTableRowText } from "styles/Fonts";
+import { CoinTableRowText, CoinTableRowTextShrink } from "styles/Fonts";
 import { UpArrow, DownArrow } from "styles/arrows";
 import { Slider, SliderWrapper } from "styles/sliders";
 import {
@@ -90,17 +90,17 @@ const TableRow = (props) => {
         <td>
           <DoubleSpan>
             <DoubleSpanTop>
-              <CoinTableRowText>
+              <CoinTableRowTextShrink>
                 {addDecimalsAndShorten(props.coin.total_volume, activeCurrency)}
-              </CoinTableRowText>
-              <CoinTableRowText>
+              </CoinTableRowTextShrink>
+              <CoinTableRowTextShrink>
                 {addDecimalsAndShorten(props.coin.market_cap, activeCurrency)}
-              </CoinTableRowText>
+              </CoinTableRowTextShrink>
             </DoubleSpanTop>
-            <SliderWrapper height="8px" width="100%" background="white">
+            <SliderWrapper height="8px" width="100%" background="#2172e5">
               <Slider
                 width={(props.coin.total_volume / props.coin.market_cap) * 100}
-                background="#aaaaaa"
+                background="white"
               />
             </SliderWrapper>
           </DoubleSpan>
@@ -108,22 +108,22 @@ const TableRow = (props) => {
         <td>
           <DoubleSpan>
             <DoubleSpanTop>
-              <CoinTableRowText>
+              <CoinTableRowTextShrink>
                 {formatLargeNumber(props.coin.circulating_supply)}
-              </CoinTableRowText>
-              <CoinTableRowText>
+              </CoinTableRowTextShrink>
+              <CoinTableRowTextShrink>
                 {props.coin.total_supply === null
                   ? "∞"
                   : formatLargeNumber(props.coin.total_supply)}
-              </CoinTableRowText>
+              </CoinTableRowTextShrink>
             </DoubleSpanTop>
-            <SliderWrapper height="8px" width="100%" background="white">
+            <SliderWrapper height="8px" width="100%" background="#2172e5">
               <Slider
                 width={
                   (props.coin.circulating_supply / props.coin.total_supply) *
                   100
                 }
-                background="#aaaaaa"
+                background="white"
               />
             </SliderWrapper>
           </DoubleSpan>

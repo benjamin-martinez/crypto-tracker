@@ -9,6 +9,10 @@ export const Wrapper = styled.div`
   border-radius: 10px;
   background: ${(props) => props.theme.card.background};
 
+  @media (max-width: 1300px) {
+    display: ${(props) => !props.visible && "none"};
+  }
+
   @media (max-width: 900px) {
     display: ${(props) => !props.visible && "none"};
     width: 361px;

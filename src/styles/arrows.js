@@ -48,6 +48,9 @@ export const NeutralDot = styled.div`
   width: 8px;
   border-radius: 50%;
   background: ${(props) => props.background};
+  @media (max-width: 400px) {
+    display: none;
+  }
 `;
 
 export const DownNuetralArrow = styled.div`
@@ -109,7 +112,7 @@ export const LeftArrow = styled.div`
   :hover {
     cursor: pointer;
   }
-  @media (max-width: 900px) {
+  @media (max-width: 1300px) {
     display: block;
   }
 `;
@@ -125,7 +128,7 @@ export const RightArrow = styled.div`
   :hover {
     cursor: pointer;
   }
-  @media (max-width: 900px) {
+  @media (max-width: 1300px) {
     display: block;
   }
 `;

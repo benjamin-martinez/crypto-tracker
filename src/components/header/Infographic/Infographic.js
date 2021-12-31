@@ -70,7 +70,7 @@ const Infographic = (props) => {
                 {addDecimalsAndShorten(data.total_volume[activeCurrency.name])}
               </NavText>
               <SliderWrapper height="13px" width="55px" background="#2172E5">
-                <Slider width="28" background="#ffffff" />
+                <Slider width={Math.round((data.total_volume[activeCurrency.name]/data.total_market_cap[activeCurrency.name])*100)} background="#ffffff" />
               </SliderWrapper>
             </PriceWrapper>
           </Volume>

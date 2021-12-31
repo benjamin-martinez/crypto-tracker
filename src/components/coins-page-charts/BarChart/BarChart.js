@@ -49,7 +49,7 @@ const BarChart = (props) => {
     },
     maintainAspectRatio: false,
     interaction: {
-      mode: 'index',
+      mode: "index",
       intersect: false,
     },
     elements: {
@@ -65,6 +65,9 @@ const BarChart = (props) => {
           maxRotation: 0,
           autoSkip: true,
           maxTicksLimit: 7,
+          font: {
+            size: 9,
+          },
         },
         grid: {
           display: false,
@@ -84,7 +87,7 @@ const BarChart = (props) => {
   };
   return (
     <Wrapper width={getWidth(screenWidth)} height={getHeight(screenWidth)}>
-      <Bar data={chartData} options={options}  />
+      <Bar data={chartData} options={options} />
     </Wrapper>
   );
 };

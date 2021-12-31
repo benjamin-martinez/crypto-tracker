@@ -6,6 +6,7 @@ export const OutsideWrapper = styled.div`
   display: block;
   width: 1300px;
   @media (max-width: 900px) {
+    width: 100%;
     margin-top: 25px;
     width: ${(props) => props.width}px;
     border-radius: 0px;
@@ -17,10 +18,10 @@ export const ScrollWrapper = styled.div`
   overflow-x: scroll;
   &::-webkit-scrollbar {
     width: 10px;
-    background: ${props => props.theme.background};
+    background: ${(props) => props.theme.background};
   }
   &::-webkit-scrollbar-thumb {
-    background: ${props => props.theme.money.green};
+    background: ${(props) => props.theme.money.green};
     border-radius: 120px;
     height: 5px;
   }
@@ -39,9 +40,9 @@ export const Wrapper = styled.table`
 
 export const HeaderRow = styled.thead`
   text-align: left;
-  width:100%;
+  width: 100%;
   tr {
-    width:100%;
+    width: 100%;
   }
   th {
     line-height: 100%;
@@ -49,7 +50,7 @@ export const HeaderRow = styled.thead`
 `;
 
 export const THNum = styled.th`
-  width: 5.3%;
+  width: .3%;
   text-overflow: ellipsis;
 `;
 

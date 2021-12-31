@@ -25,7 +25,11 @@ export const SectionWrapper = styled.div`
   color: ${(props) => props.theme.color};
 `;
 
-export const HeadingDiv = styled.div``;
+export const HeadingDiv = styled.div`
+width: 200px;
+@media (max-width: 450px) {
+  margin-left: 45px;
+}`;
 
 export const HeadingDropdown = styled.div`
   display: flex;

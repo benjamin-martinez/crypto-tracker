@@ -31,6 +31,7 @@ export const RightNav = styled.div`
 export const MobileHeader = styled.div`
   display: none;
   @media (max-width: 900px) {
+    width: 100%;
     margin-left: 29px;
     display: flex;
   }

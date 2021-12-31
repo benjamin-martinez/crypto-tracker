@@ -21,6 +21,7 @@ export const themes = {
     headerSlider: {
       background: "#2172E5",
       foreground: "#ffffff",
+      border: "#191b1f"
     },
   },
   light: {
@@ -45,6 +46,7 @@ export const themes = {
     headerSlider: {
       background: "#2172E5",
       foreground: "#2C2F36",
+      border: "000000"
     },
   },
 };

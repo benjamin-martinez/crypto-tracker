@@ -86,4 +86,8 @@ export const EthDominance = styled.div`
   align-items: center;
   gap: 4px;
   margin-right: 53px;
+
+  @media (max-width: 420px) {
+    margin-right: 0px;
+  }
 `;
