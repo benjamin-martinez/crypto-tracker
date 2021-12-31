@@ -89,7 +89,6 @@ const LineChart = (props) => {
       },
     },
   };
-
   
   return (
     <Wrapper width={getWidth(screenWidth)} height={getHeight(screenWidth)}>

@@ -26,7 +26,10 @@ export const SectionWrapper = styled.div`
 `;
 
 export const HeadingDiv = styled.div`
-width: 200px;`;
+width: 200px;
+@media (max-width: 450px) {
+  margin-left: 45px;
+}`;
 
 export const HeadingDropdown = styled.div`
   display: flex;

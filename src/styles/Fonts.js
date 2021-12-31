@@ -68,6 +68,16 @@ export const CoinTableRowText = styled.p`
   line-height: 0;
 `;
 
+export const CoinTableRowTextShrink = styled.p`
+  font-size: 15px;
+  font-weight: regular;
+  line-height: 0;
+
+  @media (max-width: 420px) {
+    font-size: 11px;
+  }
+`;
+
 export const PortfolioModalText = styled.p`
   font-size: 15px;
   font-weight: regular;

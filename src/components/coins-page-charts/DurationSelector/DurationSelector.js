@@ -1,5 +1,6 @@
 import React from "react";
 import { ChartDurationText } from "styles/Fonts";
+import { useWindowSize } from "hooks";
 import { Wrapper, ContentWrapper, SWrapper } from "./DurationSelector.styles";
 
 const Selection = (props) => {
@@ -14,8 +15,9 @@ const Selection = (props) => {
 };
 
 const DurationSelector = (props) => {
+  const { width: screenWidth } = useWindowSize();
   return (
-    <Wrapper>
+    <Wrapper screenWidth={screenWidth}>
       <ContentWrapper>
         {props.durations.map((duration) => (
           <Selection

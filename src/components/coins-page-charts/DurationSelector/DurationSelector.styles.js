@@ -13,7 +13,14 @@ export const Wrapper = styled.div`
     width: 200px;
     height: 32px;
     top: 250px;
-    left: 100px;   
+    left: 96px;   
+  }
+
+  @media (max-width: 450px) {
+    width: 200px;
+    height: 32px;
+    top: 250px;
+    left: 50px;  
   }
 `;
 

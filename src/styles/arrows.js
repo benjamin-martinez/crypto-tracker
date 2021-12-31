@@ -48,6 +48,9 @@ export const NeutralDot = styled.div`
   width: 8px;
   border-radius: 50%;
   background: ${(props) => props.background};
+  @media (max-width: 400px) {
+    display: none;
+  }
 `;
 
 export const DownNuetralArrow = styled.div`
