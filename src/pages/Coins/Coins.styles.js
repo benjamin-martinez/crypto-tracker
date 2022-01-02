@@ -17,7 +17,7 @@ export const ChartsWrapper = styled.div`
   gap: 45px;
 
   @media (max-width: 900px) {
-    gap:20px;
+    gap:15px;
   }
 `;
 

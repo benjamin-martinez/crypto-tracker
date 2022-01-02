@@ -45,9 +45,6 @@ const Asset = (props) => {
           <MarketDataWrapper>
             <SubSectionHeadingWrapper>
               <SubSectionHeading>Market Price:</SubSectionHeading>
-              <EditIconWrapper>
-                <EditIcon src="icons/pencil-edit.svg" />
-              </EditIconWrapper>
             </SubSectionHeadingWrapper>
             <SubSectionContent>
               <SubSectionSpan>
@@ -96,9 +93,6 @@ const Asset = (props) => {
           <MarketDataWrapper>
             <SubSectionHeadingWrapper>
               <SubSectionHeading>Your Coin:</SubSectionHeading>
-              <EditIconWrapper>
-                <EditIcon src="icons/pencil-edit.svg" />
-              </EditIconWrapper>
             </SubSectionHeadingWrapper>
             <SubSectionContent>
               <SubSectionSpan>
