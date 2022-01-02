@@ -7,7 +7,6 @@ import {
   DurationSelector,
   LineChart,
 } from "components/coins-page-charts";
-import { useWindowSize } from "hooks";
 import { addCommas, addDecimalsAndShorten } from "utils";
 import { ChartHeaderText, ChartSubText } from "styles/Fonts";
 import {

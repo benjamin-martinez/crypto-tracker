@@ -29,8 +29,8 @@ export const MenuItem = styled.div`
 `;
 
 export const Icon = styled.img`
-  height: 33px;
-  width: 33px;
+  height: 29px;
+  width: 29px;
   filter: ${(props) => props.theme.icon};
 `;
 

@@ -48,7 +48,7 @@ export const Wrapper = styled.div`
   animation: ${fadeInForeground} 0.5s ease-out;
 
   @media (max-width: 900px) {
-    width: 400px;
+    width: 375px;
     height: auto;
     top: 50px;
     left: ${(props) => props.width / 2 - 400 / 2}px;

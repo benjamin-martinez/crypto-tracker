@@ -119,7 +119,6 @@ function portfolioReducer(state = initialState, action) {
         historicalDataHasError: false,
       };
     case LOAD_ASSETS_HISTORICAL_DATA_SUCCESS:
-      console.log(action.payload)
       return {
         ...state,
         assets: action.payload,

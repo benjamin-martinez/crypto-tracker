@@ -24,6 +24,9 @@ export const AddAssetButton = styled.span`
     :hover {
         cursor: pointer;
     }
+    @media (max-width: 900px) {
+        width: 350px;
+    }
 `;
 
 export const SectionWrapper = styled.div`
@@ -31,6 +34,11 @@ export const SectionWrapper = styled.div`
     color: ${props => props.theme.color};
     justify-content: start;
     gap: 50px;
+
+    @media (max-width: 420px) {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
 `;
 
 export const AssetWrapper = styled.div`
