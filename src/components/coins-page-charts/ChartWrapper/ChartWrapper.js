@@ -21,7 +21,7 @@ import {
 
 const ChartWrapper = (props) => {
   const dispatch = useDispatch();
-  const [activeDate, setActiveDate] = useState("Nov 17, 2021");
+  const [activeDate, setActiveDate] = useState("");
   const durations = useSelector((state) => state.charts.durations);
   const activeCurrency = useSelector(getActiveCurrency);
   const currentPrice = useSelector(state => state.charts.currentPrice)

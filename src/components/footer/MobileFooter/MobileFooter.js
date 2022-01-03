@@ -11,7 +11,8 @@ import {
   Title,
 } from "./MobileFooter.styles";
 
-const MobileFooter = () => {
+const MobileFooter = (props) => {
+
   return (
     <Wrapper>
       <MenuWrapper>
@@ -33,7 +34,7 @@ const MobileFooter = () => {
             <Title>Summary</Title>
           </MenuItem>
         </Link>
-        <MenuItem>
+        <MenuItem onClick={props.handleMobileSearchClick}>
           <Icon src={SearchSVG} />
           <Title>Search</Title>
         </MenuItem>

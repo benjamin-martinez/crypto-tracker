@@ -18,6 +18,8 @@ const Searchbar = () => {
   const [showResults, setShowResults] = useState(false);
   const results = useSelector((state) => state.search.data);
   const isLoading = useSelector((state) => state.search.isLoading);
+  const error = useSelector((state) => state.search.error);
+  const hasError = useSelector((state) => state.search.hasError);
   const dispatch = useDispatch();
 
   const wrapperRef = useRef();
@@ -70,6 +72,12 @@ const Searchbar = () => {
     }
     //eslint-disable-next-line
   }, [results]);
+
+  useEffect(() => {
+    if (isLoading) {
+      setShowResults(true)
+    }
+  }, [isLoading])
 
   return (
     <Wrapper ref={wrapperRef} onSubmit={(e) => e.preventDefault()}>

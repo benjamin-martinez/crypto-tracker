@@ -10,14 +10,18 @@ import { Coins, Portfolio, Coin } from "pages";
 import { GlobalStyle } from "styles/GlobalStyle";
 import { themes } from "styles/colors";
 import { Header } from "components";
+import { MobileSearchModal } from "components/mobile-search";
 import { Footer, MobileFooter } from "components/footer";
 
 function App() {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
+  const [isMobileSearchActive, setIsMobileSearchActive] = useState(false);
 
   const getCurrentTheme = () => (isDarkTheme ? themes.dark : themes.light);
 
   const toggleTheme = () => setIsDarkTheme(!isDarkTheme);
+
+  const handleMobileSearchClick = () => setIsMobileSearchActive(!isMobileSearchActive);
 
   return (
     <ThemeProvider theme={getCurrentTheme()}>
@@ -35,7 +39,8 @@ function App() {
             />
           </Switch>
           <Footer />
-          <MobileFooter />
+          <MobileSearchModal isActive={isMobileSearchActive} handleMobileSearchClick={handleMobileSearchClick}/>
+          <MobileFooter handleMobileSearchClick={handleMobileSearchClick} />
         </Router>
       </div>
     </ThemeProvider>
