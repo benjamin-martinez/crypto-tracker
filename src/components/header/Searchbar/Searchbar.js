@@ -32,7 +32,6 @@ const Searchbar = () => {
           setShowResults(false);
         }
       }
-
       document.addEventListener("mousedown", handleClickOutside);
       return () => {
         document.removeEventListener("mousedown", handleClickOutside);
@@ -51,20 +50,23 @@ const Searchbar = () => {
     } else {
       dispatch(clearSearchResults());
       setShowResults(false);
+      setSearchTerm("");
     }
   };
 
   const handleLinkClick = () => {
     setSearchTerm("");
     setShowResults(false);
+    dispatch(clearSearchResults());
   };
 
-  useEffect(() => {
-    if (searchTerm.length === 0) {
-      setSearchTerm("");
-      setShowResults(false);
-    }
-  }, [searchTerm]);
+  // useEffect(() => {
+  //   if (searchTerm.length === 0) {
+  //     setSearchTerm("");
+  //     setShowResults(false);
+  //     dispatch(clearSearchResults());
+  //   }
+  // }, [searchTerm]);
 
   useEffect(() => {
     if (results && results.length > 0) {
@@ -72,12 +74,6 @@ const Searchbar = () => {
     }
     //eslint-disable-next-line
   }, [results]);
-
-  useEffect(() => {
-    if (isLoading) {
-      setShowResults(true)
-    }
-  }, [isLoading])
 
   return (
     <Wrapper ref={wrapperRef} onSubmit={(e) => e.preventDefault()}>
@@ -88,28 +84,29 @@ const Searchbar = () => {
         onChange={handleChange}
         value={searchTerm}
       />
-      {showResults &&
-        (results ? (
-          <SearchResults
-            showResults={showResults}
-            results={results}
-            handleLinkClick={handleLinkClick}
-          />
-        ) : (
-          <ErrorMessageWrapper>
-            <ErrorMessage>
-              {isLoading ? (
-                <SearchResultsText>Loading. Please wait...</SearchResultsText>
-              ) : (
-                !results && (
-                  <SearchResultsText>
-                    No results found. Try another search.
-                  </SearchResultsText>
-                )
-              )}
-            </ErrorMessage>
-          </ErrorMessageWrapper>
-        ))}
+      {showResults && results && (
+        <SearchResults
+          showResults={showResults}
+          results={results}
+          handleLinkClick={handleLinkClick}
+        />
+      )}
+      {showResults && results.length === 0 && isLoading && (
+        <ErrorMessageWrapper>
+          <ErrorMessage>
+            <SearchResultsText>Loading. Please wait...</SearchResultsText>
+          </ErrorMessage>
+        </ErrorMessageWrapper>
+      )}
+      {error && (
+        <ErrorMessageWrapper>
+          <ErrorMessage>
+            <SearchResultsText>
+              No results found. Try another search.
+            </SearchResultsText>
+          </ErrorMessage>
+        </ErrorMessageWrapper>
+      )}
     </Wrapper>
   );
 };

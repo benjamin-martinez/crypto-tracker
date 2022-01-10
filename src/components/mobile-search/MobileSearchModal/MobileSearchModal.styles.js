@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   background: ${(props) => props.theme.background};
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  display: ${(props) => props.isActive && "none"};
+  display: ${(props) => !props.isActive && "none"};
 `;
 
 export const ContentWrapper = styled.div`
