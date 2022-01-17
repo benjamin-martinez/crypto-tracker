@@ -45,7 +45,8 @@ const Searchbar = () => {
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
-    if (e.target.value.length > 0) {
+    if (e.target.value !== "") {
+      if (searchTerm !== "")
       debounce(getFilteredTokens, 1000)(e.target.value);
     } else {
       dispatch(clearSearchResults());
@@ -71,9 +72,13 @@ const Searchbar = () => {
   useEffect(() => {
     if (results && results.length > 0) {
       setShowResults(true);
+    } 
+    
+    if (searchTerm === "") {
+      setShowResults(false)
     }
     //eslint-disable-next-line
-  }, [results]);
+  }, [results, searchTerm]);
 
   return (
     <Wrapper ref={wrapperRef} onSubmit={(e) => e.preventDefault()}>
