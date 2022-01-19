@@ -18,6 +18,8 @@ const Searchbar = () => {
   const [showResults, setShowResults] = useState(false);
   const results = useSelector((state) => state.search.data);
   const isLoading = useSelector((state) => state.search.isLoading);
+  const error = useSelector((state) => state.search.error);
+  const hasError = useSelector((state) => state.search.hasError);
   const dispatch = useDispatch();
 
   const wrapperRef = useRef();
@@ -30,7 +32,6 @@ const Searchbar = () => {
           setShowResults(false);
         }
       }
-
       document.addEventListener("mousedown", handleClickOutside);
       return () => {
         document.removeEventListener("mousedown", handleClickOutside);
@@ -44,32 +45,40 @@ const Searchbar = () => {
 
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
-    if (e.target.value.length > 0) {
+    if (e.target.value !== "") {
+      if (searchTerm !== "")
       debounce(getFilteredTokens, 1000)(e.target.value);
     } else {
       dispatch(clearSearchResults());
       setShowResults(false);
+      setSearchTerm("");
     }
   };
 
   const handleLinkClick = () => {
     setSearchTerm("");
     setShowResults(false);
+    dispatch(clearSearchResults());
   };
 
-  useEffect(() => {
-    if (searchTerm.length === 0) {
-      setSearchTerm("");
-      setShowResults(false);
-    }
-  }, [searchTerm]);
+  // useEffect(() => {
+  //   if (searchTerm.length === 0) {
+  //     setSearchTerm("");
+  //     setShowResults(false);
+  //     dispatch(clearSearchResults());
+  //   }
+  // }, [searchTerm]);
 
   useEffect(() => {
     if (results && results.length > 0) {
       setShowResults(true);
+    } 
+    
+    if (searchTerm === "") {
+      setShowResults(false)
     }
     //eslint-disable-next-line
-  }, [results]);
+  }, [results, searchTerm]);
 
   return (
     <Wrapper ref={wrapperRef} onSubmit={(e) => e.preventDefault()}>
@@ -80,28 +89,29 @@ const Searchbar = () => {
         onChange={handleChange}
         value={searchTerm}
       />
-      {showResults &&
-        (results ? (
-          <SearchResults
-            showResults={showResults}
-            results={results}
-            handleLinkClick={handleLinkClick}
-          />
-        ) : (
-          <ErrorMessageWrapper>
-            <ErrorMessage>
-              {isLoading ? (
-                <SearchResultsText>Loading. Please wait...</SearchResultsText>
-              ) : (
-                !results && (
-                  <SearchResultsText>
-                    No results found. Try another search.
-                  </SearchResultsText>
-                )
-              )}
-            </ErrorMessage>
-          </ErrorMessageWrapper>
-        ))}
+      {showResults && results && (
+        <SearchResults
+          showResults={showResults}
+          results={results}
+          handleLinkClick={handleLinkClick}
+        />
+      )}
+      {showResults && results.length === 0 && isLoading && (
+        <ErrorMessageWrapper>
+          <ErrorMessage>
+            <SearchResultsText>Loading. Please wait...</SearchResultsText>
+          </ErrorMessage>
+        </ErrorMessageWrapper>
+      )}
+      {error && (
+        <ErrorMessageWrapper>
+          <ErrorMessage>
+            <SearchResultsText>
+              No results found. Try another search.
+            </SearchResultsText>
+          </ErrorMessage>
+        </ErrorMessageWrapper>
+      )}
     </Wrapper>
   );
 };

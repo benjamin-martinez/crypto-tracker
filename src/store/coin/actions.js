@@ -11,7 +11,6 @@ export const getCoinData = (searchTerm) => async (dispatch, getState) => {
     const { data } = await axios(
       `https://api.coingecko.com/api/v3/coins/${searchTerm}?localization=false`
     );
-    console.log(data);
     dispatch({
       type: GET_COIN_DATA_SUCCESS,
       payload: data,
